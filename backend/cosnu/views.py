@@ -4,9 +4,8 @@ from cosnu.serializers import UserSerializer
 from django.contrib.auth.models import User
 
 
-
 class UserList(generics.ListAPIView):
-	queryset = User.objects.all()
-	serializer_class = UserSerializer
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
-# Create your views here.
+

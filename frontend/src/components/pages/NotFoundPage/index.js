@@ -1,16 +1,13 @@
 import React from 'react'
 
-import { AccountInfo, LectureList } from 'containers'
 import { PageTemplate } from 'components'
 
-
-
-const HomePage = () => {
+const NotFoundPage = () => {
   return (
     <PageTemplate>
-      <LectureList/>
+      <h1>Not Found</h1>
     </PageTemplate>
   )
 }
 
-export default HomePage
+export default NotFoundPage

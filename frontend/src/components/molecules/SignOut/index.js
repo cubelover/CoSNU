@@ -12,18 +12,11 @@ const Wrapper = styled.div`
 const SignOut = () => {
   return (
     <Wrapper>
-      <p>Welcome User!</p>
+      <span>Welcome User!</span>
       <Button>Sign Out</Button>
       <Button>Edit Profile</Button>
     </Wrapper>
   )
-  /*
-  return (
-    <Wrapper {...props}>
-      {children}
-    </Wrapper>
-  )
-  */
 }
 
 SignOut.propTypes = {

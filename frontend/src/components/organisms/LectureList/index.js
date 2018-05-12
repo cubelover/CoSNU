@@ -13,13 +13,12 @@ const LectureList = () => {
   var lectureNames = ["Lecture 1", "Lecture 2", "Lecture 3", ]
   return (
     <Wrapper>
+      <h3>Lecture List</h3>
       {lectureNames.map( (name) =>
         <Lecture name={name} key={name}></Lecture>
       )}
     </Wrapper>
   )
-  /*
-  */
 }
 
 LectureList.propTypes = {

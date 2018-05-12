@@ -18,13 +18,6 @@ const SignIn = ({ children, ...props }) => {
       <Button>Sign Up</Button>
     </Wrapper>
   )
-  /*
-  return (
-    <Wrapper {...props}>
-      {children}
-    </Wrapper>
-  )
-  */
 }
 
 SignIn.propTypes = {

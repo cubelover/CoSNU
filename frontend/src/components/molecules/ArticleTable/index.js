@@ -17,7 +17,29 @@ class Article(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
 */
 
-const Article = ({article, lecture_id, page, ...props}) => {
+const ArticleTable = ({articles, lecture_id, page, ...props}) => {
+  return (
+    <Wrapper>
+      <table>
+        <thead><tr>
+          <td>id</td>
+          <td>title</td>
+          <td>author</td>
+          <td>create_time</td>
+        </tr></thead>
+        <tbody>
+          {articles.map( (article) =>
+            <tr key={article.id}>
+              <td>{article.id}</td>
+              <td><Link to={{ pathname: '/lecture/' + lecture_id + '/article/' + article.id, query: { page: page } }}>{article.title}</Link></td>
+              <td>{article.author}</td>
+              <td>{article.create_time}</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </Wrapper>
+  )
   return (
     <Wrapper>
       <Link to={{ pathname: '/lecture/' + lecture_id + '/article/' + article.id, query: { page: page } }}>{article.title}</Link>
@@ -27,9 +49,9 @@ const Article = ({article, lecture_id, page, ...props}) => {
   )
 }
 
-Article.propTypes = {
+ArticleTable.propTypes = {
   reverse: PropTypes.bool,
   children: PropTypes.node,
 }
 
-export default Article
+export default ArticleTable

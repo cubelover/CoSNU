@@ -1,7 +1,9 @@
-/*
 export const USER_LOGIN = 'USER_LOGIN'
-export const TEST_LOGIN = 'TEST_LOGIN'
 export const USER_LOGOUT = 'USER_LOGOUT'
+export const user_login = (id, username, email, lectures) => ({type: USER_LOGIN, id, username, email, lectures})
+export const user_logout = () => ({type: USER_LOGOUT})
+
+/*
 export const REPLACE_PROMISE = 'REPLACE_PROMISE'
 export const GET_ALL_PROMISE = 'GET_ALL_PROMISE'
 export const POST_PROMISE = 'POST_PROMISE'

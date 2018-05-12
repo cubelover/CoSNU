@@ -1,7 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { AccountInfo } from 'containers'
+//import { AccountInfo } from 'containers'
+import { AccountInfo } from 'components'
+import { SignIn } from 'containers'
+import { Link } from 'react-router'
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,7 +18,7 @@ const Wrapper = styled.div`
 const PageTemplate = (props) => {
   return (
     <Wrapper>
-      <h1>CoSNU</h1>
+      <Link to="/"><h1>CoSNU</h1></Link>
       <AccountInfo/>
       {props.children}
     </Wrapper>

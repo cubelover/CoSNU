@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const SignIn = ({ children, ...props }) => {
+const SignIn = ({ user_state, children, ...props }) => {
   return (
     <Wrapper>
       <Input type="text"></Input>

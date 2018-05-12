@@ -3,7 +3,7 @@ import { AccountInfo } from 'components'
 //import { test_login, user_logout } from '../store/promises/actions'
 
 const mapStateToProps = (state) => (
-    {}
+    {user_state : state.cosnu.user_state}
     /*
     {user_state : state.promises.user_state}
     */

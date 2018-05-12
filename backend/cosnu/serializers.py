@@ -23,3 +23,31 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'lectures')
+
+
+class ArticleThumbSerializer(serializers.ModelSerializer):
+    author = serializers.SlugRelatedField(read_only=True, slug_field='nickname')
+
+    class Meta:
+        model = Article
+        fields = ('id', 'title', 'author', 'create_time')
+
+
+class ArticleSerializer(serializers.ModelSerializer):
+    author = serializers.SlugRelatedField(read_only=True, slug_field='nickname')
+
+    class Meta:
+        model = Article
+        fields = ('id', 'title', 'author', 'create_time', 'contents')
+
+
+class LectureArticleSerializer(serializers.ModelSerializer):
+    articles = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Lecture
+        fields = ('id', 'name', 'code', 'professor', 'semester', 'articles')
+
+    def get_articles(self, obj):
+        serializer = ArticleThumbSerializer(Article.objects.filter(author__lecture_id__exact=obj.id), many=True)
+        return serializer.data

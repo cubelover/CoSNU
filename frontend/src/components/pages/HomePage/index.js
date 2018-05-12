@@ -1,9 +1,7 @@
 import React from 'react'
 
-import { AccountInfo, LectureList } from 'containers'
+import { LectureList } from 'components'
 import { PageTemplate } from 'components'
-
-
 
 const HomePage = () => {
   return (

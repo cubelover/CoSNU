@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
+
 const ArticleList = ( {lecture_id, cur_page} ) => {
   var articles = [];
   var current_url = "/lecture/" + lecture_id + '/list';

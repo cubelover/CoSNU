@@ -30,7 +30,21 @@ class LectureView(APIView):
         return Response(serializer.data)
 
 
+class IsMemberOrOwner(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        return Author.objects.filter(user=request.user, lecture_id__exact=view.kwargs['lid']).first() is not None
+
+    def has_object_permission(self, request, view, obj):
+
+        if request.method in permissions.SAFE_METHODS:
+            return True
+
+        return obj.author.user == request.user
+
+
 class ArticleViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated, IsMemberOrOwner)
 
     def get_queryset(self):
         return Article.objects.filter(author__lecture_id__exact=self.kwargs['lid'])
@@ -39,4 +53,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
         if self.action == 'list':
             return ArticleThumbSerializer
         return ArticleSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(author=Author.objects.get(user=self.request.user, lecture_id__exact=self.kwargs['lid']))
 

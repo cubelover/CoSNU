@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 
 import { SignOut } from 'components'
-//import { SignIn } from 'components'
-import { SignIn } from 'containers'
+import { SignIn } from 'components'
+//import { SignIn } from 'containers'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};

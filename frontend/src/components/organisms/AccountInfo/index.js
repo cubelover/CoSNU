@@ -3,19 +3,19 @@ import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 
 import { SignOut } from 'components'
-import { SignIn } from 'containers'
+import { SignIn } from 'components'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
   color: ${palette('grayscale', 0)};
 `
 
-const AccountInfo = ( {user_state}) => {
-  console.log(user_state)
+const AccountInfo = ( {user_state, action_login, action_logout}) => {
   return (
     <Wrapper>
-      <SignIn/>
-      <SignOut/>
+      {
+        user_state.username ? (<SignOut action_logout={action_logout}/>) : (<SignIn action_login={action_login}/>) 
+      }
     </Wrapper>
   )
 }

@@ -5,14 +5,17 @@ const user_state = (user_state = {}, action) => {
     switch(action.type) {
         case actions.USER_LOGOUT:
             return {};
-        case actions.USER_LOGIN:
+        case actions.SET_USER_INFO:
             return {"id": action.id, "username": action.username, "email": action.email, "lectures": action.lectures}
+        /*will be erased*/
+        case actions.USER_LOGIN:
+            return {"username": action.username}
         default:
             return user_state;
     }
 }
 
-const promises_reducer = combineReducers({
+const cosnu_reducer = combineReducers({
     user_state
 });
 /*
@@ -22,4 +25,4 @@ const promises_reducer = combineReducers({
 });
 */
     
-export default promises_reducer;
+export default cosnu_reducer;

@@ -15,6 +15,7 @@ const styles = css`
 const InputBase = styled.input`${styles}`
 
 const Input = ({ children, type, ...props }) => {
+  let test;
   if (type == "radio") {
     if(children != undefined) {
       return (

@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { PageTemplate } from 'components'
-import { LectureList } from 'components'
 import { Button } from 'components'
 
 const SignUpPage = ({ action_verify_email, action_sign_up }) => {

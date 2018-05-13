@@ -11,10 +11,11 @@ const Wrapper = styled.div`
 `
 
 const AccountInfo = ( {user_state, action_login, action_logout}) => {
+  console.log(user_state.username);
   return (
     <Wrapper>
       {
-        user_state.username ? (<SignOut action_logout={action_logout}/>) : (<SignIn action_login={action_login}/>) 
+        user_state.username ? (<SignOut username={user_state.username} action_logout={action_logout}/>) : (<SignIn action_login={action_login}/>) 
       }
     </Wrapper>
   )

@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 
 import { LectureTable } from 'components'
-import { CCSignIn } from 'containers'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};

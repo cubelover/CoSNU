@@ -1,11 +1,19 @@
-export const USER_LOGIN = 'USER_LOGIN_BEFORE_CHK'
-export const SET_USER_INFO = 'SET_USER_INFO'
+export const USER_LOGIN = 'USER_LOGIN'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAIL = 'LOGIN_FAIL'
+export const VALIDATE_TOKEN = 'VALIDATE_TOKEN'
+
+export const SET_USERINFO = 'SET_USERINFO'
 export const USER_LOGOUT = 'USER_LOGOUT'
 export const SIGN_UP = 'SIGN_UP'
 export const VERIFY_EMAIL = 'VERIFY_EMAIL'
 
 export const user_login = (username, password) => ({type: USER_LOGIN, username, password})
-export const set_user_info = (id, username, email, lectures) => ({type: SET_USER_INFO, id, username, email, lectures})
+export const login_success = () => ({type: LOGIN_SUCCESS})
+export const login_fail = () => ({type: LOGIN_FAIL})
+export const validate_token = (token) => ({type: VALIDATE_TOKEN, token})
+
+export const set_userinfo = (pk, username, email, token) => ({type: SET_USERINFO, pk, username, email, token})
 export const user_logout = () => ({type: USER_LOGOUT})
 export const sign_up = (username, password, email, verify_code) => 
 ({type: SIGN_UP, username, password, email, verify_code})

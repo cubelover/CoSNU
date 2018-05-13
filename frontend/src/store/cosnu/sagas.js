@@ -1,13 +1,9 @@
-/*
 import { takeEvery, put, call, fork } from 'redux-saga/effects'
 import api from 'services/api'
 import * as actions from './actions'
 
-const post_url = 'http://127.0.0.1:8000/promises/';
-const get_url = 'http://127.0.0.1:8000/promises/';
-const users_url = 'http://127.0.0.1:8000/users/';
-const login_url = 'http://127.0.0.1:8000/promises/';
-
+const user_url = 'http://127.0.0.1:8000/user/';
+/*
 export function* getPromiseForId(userid) {
     const request = yield call (fetch, users_url, {method: 'GET'});
     if(request.status == 200) {

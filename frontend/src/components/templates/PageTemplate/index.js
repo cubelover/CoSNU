@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { AccountInfo } from 'components'
+import { AccountInfo } from 'containers'
 import { Link } from 'react-router'
 
 const Wrapper = styled.div`

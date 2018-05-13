@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import { Component } from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 
@@ -9,16 +10,24 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const SignIn = ({ user_state, children, ...props }) => {
+const SignIn = ({ action_login, children, ...props }) => {
+  let username, password;
+  const send_login = () => {
+    if(username.value != undefined && password.value != undefined) {
+      action_login(username.value, password.value);
+      username.value = password.value = '';
+    }
+  }
   return (
     <Wrapper>
-      <Input type="text"></Input>
-      <Input type="password"></Input>
-      <Button>Sign In</Button>
+      <input type="text" placeholder="username" ref={(ref) => {username = ref;}}></input>
+      <input type="password" placeholder="password" ref={(ref) => {password = ref}}></input>
+      <Button onClick={send_login}>Sign In</Button>
       <Button>Sign Up</Button>
     </Wrapper>
   )
 }
+
 
 SignIn.propTypes = {
   reverse: PropTypes.bool,

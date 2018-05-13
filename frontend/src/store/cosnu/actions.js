@@ -1,7 +1,15 @@
-export const USER_LOGIN = 'USER_LOGIN'
+export const USER_LOGIN = 'USER_LOGIN_BEFORE_CHK'
+export const SET_USER_INFO = 'SET_USER_INFO'
 export const USER_LOGOUT = 'USER_LOGOUT'
-export const user_login = (id, username, email, lectures) => ({type: USER_LOGIN, id, username, email, lectures})
+export const SIGN_UP = 'SIGN_UP'
+export const VERIFY_EMAIL = 'VERIFY_EMAIL'
+
+export const user_login = (username, password) => ({type: USER_LOGIN, username, password})
+export const set_user_info = (id, username, email, lectures) => ({type: SET_USER_INFO, id, username, email, lectures})
 export const user_logout = () => ({type: USER_LOGOUT})
+export const sign_up = (username, password, email, verify_code) => 
+({type: SIGN_UP, username, password, email, verify_code})
+export const verify_email = (email) => ({type: VERIFY_EMAIL, email});
 
 /*
 export const REPLACE_PROMISE = 'REPLACE_PROMISE'

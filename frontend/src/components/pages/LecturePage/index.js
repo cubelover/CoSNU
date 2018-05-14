@@ -5,7 +5,7 @@ import { PageTemplate, ArticleList } from 'components'
 
 const LecturePage = ({ params, location: { query }, children, ...props}) => {
   let lecture_id = params.lecture_id;
-  let cur_page = query && query.page ? parseInt(query.page, 10) : 1;
+  let cur_page = (query ? (query && query.page ? parseInt(query.page, 10) : 1) : 1);
   if(isNaN(cur_page)) cur_page = 1;
   return (
     <PageTemplate>

@@ -12,7 +12,7 @@ import { Button } from 'components'
   "contents": "뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글"
 }
 */
-const ArticlePage = ({ params, location: { query }}) => {
+const ArticlePage = ({ params, location: { query }, children, ...props}) => {
   var article = 
   {
     "id": 1,

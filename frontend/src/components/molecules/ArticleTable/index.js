@@ -17,7 +17,7 @@ class Article(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
 */
 
-const ArticleTable = ({articles, lecture_id, page, ...props}) => {
+const ArticleTable = ({articles, lecture_id, page, children, ...props}) => {
   return (
     <Wrapper>
       <table>
@@ -28,7 +28,7 @@ const ArticleTable = ({articles, lecture_id, page, ...props}) => {
           <td>create_time</td>
         </tr></thead>
         <tbody>
-          {articles.map( (article) =>
+          {(articles ? articles : []).map( (article) =>
             <tr key={article.id}>
               <td>{article.id}</td>
               <td><Link to={{ pathname: '/lecture/' + lecture_id + '/article/' + article.id, query: { page: page } }}>{article.title}</Link></td>

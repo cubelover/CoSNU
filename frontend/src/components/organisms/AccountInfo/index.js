@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const AccountInfo = ( {user_state, action_login, action_logout}) => {
+const AccountInfo = ( {user_state, action_login, action_logout, children, ...props}) => {
   console.log(user_state.username);
   return (
     <Wrapper>

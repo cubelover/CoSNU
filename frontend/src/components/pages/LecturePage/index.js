@@ -3,7 +3,7 @@ import React from 'react'
 import { PageTemplate, ArticleList } from 'components'
 //import { PageTemplate, Header, Hero, Footer, FeatureList } from 'components'
 
-const LecturePage = ({ params, location: { query }}) => {
+const LecturePage = ({ params, location: { query }, children, ...props}) => {
   let lecture_id = params.lecture_id;
   let cur_page = query && query.page ? parseInt(query.page, 10) : 1;
   if(isNaN(cur_page)) cur_page = 1;

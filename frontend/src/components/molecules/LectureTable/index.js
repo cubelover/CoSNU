@@ -16,7 +16,7 @@ class Lecture(models.Model):
     semester = models.CharField(max_length=50)
 */
 
-const LectureTable = ({lectures, ...props}) => {
+const LectureTable = ({lectures, ...children, ...props}) => {
   return (
     <Wrapper>
       <table>

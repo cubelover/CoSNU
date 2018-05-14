@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `
 
 
-const ArticleList = ( {lecture_id, cur_page} ) => {
+const ArticleList = ( {lecture_id, cur_page, children, ...props} ) => {
   var articles = [];
   var current_url = "/lecture/" + lecture_id + '/list';
   for(var i=0; i<166; i++) articles.push({title: "Article " + i, id: i+1, author: "Author " + i, create_time:"2018-05-12T07:42:25.105055Z"});

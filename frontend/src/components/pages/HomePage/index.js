@@ -7,6 +7,7 @@ const HomePage = ( {children, ...props}) => {
   return (
     <PageTemplate>
       <LectureList/>
+      {children}
     </PageTemplate>
   )
 }

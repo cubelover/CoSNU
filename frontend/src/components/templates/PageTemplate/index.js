@@ -13,12 +13,12 @@ const Wrapper = styled.div`
   height: 100%;
 `
 
-const PageTemplate = (props) => {
+const PageTemplate = ( {children, ...props} ) => {
   return (
     <Wrapper>
       <Link to="/"><h1>CoSNU</h1></Link>
       <AccountInfo/>
-      {props.children}
+      {children}
     </Wrapper>
   )
 }

@@ -19,11 +19,12 @@ const SignIn = ({ action_login, children, ...props }) => {
     }
   }
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <input type="text" placeholder="username" ref={(ref) => {username = ref;}}></input>
       <input type="password" placeholder="password" ref={(ref) => {password = ref}}></input>
       <Button onClick={send_login}>Sign In</Button>
       <Button>Sign Up</Button>
+      {children}
     </Wrapper>
   )
 }

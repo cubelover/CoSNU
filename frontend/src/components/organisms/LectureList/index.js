@@ -21,9 +21,10 @@ const LectureList = ({children, ...props}) => {
   var lectures = [];
   for(var i=0; i<6; i++) lectures.push({name: "Lecture" + i, id: i+1, code: "4190.309A / " + i, professor:"professor" + i, semester:"semester"+i});
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <h3>Lecture List</h3>
       <LectureTable lectures={lectures}></LectureTable>
+      {children}
     </Wrapper>
   )
 }

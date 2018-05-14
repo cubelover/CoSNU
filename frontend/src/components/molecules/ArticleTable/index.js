@@ -19,7 +19,7 @@ class Article(models.Model):
 
 const ArticleTable = ({articles, lecture_id, page, children, ...props}) => {
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <table>
         <thead><tr>
           <td>id</td>
@@ -38,13 +38,15 @@ const ArticleTable = ({articles, lecture_id, page, children, ...props}) => {
           )}
         </tbody>
       </table>
+      {children}
     </Wrapper>
-  )
+    )
   return (
     <Wrapper>
       <Link to={{ pathname: '/lecture/' + lecture_id + '/article/' + article.id, query: { page: page } }}>{article.title}</Link>
       <span>{article.author}</span>
       <span>{article.create_time}</span>
+      {children}
     </Wrapper>
   )
 }

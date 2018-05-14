@@ -16,9 +16,13 @@ class Lecture(models.Model):
     semester = models.CharField(max_length=50)
 */
 
-const LectureTable = ({lectures, ...children, ...props}) => {
+const LectureTable = ({lectures, children, ...props}) => {
+  if(typeof(lectures) !== 'undefined' || lectures != null) {
+  }else{
+    lectures = [];
+  }
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <table>
         <thead><tr>
           <td>name</td>
@@ -37,6 +41,7 @@ const LectureTable = ({lectures, ...children, ...props}) => {
           )}
         </tbody>
       </table>
+      {children}
     </Wrapper>
   )
 }

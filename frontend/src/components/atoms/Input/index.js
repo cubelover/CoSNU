@@ -21,13 +21,15 @@ const Input = ({ children, type, ...props }) => {
       return (
         <Wrapper>
           <span>{ children }</span>
-          <InputBase {...props} type={type}></InputBase>
+          <InputBase {...props} type={type}>
+          </InputBase>
+          {children}
         </Wrapper>
       )
     }
-    return <InputBase {...props} type={type} />
+    return <InputBase {...props} type={type}>{children}</InputBase>
   }
-  return <InputBase {...props} type={type} />
+  return <InputBase {...props} type={type}>{children}</InputBase>
 }
 
 

@@ -14,10 +14,11 @@ const SignOut = ( {username, action_logout, children, ...props}) => {
     action_logout();
   }
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <span>Welcome {username}!</span>
       <Button onClick={send_logout}>Sign Out</Button>
       <Button>Edit Profile</Button>
+      {children}
     </Wrapper>
   )
 }

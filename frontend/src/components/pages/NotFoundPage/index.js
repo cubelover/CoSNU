@@ -6,6 +6,7 @@ const NotFoundPage = ( {children, ...props}) => {
   return (
     <PageTemplate>
       <h1>Not Found</h1>
+      {children}
     </PageTemplate>
   )
 }

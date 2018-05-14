@@ -20,7 +20,7 @@ const ArticleList = ( {lecture_id, cur_page, children, ...props} ) => {
   var article_begin = Math.min(article_per_page * (cur_page-1), articles.length-1);
   var article_end = Math.min(article_per_page * (cur_page), articles.length);
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <h3>Article List (Lecture_id = {lecture_id})</h3>
       <Input type="radio" name="sortedby">Sorted by Time</Input>
       <Input type="radio" name="sortedby">Sorted by Upvote</Input>
@@ -31,6 +31,7 @@ const ArticleList = ( {lecture_id, cur_page, children, ...props} ) => {
         style={{color: page == cur_page?'red':'black', padding: '5'}} key={page}>{page}</Link>
       })}
       <Button>Write</Button>
+      {children}
     </Wrapper>
   )
 }

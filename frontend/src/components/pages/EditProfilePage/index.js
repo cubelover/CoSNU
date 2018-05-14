@@ -49,6 +49,7 @@ const EditProfilePage = ({children, ...props}) => {
         </tbody>
       </table>
       <Button onClick={send_set_lectureinfo}>Edit Lecture Information</Button>
+      {children}
     </PageTemplate>
   )
 }

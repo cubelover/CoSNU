@@ -22,8 +22,8 @@ const ArticleList = ( {lecture_id, cur_page, children, ...props} ) => {
   return (
     <Wrapper>
       <h3>Article List (Lecture_id = {lecture_id})</h3>
-      <Input type="radio">Sorted by Time</Input>
-      <Input type="radio">Sorted by Upvote</Input>
+      <Input type="radio" name="sortedby">Sorted by Time</Input>
+      <Input type="radio" name="sortedby">Sorted by Upvote</Input>
       <ArticleTable articles={articles.slice(article_begin, article_end)} lecture_id={lecture_id} page={cur_page}/>
       <Button>List</Button>
       {Array.from(new Array(max_page_num), (val,index)=>index+1).map( (page) => {

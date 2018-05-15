@@ -16,7 +16,7 @@ const SignOut = ( {username, action_logout, children, ...props}) => {
   return (
     <Wrapper {...props}>
       <span>Welcome {username}!</span>
-      <Button onClick={send_logout}>Sign Out</Button>
+      <Link to="/"><Button onClick={send_logout}>Sign Out</Button></Link>
       <Link to = "/edit"><Button>Edit Profile</Button></Link>
       {children}
     </Wrapper>

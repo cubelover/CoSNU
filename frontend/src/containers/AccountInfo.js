@@ -1,3 +1,4 @@
+import React from 'react'
 import { connect } from 'react-redux'
 import { AccountInfo } from 'components'
 import { user_login, user_logout } from '../store/cosnu/actions'
@@ -14,4 +15,4 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(AccountInfo)
+export default connect(mapStateToProps, mapDispatchToProps)((props)=>(<AccountInfo {...props} />))

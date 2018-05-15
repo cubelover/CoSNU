@@ -17,9 +17,7 @@ class Lecture(models.Model):
     semester = models.CharField(max_length=50)
 */
 
-const LectureList = ({children, ...props}) => {
-  var lectures = [];
-  for(var i=0; i<6; i++) lectures.push({name: "Lecture" + i, id: i+1, code: "4190.309A / " + i, professor:"professor" + i, semester:"semester"+i});
+const LectureList = ({children, lectures, ...props}) => {
   return (
     <Wrapper {...props}>
       <h3>Lecture List</h3>

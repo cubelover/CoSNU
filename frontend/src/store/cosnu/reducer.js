@@ -4,9 +4,9 @@ import { combineReducers } from 'redux';
 const user_state = (user_state = {}, action) => {
     switch(action.type) {
         case actions.USER_LOGOUT:
-            return {};
+            return {"pk": 0, "username": "", "email": "", "token": "", "lectures": []};
         case actions.SET_USERINFO:
-            return {"pk": action.pk, "username": action.username, "email": action.email, "token": action.token}
+            return {"pk": action.pk, "username": action.username, "email": action.email, "token": action.token, lectures: action.lectures}
         /*will be erased*/
         case actions.USER_LOGIN:
 //            return {"username": action.username}

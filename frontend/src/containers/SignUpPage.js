@@ -1,3 +1,4 @@
+import React from 'react'
 import { connect } from 'react-redux'
 import { SignUpPage } from 'components'
 import { verify_email, sign_up } from '../store/cosnu/actions'
@@ -14,4 +15,4 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage)
+export default connect(mapStateToProps, mapDispatchToProps)((props)=>(<SignUpPage {...props} />))

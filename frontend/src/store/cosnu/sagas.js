@@ -15,7 +15,7 @@ export function* watchValidateToken(action){
     if(response.ok){
         const result = yield call(() => response.json())
         console.log(result)
-        yield put(actions.set_userinfo(result.id, result.username, result.email, result.token))
+        yield put(actions.set_userinfo(result.id, result.username, result.email, result.token, result.lectures))
     }
     else{
         yield put(actions.login_fail())

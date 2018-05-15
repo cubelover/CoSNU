@@ -15,7 +15,7 @@ export const login_success = () => ({type: LOGIN_SUCCESS})
 export const login_fail = () => ({type: LOGIN_FAIL})
 export const validate_token = (token) => ({type: VALIDATE_TOKEN, token})
 
-export const set_userinfo = (pk, username, email, token) => ({type: SET_USERINFO, pk, username, email, token})
+export const set_userinfo = (pk, username, email, token, lectures) => ({type: SET_USERINFO, pk, username, email, token, lectures})
 export const user_logout = () => ({type: USER_LOGOUT})
 export const sign_up = (username, password, email, verify_code) => ({type: SIGN_UP, username, password, email, verify_code})
 export const verify_email = (email) => ({type: VERIFY_EMAIL, email});

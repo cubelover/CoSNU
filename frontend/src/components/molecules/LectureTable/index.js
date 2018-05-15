@@ -32,11 +32,11 @@ const LectureTable = ({lectures, children, ...props}) => {
         </tr></thead>
         <tbody>
           {lectures.map( (lecture) =>
-            <tr key={lecture.id}>
-              <td><Link to={'/lecture/' + lecture.id + '/list'}>{lecture.name}</Link></td>
-              <td>{lecture.code}</td>
-              <td>{lecture.professor}</td>
-              <td>{lecture.semester}</td>
+            <tr key={lecture.lecture.id}>
+              <td><Link to={'/lecture/' + lecture.lecture.id + '/list'}>{lecture.lecture.name}</Link></td>
+              <td>{lecture.lecture.code}</td>
+              <td>{lecture.lecture.professor}</td>
+              <td>{lecture.lecture.semester}</td>
             </tr>
           )}
         </tbody>

@@ -9,37 +9,12 @@ const Wrapper = styled.div`
 
 const styles = css`
   font-family: ${font('primary')};
-  color: ${palette({ grayscale: 0 }, 1)};
+  color: ${palette('grayscale', 0)};
+  padding: .5rem .75rem;
+  border: 1px solid #ccc;
+  border-radius: .3rem;
 `
 
-const InputBase = styled.input`${styles}`
-
-const Input = ({ children, type, ...props }) => {
-  let test;
-  if (type == "radio") {
-    if(children != undefined) {
-      return (
-        <Wrapper>
-          <span>{ children }</span>
-          <InputBase {...props} type={type}>
-          </InputBase>
-          {children}
-        </Wrapper>
-      )
-    }
-    return <InputBase {...props} type={type}>{children}</InputBase>
-  }
-  return <InputBase {...props} type={type}>{children}</InputBase>
-}
-
-
-Input.propTypes = {
-  palette: PropTypes.string,
-  reverse: PropTypes.bool,
-}
-
-Input.defaultProps = {
-  palette: 'grayscale',
-}
+const Input = styled.input`${styles}`
 
 export default Input

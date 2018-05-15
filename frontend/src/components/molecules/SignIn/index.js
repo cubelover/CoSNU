@@ -17,8 +17,6 @@ const InputStyles = css`
   border-radius: .3rem;
 `
 
-const InputBase = styled.input`${InputStyles}`
-
 const SignIn = ({ action_login, children, ...props }) => {
   let username, password;
   const send_login = () => {
@@ -30,9 +28,9 @@ const SignIn = ({ action_login, children, ...props }) => {
   }
   return (
     <Wrapper {...props}>
-      <InputBase type="text" placeholder="username" innerRef={(ref) => {username = ref;}}></InputBase>
+      <Input type="text" placeholder="username" innerRef={(ref) => {username = ref;}}></Input>
       &nbsp;
-      <InputBase type="password" placeholder="password" innerRef={(ref) => {password = ref}}></InputBase>
+      <Input type="password" placeholder="password" innerRef={(ref) => {password = ref}}></Input>
       &nbsp;
       <Button onClick={send_login}>Sign In</Button>
       &nbsp;

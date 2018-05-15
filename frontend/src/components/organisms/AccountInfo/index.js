@@ -12,13 +12,14 @@ const Wrapper = styled.div`
 
 const AccountInfo = ( {user_state, action_login, action_logout, children, ...props}) => {
   var testname = "";
-  if(typeof(user_state) != undefined && user_state != null) {
-    testname = user_state.username;
+  console.log(testname);
+  if(typeof(user_state) !== 'undefined' || user_state != null) {
+    if(typeof(user_state.username) !== 'undefined' || user_state.username != null) {
+      testname = user_state.username;
+    }
   }
 
   console.log(testname);
-  if(testname == undefined)testname = ""
-  console.log(typeof(testname))
   return (
     <Wrapper {...props}>
       {

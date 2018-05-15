@@ -17,11 +17,19 @@ class Lecture(models.Model):
     semester = models.CharField(max_length=50)
 */
 
-const LectureList = ({children, lectures, ...props}) => {
+const LectureList = ({user_state, children, ...props}) => {
+  console.log(user_state.username)
+  if(user_state.username == ""){
+      return (
+        <Wrapper {...props}>
+          {children}
+        </Wrapper>
+      )
+  }
   return (
     <Wrapper {...props}>
       <h3>Lecture List</h3>
-      <LectureTable lectures={lectures}></LectureTable>
+      <LectureTable lectures={user_state.lectures}></LectureTable>
       {children}
     </Wrapper>
   )

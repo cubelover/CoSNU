@@ -3,6 +3,9 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAIL = 'LOGIN_FAIL'
 export const VALIDATE_TOKEN = 'VALIDATE_TOKEN'
 
+export const SET_ARTICLES = 'SET_ARTICLES'
+export const GET_ARTICLES = 'GET_ARTICLES'
+
 export const SET_USERINFO = 'SET_USERINFO'
 export const USER_LOGOUT = 'USER_LOGOUT'
 export const SIGN_UP = 'SIGN_UP'
@@ -21,6 +24,9 @@ export const sign_up = (username, password, email, verify_code) => ({type: SIGN_
 export const verify_email = (email) => ({type: VERIFY_EMAIL, email});
 export const set_password = (password, new_password) => ({type: SET_PASSWORD, password, new_password});
 export const set_lectureinfo = () => ({type: SET_LECTUREINFO});
+
+export const set_articles = (articles) => ({type: SET_ARTICLES, articles})
+export const get_articles = (lecture_id) => ({type: GET_ARTICLES, lecture_id})
 
 /*
 export const REPLACE_PROMISE = 'REPLACE_PROMISE'

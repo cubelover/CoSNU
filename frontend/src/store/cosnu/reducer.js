@@ -1,13 +1,16 @@
 import * as actions from './actions';
 import { combineReducers } from 'redux';
 
-const user_state = (user_state = {}, action) => {
+const initialState = {"pk": 0, "username": "", "email": "", "token": "", "lectures": [], currunt_articles:[]}
+
+const user_state = (user_state = initialState, action) => {
     switch(action.type) {
         case actions.USER_LOGOUT:
-            return {"pk": 0, "username": "", "email": "", "token": "", "lectures": []};
+            return {"pk": 0, "username": "", "email": "", "token": "", "lectures": [], currunt_articles:[]}
         case actions.SET_USERINFO:
-            return {"pk": action.pk, "username": action.username, "email": action.email, "token": action.token, lectures: action.lectures}
-        /*will be erased*/
+            return {"pk": action.pk, "username": action.username, "email": action.email, "token": action.token, lectures: action.lectures, currunt_articles:[]}
+        case actions.SET_ARTICLES:
+            return {...user_state, currunt_articles: action.articles}
         case actions.USER_LOGIN:
 //            return {"username": action.username}
         default:

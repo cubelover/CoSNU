@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { PageTemplate, ArticleList } from 'components'
+import { PageTemplate } from 'components'
 import { Button } from 'components'
+import { ArticleList } from 'containers'
 
 /*
 {

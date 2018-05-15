@@ -1,4 +1,4 @@
-import { takeEvery, put, call, fork } from 'redux-saga/effects'
+import { takeEvery, put, call, fork, select } from 'redux-saga/effects'
 import api from 'services/api'
 import * as actions from './actions'
 
@@ -14,8 +14,7 @@ export function* watchValidateToken(action){
     });
     if(response.ok){
         const result = yield call(() => response.json())
-        console.log(result)
-        yield put(actions.set_userinfo(result.id, result.username, result.email, result.token, result.lectures))
+        yield put(actions.set_userinfo(result.id, result.username, result.email, token, result.lectures))
     }
     else{
         yield put(actions.login_fail())
@@ -53,11 +52,33 @@ export function* watchLogin(action) {
     }    */
 }
 
+export function* watchGetArticle(action){
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const lecture_id = action.lecture_id
+
+    const response = yield call (fetch, `/api/lecture/${lecture_id}/article/`, {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        },
+    });
+    if(response.ok){
+        const result = yield call(() => response.json())
+        //console.log(result)
+        yield put(actions.set_articles(result))
+    }
+    else{
+        yield put(actions.login_fail())
+    }
+}
 
 export default function* () {
     //yield takeEvery(actions.POST_PROMISE, watchPostPromise);
     yield takeEvery(actions.USER_LOGIN, watchLogin)
     yield takeEvery(actions.VALIDATE_TOKEN, watchValidateToken)
+    yield takeEvery(actions.GET_ARTICLES, watchGetArticle)
 }
 
 

@@ -30,9 +30,9 @@ const SignIn = ({ action_login, children, ...props }) => {
   }
   return (
     <Wrapper {...props}>
-      <InputBase type="text" placeholder="username" ref={(ref) => {username = ref;}}></InputBase>
+      <InputBase type="text" placeholder="username" innerRef={(ref) => {username = ref;}}></InputBase>
       &nbsp;
-      <InputBase type="password" placeholder="password" ref={(ref) => {password = ref}}></InputBase>
+      <InputBase type="password" placeholder="password" innerRef={(ref) => {password = ref}}></InputBase>
       &nbsp;
       <Button onClick={send_login}>Sign In</Button>
       &nbsp;

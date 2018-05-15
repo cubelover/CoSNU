@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { PageTemplate, ArticleList } from 'components'
-import { Button } from 'components'
+import { Input, Button } from 'components'
 
 /*
 {
@@ -40,9 +40,9 @@ const ArticlePage = ({ params, location, children, ...props}) => {
       <p>{article.contents}</p>
       <Button>Modify</Button>
       <Button>Delete</Button>
-      <input type="text"/>
+      <Input type="text"></Input>
       <Button>Report</Button>
-      <input type="text"/>
+      <Input type="text"></Input>
       <Button>Add Comment</Button>
       <ArticleList lecture_id={lecture_id} cur_page={cur_page}/>
       {children}

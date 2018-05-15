@@ -9,7 +9,7 @@ const user_state = (user_state = {}, action) => {
             return {"pk": action.pk, "username": action.username, "email": action.email, "token": action.token}
         /*will be erased*/
         case actions.USER_LOGIN:
-            return {"username": action.username}
+//            return {"username": action.username}
         default:
             return user_state;
     }

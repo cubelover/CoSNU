@@ -3,10 +3,11 @@ import React from 'react'
 import { LectureList } from 'components'
 import { PageTemplate } from 'components'
 
-const HomePage = () => {
+const HomePage = ( {children, ...props}) => {
   return (
     <PageTemplate>
       <LectureList/>
+      {children}
     </PageTemplate>
   )
 }

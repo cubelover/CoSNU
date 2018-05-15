@@ -4,7 +4,7 @@ import { PageTemplate } from 'components'
 import { Button } from 'components'
 import { Link } from 'react-router'
 
-const EditProfilePage = () => {
+const EditProfilePage = ({children, ...props}) => {
   var lectures = [];
   for(var i=0; i<6; i++) lectures.push({
     lecture:{name: "Lecture" + i, id: i+1, code: "4190.309A / " + i, professor:"professor" + i, semester:"semester"+i},
@@ -49,6 +49,7 @@ const EditProfilePage = () => {
         </tbody>
       </table>
       <Button onClick={send_set_lectureinfo}>Edit Lecture Information</Button>
+      {children}
     </PageTemplate>
   )
 }

@@ -3,7 +3,7 @@ import React from 'react'
 import { PageTemplate } from 'components'
 import { Button } from 'components'
 
-const SignUpPage = ({ action_verify_email, action_sign_up }) => {
+const SignUpPage = ({ action_verify_email, action_sign_up, children, ...props }) => {
   let username, password, confirm_password, email, verify_code;
   const send_verify_email = () => {
     if(email.value != undefined) {
@@ -31,6 +31,7 @@ const SignUpPage = ({ action_verify_email, action_sign_up }) => {
       <Button onClick={send_verify_email}>Verify</Button>
       <input type="text" placeholder="verify_code" ref={(ref) => {verify_code = ref;}}></input>
       <Button onClick={send_sign_up}>Sign Up</Button>
+      {children}
     </PageTemplate>
   )
 }

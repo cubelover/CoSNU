@@ -12,7 +12,8 @@ import { Button } from 'components'
   "contents": "뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글"
 }
 */
-const ArticlePage = ({ params, location: { query }}) => {
+const ArticlePage = ({ params, location, children, ...props}) => {
+  //location: {query}
   var article = 
   {
     "id": 1,
@@ -21,10 +22,14 @@ const ArticlePage = ({ params, location: { query }}) => {
     "create_time": "2018-05-12T07:42:25.105055Z",
     "contents": "뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글"
   };
+  if(typeof(params) !== 'undefined' || params != null) {
+  }else{
+    params = {"lecture_id": "1", "article_id": "1"};
+  }
 
   let lecture_id = params.lecture_id;
   let article_id = params.article_id;
-  let cur_page = query && query.page ? parseInt(query.page, 10) : 1;
+  let cur_page = 1;//query.page ? parseInt(query.page, 10) : 1;
   if(isNaN(cur_page)) cur_page = 1;
   return (
     <PageTemplate>
@@ -40,6 +45,7 @@ const ArticlePage = ({ params, location: { query }}) => {
       <input type="text"/>
       <Button>Add Comment</Button>
       <ArticleList lecture_id={lecture_id} cur_page={cur_page}/>
+      {children}
     </PageTemplate>
   )
 }

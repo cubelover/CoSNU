@@ -23,8 +23,8 @@ class ArticleList extends React.Component {
     return (
       <Wrapper {...props}>
         <h3>Article List (Lecture_id = {lecture_id})</h3>
-        <Input type="radio" name="sortedby">Sorted by Time</Input>
-        <Input type="radio" name="sortedby">Sorted by Upvote</Input>
+        Sorted by Time<Input type="radio" name="sortedby" />
+        Sorted by Upvote<Input type="radio" name="sortedby" />
         <ArticleTable articles={articles} lecture_id={lecture_id} page={cur_page}/>
         <Button>List</Button>
         <Button>Write</Button>

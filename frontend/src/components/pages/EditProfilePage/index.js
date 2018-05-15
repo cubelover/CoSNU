@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { PageTemplate } from 'components'
-import { Button } from 'components'
+import { Input, Button } from 'components'
 import { Link } from 'react-router'
 
 const EditProfilePage = ({children, ...props}) => {
@@ -27,9 +27,9 @@ const EditProfilePage = ({children, ...props}) => {
   return (
     <PageTemplate>
       <h1>EditProfilePage</h1>
-      <input type="password" placeholder="password" ref={(ref) => {password = ref;}}></input>
-      <input type="password" placeholder="new_password" ref={(ref) => {new_password = ref;}}></input>
-      <input type="password" placeholder="confirm_new_password" ref={(ref) => {confirm_new_password = ref;}}></input>
+      <Input type="password" placeholder="password" innerRef={(ref) => {password = ref;}}></Input>
+      <Input type="password" placeholder="new_password" innerRef={(ref) => {new_password = ref;}}></Input>
+      <Input type="password" placeholder="confirm_new_password" innerRef={(ref) => {confirm_new_password = ref;}}></Input>
       <Button onClick={send_set_password}>Change Password</Button>
       
       <table>
@@ -42,8 +42,8 @@ const EditProfilePage = ({children, ...props}) => {
           {lectures.map( (lecture) =>
             <tr key={lecture.lecture.id}>
               <td>{lecture.lecture.name}</td>
-              <td><input type="text" value={lecture.nickname}></input></td>
-              <td><input type="text" value={lecture.alias}></input></td>
+              <td><Input type="text" value={lecture.nickname}></Input></td>
+              <td><Input type="text" value={lecture.alias}></Input></td>
             </tr>
           )}
         </tbody>

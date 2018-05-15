@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
-
+import { Link } from 'react-router'
 import { Input, Button } from 'components'
 
 const Wrapper = styled.div`
@@ -17,7 +17,7 @@ const SignOut = ( {username, action_logout, children, ...props}) => {
     <Wrapper {...props}>
       <span>Welcome {username}!</span>
       <Button onClick={send_logout}>Sign Out</Button>
-      <Button>Edit Profile</Button>
+      <Link to = "/edit"><Button>Edit Profile</Button></Link>
       {children}
     </Wrapper>
   )

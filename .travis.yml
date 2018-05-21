@@ -1,9 +1,7 @@
 language: node_js
 node_js:
-  - v6
+  - v8
 script:
-  - cd frontend && npm run lint && npm test -- --coverage
-cache:
-  - yarn
+  - cd frontend && npm install -g && npm run lint && npm test -- --coverage
 after_success:
   - bash <(curl -s https://codecov.io/bash)

@@ -3,6 +3,6 @@ node_js:
   - v8
 before_install: cd frontend
 script:
-  - npm run lint && npm test -- --coverage
+  - npm test -- --coverage
 after_success:
   - bash <(curl -s https://codecov.io/bash)

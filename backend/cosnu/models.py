@@ -40,6 +40,16 @@ class Article(models.Model):
 #
 
 
+class Comment(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    contents = models.CharField(max_length=2000)
+    create_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "%s: %s" % (self.author, self.contents)
+
+
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:

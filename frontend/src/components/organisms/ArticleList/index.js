@@ -15,7 +15,7 @@ class ArticleList extends React.Component {
     super(props)
   }
   componentDidMount(){
-    this.props.get_articles(this.props.lecture_id);
+    this.props.get_articles(this.props.lecture_id)
   }
   render(){
     var {lecture_id, cur_page, children, articles, ...props} = this.props

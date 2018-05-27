@@ -11,16 +11,13 @@ const Wrapper = styled.div`
 `
 
 const AccountInfo = ( {user_state, action_login, action_logout, children, ...props}) => {
-  var testname = "";
-  if(typeof(user_state) !== 'undefined' || user_state != null) {
-    if(typeof(user_state.username) !== 'undefined' || user_state.username != null) {
-      testname = user_state.username;
-    }
-  }
+  var username = user_state.username
   return (
     <Wrapper {...props}>
       {
-        testname != "" ? (<SignOut username={testname} action_logout={action_logout}/>) : (<SignIn action_login={action_login}/>) 
+        username != "" 
+        ? (<SignOut username={username} action_logout={action_logout}/>) 
+        : (<SignIn action_login={action_login}/>) 
       }
       {children}
     </Wrapper>

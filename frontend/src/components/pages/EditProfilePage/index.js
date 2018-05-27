@@ -5,12 +5,12 @@ import { Input, Button } from 'components'
 import { Link } from 'react-router'
 
 const EditProfilePage = ({children, ...props}) => {
-  var lectures = [];
+  var lectures = []
   for(var i=0; i<6; i++) lectures.push({
     lecture:{name: "Lecture" + i, id: i+1, code: "4190.309A / " + i, professor:"professor" + i, semester:"semester"+i},
     "nickname": "Nickname" + i,
     "alias": "Alias" + i,
-  });
+  })
 
   let password, new_password, confirm_new_password;
   const send_set_password = () => {

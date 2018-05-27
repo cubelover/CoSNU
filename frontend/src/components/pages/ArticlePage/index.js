@@ -22,16 +22,12 @@ const ArticlePage = ({ params, location, children, ...props}) => {
     "author": "소개수강생1",
     "create_time": "2018-05-12T07:42:25.105055Z",
     "contents": "뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글"
-  };
-  if(typeof(params) !== 'undefined' || params != null) {
-  }else{
-    params = {"lecture_id": "1", "article_id": "1"};
   }
 
-  let lecture_id = params.lecture_id;
-  let article_id = params.article_id;
-  let cur_page = 1;//query.page ? parseInt(query.page, 10) : 1;
-  if(isNaN(cur_page)) cur_page = 1;
+  let lecture_id = params.lecture_id
+  let article_id = params.article_id
+  let cur_page = 1//query.page ? parseInt(query.page, 10) : 1
+  if(isNaN(cur_page)) cur_page = 1
   return (
     <PageTemplate>
       <h1>ArticlePage {lecture_id} + {article_id}</h1>

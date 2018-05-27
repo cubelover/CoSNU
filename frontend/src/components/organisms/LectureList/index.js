@@ -21,6 +21,7 @@ const LectureList = ({user_state, children, ...props}) => {
   if(user_state.username == ""){
       return (
         <Wrapper {...props}>
+          <h3>Please Login First</h3>
           {children}
         </Wrapper>
       )

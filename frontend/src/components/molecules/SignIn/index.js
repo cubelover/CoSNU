@@ -21,7 +21,6 @@ const SignIn = ({ action_login, children, ...props }) => {
   let username, password;
   const send_login = () => {
     if(username.value != undefined && password.value != undefined) {
-      console.log(username.value);
       action_login(username.value, password.value);
       username.value = password.value = '';
     }

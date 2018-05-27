@@ -17,7 +17,7 @@ const root = document.getElementById('app')
 
 const renderApp = () => (
   <Provider store={store}>
-    <Router key={Math.random()} history={history} routes={routes} />
+    <Router key={Math.random()} history={history} routes={routes(store)} />
   </Provider>
 )
 

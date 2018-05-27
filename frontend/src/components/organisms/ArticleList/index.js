@@ -19,7 +19,6 @@ class ArticleList extends React.Component {
   }
   render(){
     var {lecture_id, cur_page, children, articles, ...props} = this.props
-    console.log(articles)
     return (
       <Wrapper {...props}>
         <h3>Article List (Lecture_id = {lecture_id})</h3>

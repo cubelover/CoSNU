@@ -9,16 +9,32 @@ import { ArticlePage } from 'components'
 import { SignUpPage } from 'containers'
 import { EditProfilePage } from 'components'
 
-const routes = (
-  <Route path="/" component={App}>
-    <IndexRoute component={HomePage} />
-    <Route path = "index" component = {HomePage} />
-    <Route path = "signup" component = {SignUpPage} />
-    <Route path = "edit" component = {EditProfilePage} />
-    <Route path = "lecture/:lecture_id/list"  component = {LecturePage} />
-    <Route path = "lecture/:lecture_id/article/:article_id"  component = {ArticlePage} />
-    <Route path = '*' component={NotFoundPage} />
-  </Route>
-)
+export const routes = (store) => {
+  const authRequired = (nextState, replace) => {
+    const state = store.getState();
+    let username = state.cosnu.user_state.username;
+    console.log("hi");
+    if (username === "") {
+      replace('/needlogin')
+      //replaceState({ nextPathname: nextState.location.pathname }, '/login');
+    }
+  };
+
+  return (
+    <Route path="/" component={App}>
+      <IndexRoute component={HomePage} />
+      <Route path="needlogin" component = {NotFoundPage} />
+      <Route path="index" component = {HomePage} />
+      <Route path="signup" component = {SignUpPage} />
+      <Route onEnter={authRequired}>
+        <Route path="edit" component = {EditProfilePage} />
+        <Route path="lecture/:lecture_id/list"  component = {LecturePage}/>
+        <Route path="lecture/:lecture_id/article/:article_id"  component = {ArticlePage} />
+      </Route>
+      <Route path='*' component={NotFoundPage} />
+    </Route>
+  );
+}
+
 
 export default routes

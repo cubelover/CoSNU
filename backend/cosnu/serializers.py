@@ -33,12 +33,19 @@ class ArticleThumbSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'author', 'create_time')
 
 
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ('id', 'article', 'author', 'contents', 'create_time')
+
+
 class ArticleSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(read_only=True, slug_field='nickname')
+    comments = CommentSerializer(source='comment_set', read_only=True, many=True)
 
     class Meta:
         model = Article
-        fields = ('id', 'title', 'author', 'create_time', 'contents')
+        fields = ('id', 'title', 'author', 'create_time', 'contents', 'comments')
 
 
 class LectureArticleSerializer(serializers.ModelSerializer):
@@ -51,3 +58,5 @@ class LectureArticleSerializer(serializers.ModelSerializer):
     def get_articles(self, obj):
         serializer = ArticleThumbSerializer(Article.objects.filter(author__lecture_id__exact=obj.id), many=True)
         return serializer.data
+
+

@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(Article)
 admin.site.register(Lecture)
 admin.site.register(Author)
+admin.site.register(Comment)

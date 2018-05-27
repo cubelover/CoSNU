@@ -13,7 +13,14 @@ export const routes = (store) => {
   const authRequired = (nextState, replace) => {
     const state = store.getState();
     let username = state.cosnu.user_state.username;
-    console.log("hi");
+    if (username === "") {
+      replace('/needlogin')
+      //replaceState({ nextPathname: nextState.location.pathname }, '/login');
+    }
+  };
+  const authNotRequired = (nextState, replace) => {
+    const state = store.getState();
+    let username = state.cosnu.user_state.username;
     if (username === "") {
       replace('/needlogin')
       //replaceState({ nextPathname: nextState.location.pathname }, '/login');
@@ -25,7 +32,9 @@ export const routes = (store) => {
       <IndexRoute component={HomePage} />
       <Route path="needlogin" component = {NotFoundPage} />
       <Route path="index" component = {HomePage} />
-      <Route path="signup" component = {SignUpPage} />
+      <Route onEnter={authNotRequired}>
+        <Route path="signup" component = {SignUpPage} />
+      </Route>
       <Route onEnter={authRequired}>
         <Route path="edit" component = {EditProfilePage} />
         <Route path="lecture/:lecture_id/list"  component = {LecturePage}/>

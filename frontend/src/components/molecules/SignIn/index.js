@@ -31,7 +31,7 @@ const SignIn = ({ action_login, children, ...props }) => {
       &nbsp;
       <Input type="password" placeholder="password" innerRef={(ref) => {password = ref}}></Input>
       &nbsp;
-      <Button onClick={send_login}>Sign In</Button>
+      <Link to = "/"><Button onClick={send_login}>Sign In</Button></Link>
       &nbsp;
       <Link to="/signup"><Button>Sign Up</Button></Link>
       {children}

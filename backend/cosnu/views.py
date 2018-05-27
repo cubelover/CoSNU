@@ -57,3 +57,19 @@ class ArticleViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=Author.objects.get(user=self.request.user, lecture_id__exact=self.kwargs['lid']))
 
+
+'''class CommentViewSet(viewsets.ModelViewSet):
+    permission_classes = ()
+
+    def get_queryset(self):
+        return Comment.objects.filter()
+        return Article.objects.filter(author__lecture_id__exact=self.kwargs['lid'])
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return ArticleThumbSerializer
+        return ArticleSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(author=Author.objects.get(user=self.request.user, lecture_id__exact=self.kwargs['lid']))
+'''

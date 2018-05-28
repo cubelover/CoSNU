@@ -27,7 +27,7 @@ class ArticleList extends React.Component {
         Sorted by Upvote<Input type="radio" name="sortedby" />
         <ArticleTable articles={articles} lecture_id={lecture_id} page={cur_page}/>
         <Button>List</Button>
-        <Button>Write</Button>
+        <Link to={{pathname : '/lecture/' + lecture_id + '/write'}}><Button>Write</Button></Link>
         {children}
       </Wrapper>
     )

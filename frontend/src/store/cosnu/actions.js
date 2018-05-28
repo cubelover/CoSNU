@@ -24,7 +24,7 @@ export const sign_up = (username, password, email, verify_code) => ({type: SIGN_
 export const verify_email = (email) => ({type: VERIFY_EMAIL, email});
 export const set_password = (password, new_password) => ({type: SET_PASSWORD, password, new_password});
 export const set_lectureinfo = () => ({type: SET_LECTUREINFO});
-
+ 
 export const set_articles = (articles) => ({type: SET_ARTICLES, articles})
 export const get_articles = (lecture_id) => ({type: GET_ARTICLES, lecture_id})
 

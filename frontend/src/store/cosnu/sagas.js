@@ -54,6 +54,28 @@ export function* watchLogin(action) {
     }    */
 }
 
+export function* watchPostArticle(action){
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const lecture_id = action.lecture_id
+
+    const response = yield call (fetch, `/api/lecture/${lecture_id}/article/`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        },
+    });
+    if(response.ok){
+        const result = yield call(() => response.json())
+        console.log(result)
+    }
+    else{
+        yield put(actions.login_fail())
+    }
+}
+
+
 export function* watchGetArticle(action){
     const token = yield select((state) => state.cosnu.user_state.token)
     const lecture_id = action.lecture_id

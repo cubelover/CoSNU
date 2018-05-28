@@ -68,6 +68,31 @@ export function* watchPostArticle(action){
     }
 }
 
+export function* watchPostComment(action){
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const lecture_id = action.lecture_id
+    const article_id = action.article_id
+
+    const response = yield call (fetch, `/api/lecture/${lecture_id}/article/${article_id}/comment/`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        },
+        body: JSON.stringify({
+            'contents': action.comment_content
+        })
+    });
+    if(response.ok){
+        console.log(response.status)
+    }
+    else{
+        yield put(actions.login_fail())
+    }
+}
+
+
 export function* watchDeleteArticle(action){
     const token = yield select((state) => state.cosnu.user_state.token)
     const lecture_id = action.lecture_id
@@ -144,6 +169,7 @@ export default function* () {
     yield takeEvery(actions.GET_ARTICLE, watchGetArticle)
     yield takeEvery(actions.POST_ARTICLE, watchPostArticle)
     yield takeEvery(actions.DELETE_ARTICLE, watchDeleteArticle)
+    yield takeEvery(actions.POST_COMMENT, watchPostComment)
     yield takeEvery(actions.SET_USERINFO, watchUSERINFO)
     yield takeEvery(actions.USER_LOGOUT, watchLogout)
     yield takeEvery(actions.LOGIN_FAIL, watchLoginFail)

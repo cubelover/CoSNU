@@ -34,7 +34,7 @@ const user_state = (user_state = initialState, action) => {
         case actions.SET_ARTICLE:
             return {...user_state, current_article: action.article}
         default:
-            return user_state;
+            return user_state
     }
 }
 

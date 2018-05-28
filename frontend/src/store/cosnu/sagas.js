@@ -56,10 +56,13 @@ export function* watchPostArticle(action){
             "Content-Type": "application/json",
             'Authorization': 'Token ' + token
         },
+        body: JSON.stringify({
+            'title': action.title,
+            'contents': action.contents
+        })
     });
     if(response.ok){
-        const result = yield call(() => response.json())
-        console.log(result)
+        console.log(response.status)
     }
     else{
         yield put(actions.login_fail())
@@ -111,6 +114,7 @@ export default function* () {
     yield takeEvery(actions.VALIDATE_TOKEN, watchValidateToken)
     yield takeEvery(actions.GET_ARTICLES, watchGetArticles)
     yield takeEvery(actions.GET_ARTICLE, watchGetArticle)
+    yield takeEvery(actions.POST_ARTICLE, watchPostArticle)
     yield takeEvery(actions.USER_LOGOUT, watchLogout)
     
     let token = localStorage.getItem("auth-token")

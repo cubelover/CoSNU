@@ -1,19 +1,12 @@
 import { PropTypes } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { font, palette } from 'styled-theme'
 
-const Td = styled.span`
-  font-family: ${font('primary')};
-  color: ${palette({ grayscale: 0 }, 1)};
+const styles = css`
+  padding: 12px;
+  border: 1px solid #ccc;
 `
 
-Td.propTypes = {
-  palette: PropTypes.string,
-  reverse: PropTypes.bool,
-}
-
-Td.defaultProps = {
-  palette: 'grayscale',
-}
+const Td = styled.td`${styles}`
 
 export default Td

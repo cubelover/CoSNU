@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { Link } from 'react-router'
+import { Table, Tr, Th, Td } from 'components'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
@@ -19,24 +20,24 @@ class Lecture(models.Model):
 const LectureTable = ({lectures, children, ...props}) => {
   return (
     <Wrapper {...props}>
-      <table>
+      <Table>
         <thead><tr>
-          <td>name</td>
-          <td>code</td>
-          <td>professor</td>
-          <td>semester</td>
+          <Th>name</Th>
+          <Th>code</Th>
+          <Th>professor</Th>
+          <Th>semester</Th>
         </tr></thead>
         <tbody>
           {lectures.map( (lecture) =>
             <tr key={lecture.lecture.id}>
-              <td><Link to={'/lecture/' + lecture.lecture.id + '/list'}>{lecture.lecture.name}</Link></td>
-              <td>{lecture.lecture.code}</td>
-              <td>{lecture.lecture.professor}</td>
-              <td>{lecture.lecture.semester}</td>
+              <Td><Link to={'/lecture/' + lecture.lecture.id + '/list'}>{lecture.lecture.name}</Link></Td>
+              <Td>{lecture.lecture.code}</Td>
+              <Td>{lecture.lecture.professor}</Td>
+              <Td>{lecture.lecture.semester}</Td>
             </tr>
           )}
         </tbody>
-      </table>
+      </Table>
       {children}
     </Wrapper>
   )

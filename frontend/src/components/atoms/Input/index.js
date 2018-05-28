@@ -2,11 +2,6 @@ import React, { PropTypes } from 'react'
 import styled, { css } from 'styled-components'
 import { font, palette } from 'styled-theme'
 
-const Wrapper = styled.div`
-  font-family: ${font('primary')};
-  color: ${palette('grayscale', 0)};
-`
-
 const styles = css`
   font-family: ${font('primary')};
   color: ${palette('grayscale', 0)};

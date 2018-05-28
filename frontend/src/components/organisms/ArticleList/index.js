@@ -14,12 +14,15 @@ class ArticleList extends React.Component {
   constructor( props ){
     super(props)
   }
-  componentDidMount(){
-    this.props.get_articles(this.props.lecture_id);
+  componentWillMount(){
+    this.props.get_articles(this.props.lecture_id)
+  }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.lecture_id == this.props.lecture_id) return;
+    this.props.get_articles(this.props.lecture_id)
   }
   render(){
     var {lecture_id, cur_page, children, articles, ...props} = this.props
-    console.log(articles)
     return (
       <Wrapper {...props}>
         <h3>Article List (Lecture_id = {lecture_id})</h3>

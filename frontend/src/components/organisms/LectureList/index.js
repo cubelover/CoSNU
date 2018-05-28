@@ -18,10 +18,10 @@ class Lecture(models.Model):
 */
 
 const LectureList = ({user_state, children, ...props}) => {
-  console.log(user_state.username)
   if(user_state.username == ""){
       return (
         <Wrapper {...props}>
+          <h3>Please Login First</h3>
           {children}
         </Wrapper>
       )

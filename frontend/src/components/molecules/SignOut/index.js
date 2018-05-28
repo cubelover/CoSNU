@@ -11,12 +11,12 @@ const Wrapper = styled.div`
 
 const SignOut = ( {username, action_logout, children, ...props}) => {
   const send_logout = () => {
-    action_logout();
+    action_logout()
   }
   return (
     <Wrapper {...props}>
       <span>Welcome {username}!</span>
-      <Link to="/"><Button onClick={send_logout}>Sign Out</Button></Link>
+      <Link to = "/"><Button onClick={send_logout}>Sign Out</Button></Link>
       <Link to = "/edit"><Button>Edit Profile</Button></Link>
       {children}
     </Wrapper>

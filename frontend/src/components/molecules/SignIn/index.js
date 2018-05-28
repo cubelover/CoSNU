@@ -20,19 +20,16 @@ const InputStyles = css`
 const SignIn = ({ action_login, children, ...props }) => {
   let username, password;
   const send_login = () => {
-    if(username.value != undefined && password.value != undefined) {
-      console.log(username.value);
-      action_login(username.value, password.value);
-      username.value = password.value = '';
-    }
+    action_login(username.value, password.value);
+    username.value = password.value = '';
   }
   return (
     <Wrapper {...props}>
-      <Input type="text" placeholder="username" innerRef={(ref) => {username = ref;}}></Input>
+      <Input type="text" placeholder="username" innerRef={(ref) => {username = ref}}></Input>
       &nbsp;
       <Input type="password" placeholder="password" innerRef={(ref) => {password = ref}}></Input>
       &nbsp;
-      <Button onClick={send_login}>Sign In</Button>
+      <Link to = "/"><Button onClick={send_login}>Sign In</Button></Link>
       &nbsp;
       <Link to="/signup"><Button>Sign Up</Button></Link>
       {children}

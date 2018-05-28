@@ -13,42 +13,42 @@ import { ArticleList } from 'containers'
   "contents": "뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글"
 }
 */
-const ArticlePage = ({ params, location, children, ...props}) => {
-  //location: {query}
-  var article = 
-  {
-    "id": 1,
-    "title": "뻘글",
-    "author": "소개수강생1",
-    "create_time": "2018-05-12T07:42:25.105055Z",
-    "contents": "뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글뻘글"
-  };
-  if(typeof(params) !== 'undefined' || params != null) {
-  }else{
-    params = {"lecture_id": "1", "article_id": "1"};
+class ArticlePage extends React.Component {
+  constructor( props ){
+    super(props)
   }
-
-  let lecture_id = params.lecture_id;
-  let article_id = params.article_id;
-  let cur_page = 1;//query.page ? parseInt(query.page, 10) : 1;
-  if(isNaN(cur_page)) cur_page = 1;
-  return (
-    <PageTemplate>
-      <h1>ArticlePage {lecture_id} + {article_id}</h1>
-      <span>{article.title}</span>
-      <span>{article.author}</span>
-      <span>{article.create_time}</span>
-      <p>{article.contents}</p>
-      <Button>Modify</Button>
-      <Button>Delete</Button>
-      <Input type="text"></Input>
-      <Button>Report</Button>
-      <Input type="text"></Input>
-      <Button>Add Comment</Button>
-      <ArticleList lecture_id={lecture_id} cur_page={cur_page}/>
-      {children}
-    </PageTemplate>
-  )
+  componentWillMount(){
+    var {lecture_id, article_id} = this.props.params;
+    this.props.get_article(lecture_id, article_id)
+  }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.params.lecture_id == this.props.params.lecture_id && 
+        nextProps.params.article_id == this.props.params.article_id) return;
+    this.props.get_article(nextProps.params.lecture_id, nextProps.params.article_id)
+  }
+  render(){
+    var {location, children, article, ...props} = this.props
+    var {lecture_id, article_id} = this.props.params;
+    let cur_page = 1//query.page ? parseInt(query.page, 10) : 1
+    if(isNaN(cur_page)) cur_page = 1
+    return (
+      <PageTemplate>
+        <h1>ArticlePage {lecture_id} + {article_id}</h1>
+        <span>{article.title}</span>
+        <span>{article.author}</span>
+        <span>{article.create_time}</span>
+        <p>{article.contents}</p>
+        <Button>Modify</Button>
+        <Button>Delete</Button>
+        <Input type="text"></Input>
+        <Button>Report</Button>
+        <Input type="text"></Input>
+        <Button>Add Comment</Button>
+        <ArticleList lecture_id={lecture_id} cur_page={cur_page}/>
+        {children}
+      </PageTemplate>
+    )
+  }
 }
 
 export default ArticlePage

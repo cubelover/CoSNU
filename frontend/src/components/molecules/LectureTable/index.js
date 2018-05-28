@@ -17,10 +17,6 @@ class Lecture(models.Model):
 */
 
 const LectureTable = ({lectures, children, ...props}) => {
-  if(typeof(lectures) !== 'undefined' || lectures != null) {
-  }else{
-    lectures = [];
-  }
   return (
     <Wrapper {...props}>
       <table>

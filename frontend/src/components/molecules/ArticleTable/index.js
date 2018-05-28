@@ -9,7 +9,6 @@ const Wrapper = styled.div`
 `
 
 /*
-
 class Article(models.Model):
     title = models.CharField(max_length=100)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
@@ -28,7 +27,7 @@ const ArticleTable = ({articles, lecture_id, page, children, ...props}) => {
           <td>create_time</td>
         </tr></thead>
         <tbody>
-          {(articles ? articles : []).map( (article) =>
+          {articles.map( (article) =>
             <tr key={article.id}>
               <td>{article.id}</td>
               <td><Link to={{ pathname: '/lecture/' + lecture_id + '/article/' + article.id, query: { page: page } }}>{article.title}</Link></td>

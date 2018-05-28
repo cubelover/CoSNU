@@ -16,12 +16,9 @@ const initialState = {
   
 const user_state = (user_state = initialState, action) => {
     switch(action.type) {
-<<<<<<< Updated upstream
-=======
         case actions.LOGIN_FAIL:
         case actions.USER_LOGOUT:
             return {"pk": 0, "username": "", "email": "", "token": "", "lectures": [], currunt_articles:[]}
->>>>>>> Stashed changes
         case actions.SET_USERINFO:
             return {...user_state, pk: action.pk, username: action.username, email: action.email, token: action.token, lectures: action.lectures}
         case actions.SET_ARTICLES:

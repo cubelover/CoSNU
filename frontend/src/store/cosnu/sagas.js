@@ -106,11 +106,11 @@ export function* watchGetArticle(action){
 }
 
 export function* watchUSERINFO(action) {
-    localStorage.setItem("user_info", JSON.stringify({"pk": action.pk, "username": action.username, "email": action.email, "token": action.token, lectures: action.lectures, currunt_articles:[]}));
+    localStorage.setItem("user_info", JSON.stringify({"pk": action.pk, "username": action.username, "email": action.email, "token": action.token, lectures: action.lectures, current_articles:[]}));
 }
 
 export function* watchLoginFail(){
-    localStorage.setItem("user_info", JSON.stringify({"pk": 0, "username": "", "email": "", "token": "", "lectures": [], currunt_articles:[]}));
+    localStorage.setItem("user_info", JSON.stringify({"pk": 0, "username": "", "email": "", "token": "", "lectures": [], current_articles:[]}));
 }
 
 export default function* () {

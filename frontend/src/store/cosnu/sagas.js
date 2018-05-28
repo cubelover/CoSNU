@@ -39,7 +39,7 @@ export function* watchLogin(action) {
         const result = yield call(() => response.json())
         yield put(actions.validate_token(result.token))
     }
-    else {
+    else{
         yield put(actions.login_fail())
     }
 }
@@ -60,10 +60,11 @@ export function* watchPostArticle(action){
             'contents': action.contents
         })
     });
+    console.log(response)
     if(response.ok){
         console.log(response.status)
     }
-    else{
+    else if(response.status == 401){
         yield put(actions.login_fail())
     }
 }
@@ -87,7 +88,7 @@ export function* watchPostComment(action){
     if(response.ok){
         console.log(response.status)
     }
-    else{
+    else if(response.status == 401){
         yield put(actions.login_fail())
     }
 }
@@ -109,7 +110,7 @@ export function* watchDeleteArticle(action){
     if(response.ok){
         console.log(response.status)
     }
-    else{
+    else if(response.status == 401){
         yield put(actions.login_fail())
     }
 }
@@ -129,7 +130,7 @@ export function* watchGetArticles(action){
         const result = yield call(() => response.json())
         yield put(actions.set_articles(result))
     }
-    else{
+    else if(response.status == 401){
         yield put(actions.login_fail())
     }
 }
@@ -149,7 +150,7 @@ export function* watchGetArticle(action){
         const result = yield call(() => response.json())
         yield put(actions.set_article(result))
     }
-    else{
+    else if(response.status == 401){
         yield put(actions.login_fail())
     }
 }

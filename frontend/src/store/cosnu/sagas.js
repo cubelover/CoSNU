@@ -142,12 +142,9 @@ export default function* () {
     yield takeEvery(actions.VALIDATE_TOKEN, watchValidateToken)
     yield takeEvery(actions.GET_ARTICLES, watchGetArticles)
     yield takeEvery(actions.GET_ARTICLE, watchGetArticle)
-    yield takeEvery(actions.SET_USERINFO, watchUSERINFO)
-    yield takeEvery(actions.LOGIN_FAIL, watchLoginFail)
     yield takeEvery(actions.POST_ARTICLE, watchPostArticle)
     yield takeEvery(actions.DELETE_ARTICLE, watchDeleteArticle)
+    yield takeEvery(actions.SET_USERINFO, watchUSERINFO)
     yield takeEvery(actions.USER_LOGOUT, watchLogout)
-    
-    let token = localStorage.getItem("auth-token")
-    yield put(actions.validate_token(token))
+    yield takeEvery(actions.LOGIN_FAIL, watchLoginFail)
 }

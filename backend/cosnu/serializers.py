@@ -34,9 +34,11 @@ class ArticleThumbSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    author = serializers.SlugRelatedField(read_only=True, slug_field='nickname')
+
     class Meta:
         model = Comment
-        fields = ('id', 'article', 'author', 'contents', 'create_time')
+        fields = ('id', 'author', 'contents', 'create_time')
 
 
 class ArticleSerializer(serializers.ModelSerializer):

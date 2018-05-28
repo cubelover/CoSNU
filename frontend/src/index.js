@@ -11,7 +11,13 @@ import configureStore from 'store/configure'
 import routes from 'routes'
 
 const baseHistory = useRouterHistory(createHistory)({ basename: process.env.PUBLIC_PATH })
-const store = configureStore({}, baseHistory)
+
+var initialState = {};
+if(localStorage.getItem("user_info")){
+  initialState = {cosnu:{user_state:JSON.parse(localStorage.getItem("user_info"))}}
+}
+console.log(initialState)
+const store = configureStore(initialState, baseHistory)
 const history = syncHistoryWithStore(baseHistory, store)
 const root = document.getElementById('app')
 

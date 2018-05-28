@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^user/$', views.ProfileView.as_view()),
     url(r'^lecture/(?P<pk>[0-9]+)/$', views.LectureView.as_view()),
     url(r'^lecture/(?P<lid>[0-9]+)/', include(router.urls))
+#    url(r'^lecture/(?P<lid>[0-9]+)/article/(?P<aid>[0-9]+)', include(router.urls))
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

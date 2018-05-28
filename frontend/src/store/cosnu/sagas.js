@@ -116,7 +116,7 @@ export function* watchLoginFail(){
 export default function* () {
     yield takeEvery(actions.USER_LOGIN, watchLogin)
     yield takeEvery(actions.VALIDATE_TOKEN, watchValidateToken)
-    yield takeEvery(actions.GET_ARTICLES, watchGetArticle)
+    yield takeEvery(actions.GET_ARTICLES, watchGetArticles)
     yield takeEvery(actions.GET_ARTICLE, watchGetArticle)
     // local storage related saga
     yield takeEvery(actions.SET_USERINFO, watchUSERINFO)

@@ -3,6 +3,7 @@ import React from 'react'
 import { PageTemplate } from 'components'
 import { Button, Input } from 'components'
 import { ArticleList } from 'containers'
+import { Link } from 'react-router'
 
 /*
 {
@@ -27,10 +28,15 @@ class ArticlePage extends React.Component {
     this.props.get_article(nextProps.params.lecture_id, nextProps.params.article_id)
   }
   render(){
-    var {location, children, article, ...props} = this.props
+    var {location, action_delete_article, children, article, ...props} = this.props
     var {lecture_id, article_id} = this.props.params;
     let cur_page = 1//query.page ? parseInt(query.page, 10) : 1
     if(isNaN(cur_page)) cur_page = 1
+
+    const delete_article = () => {
+      action_delete_article(lecture_id, article_id)
+    }
+
     return (
       <PageTemplate>
         <h1>ArticlePage {lecture_id} + {article_id}</h1>
@@ -39,7 +45,7 @@ class ArticlePage extends React.Component {
         <span>{article.create_time}</span>
         <p>{article.contents}</p>
         <Button>Modify</Button>
-        <Button>Delete</Button>
+        <Button onClick = {delete_article}>Delete</Button>
         <Input type="text"></Input>
         <Button>Report</Button>
         <Input type="text"></Input>

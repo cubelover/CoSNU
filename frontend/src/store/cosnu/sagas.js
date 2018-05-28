@@ -69,6 +69,27 @@ export function* watchPostArticle(action){
     }
 }
 
+export function* watchDeleteArticle(action){
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const lecture_id = action.lecture_id
+    const article_id = action.article_id
+
+    const response = yield call (fetch, `/api/lecture/${lecture_id}/article/${article_id}/`, {
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        },
+    });
+    if(response.ok){
+        console.log(response.status)
+    }
+    else{
+        yield put(actions.login_fail())
+    }
+}
+
 export function* watchGetArticles(action){
     const token = yield select((state) => state.cosnu.user_state.token)
     const lecture_id = action.lecture_id
@@ -115,6 +136,7 @@ export default function* () {
     yield takeEvery(actions.GET_ARTICLES, watchGetArticles)
     yield takeEvery(actions.GET_ARTICLE, watchGetArticle)
     yield takeEvery(actions.POST_ARTICLE, watchPostArticle)
+    yield takeEvery(actions.DELETE_ARTICLE, watchDeleteArticle)
     yield takeEvery(actions.USER_LOGOUT, watchLogout)
     
     let token = localStorage.getItem("auth-token")

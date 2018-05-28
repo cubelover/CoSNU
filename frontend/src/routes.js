@@ -5,7 +5,7 @@ import App from 'components/App'
 import { HomePage } from 'components'
 import { LecturePage } from 'components'
 import { NotFoundPage } from 'components'
-import { ArticlePage } from 'components'
+import { ArticlePage } from 'containers'
 import { SignUpPage } from 'containers'
 import { EditProfilePage } from 'components'
 

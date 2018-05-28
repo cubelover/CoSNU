@@ -3,6 +3,8 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAIL = 'LOGIN_FAIL'
 export const VALIDATE_TOKEN = 'VALIDATE_TOKEN'
 
+export const SET_ARTICLE = 'SET_ARTICLE'
+export const GET_ARTICLE = 'GET_ARTICLE'
 export const SET_ARTICLES = 'SET_ARTICLES'
 export const GET_ARTICLES = 'GET_ARTICLES'
 
@@ -25,35 +27,7 @@ export const verify_email = (email) => ({type: VERIFY_EMAIL, email});
 export const set_password = (password, new_password) => ({type: SET_PASSWORD, password, new_password});
 export const set_lectureinfo = () => ({type: SET_LECTUREINFO});
 
+export const set_article = (article) => ({type: SET_ARTICLE, article})
+export const get_article = (lecture_id, article_id) => ({type: GET_ARTICLE, lecture_id, article_id})
 export const set_articles = (articles) => ({type: SET_ARTICLES, articles})
 export const get_articles = (lecture_id) => ({type: GET_ARTICLES, lecture_id})
-
-/*
-export const REPLACE_PROMISE = 'REPLACE_PROMISE'
-export const GET_ALL_PROMISE = 'GET_ALL_PROMISE'
-export const POST_PROMISE = 'POST_PROMISE'
-
-export const test_login = (username, password) => ({type: TEST_LOGIN,username,password})
-export const user_login = (username, password, userid) => ({type: USER_LOGIN, username, password, userid})
-
-export const user_logout = () => ({type: USER_LOGOUT})
-
-export const replace_promise = (promise_list) => {
-    return {
-        type: REPLACE_PROMISE,
-        promise_list
-    }
-}
-
-
-export const post_promise = (username, password, sinceWhen, tilWhen, user2) => {
-    return {
-        type: POST_PROMISE,
-        username, 
-        password, 
-        sinceWhen,
-        tilWhen,
-        user2
-    }
-}
-*/

@@ -5,7 +5,7 @@ import { get_articles } from '../store/cosnu/actions'
 
 
 const mapStateToProps = (state) => {
-    return ({articles : state.cosnu.user_state.currunt_articles})
+    return ({articles : state.cosnu.user_state.current_articles})
 }
 const mapDispatchToProps = (dispatch) => {
     return {

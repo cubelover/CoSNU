@@ -1,14 +1,27 @@
 import * as actions from './actions';
 import { combineReducers } from 'redux';
 
-const initialState = {pk: 0, username: "", email: "", token: "", lectures: [], currunt_articles:[]}
-
+const initialState = {
+    pk: 0, 
+    username: "", email: "", token: "", lectures: [], 
+    current_articles:[], 
+    current_article:{
+        id: 0,
+        title: "",
+        author: "",
+        create_time: "",
+        contents: ""
+    }
+}
+  
 const user_state = (user_state = initialState, action) => {
     switch(action.type) {
         case actions.SET_USERINFO:
-            return {pk: action.pk, username: action.username, email: action.email, token: action.token, lectures: action.lectures, currunt_articles:[]}
+            return {...user_state, pk: action.pk, username: action.username, email: action.email, token: action.token, lectures: action.lectures}
         case actions.SET_ARTICLES:
-            return {...user_state, currunt_articles: action.articles}
+            return {...user_state, current_articles: action.articles}
+        case actions.SET_ARTICLE:
+            return {...user_state, current_article: action.article}
         default:
             return user_state;
     }
@@ -17,11 +30,5 @@ const user_state = (user_state = initialState, action) => {
 const cosnu_reducer = combineReducers({
     user_state
 });
-/*
-const promises_reducer = combineReducers({
-    promise_state,
-    user_state
-});
-*/
     
 export default cosnu_reducer;

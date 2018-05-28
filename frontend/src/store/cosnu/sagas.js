@@ -45,7 +45,7 @@ export function* watchLogin(action) {
     }
 }
 
-export function* watchGetArticle(action){
+export function* watchGetArticles(action){
     const token = yield select((state) => state.cosnu.user_state.token)
     const lecture_id = action.lecture_id
     const response = yield call (fetch, `/api/lecture/${lecture_id}/article/`, {
@@ -65,10 +65,31 @@ export function* watchGetArticle(action){
     }
 }
 
+export function* watchGetArticle(action){
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const {lecture_id, article_id} = action
+    const response = yield call (fetch, `/api/lecture/${lecture_id}/article/${article_id}/`, {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        },
+    })
+    if(response.ok){
+        const result = yield call(() => response.json())
+        yield put(actions.set_article(result))
+    }
+    else{
+        yield put(actions.login_fail())
+    }
+}
+
 export default function* () {
     yield takeEvery(actions.USER_LOGIN, watchLogin)
     yield takeEvery(actions.VALIDATE_TOKEN, watchValidateToken)
-    yield takeEvery(actions.GET_ARTICLES, watchGetArticle)
+    yield takeEvery(actions.GET_ARTICLES, watchGetArticles)
+    yield takeEvery(actions.GET_ARTICLE, watchGetArticle)
     yield takeEvery(actions.USER_LOGOUT, watchLogout)
     
     let token = localStorage.getItem("auth-token")

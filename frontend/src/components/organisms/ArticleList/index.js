@@ -14,7 +14,11 @@ class ArticleList extends React.Component {
   constructor( props ){
     super(props)
   }
-  componentDidMount(){
+  componentWillMount(){
+    this.props.get_articles(this.props.lecture_id)
+  }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.lecture_id == this.props.lecture_id) return;
     this.props.get_articles(this.props.lecture_id)
   }
   render(){

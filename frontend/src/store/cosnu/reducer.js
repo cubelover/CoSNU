@@ -10,7 +10,8 @@ const initialState = {
         title: "",
         author: "",
         create_time: "",
-        contents: ""
+        contents: "",
+        comments: []
     }
 }
   

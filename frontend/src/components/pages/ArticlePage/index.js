@@ -17,7 +17,7 @@ class ArticlePage extends React.Component {
   constructor( props ){
     super(props)
   }
-  componentWillMount(){
+  componentDidMount(){
     var {lecture_id, article_id} = this.props.params;
     this.props.get_article(lecture_id, article_id)
   }

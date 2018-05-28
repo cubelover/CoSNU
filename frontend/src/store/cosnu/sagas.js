@@ -15,6 +15,8 @@ export function* watchValidateToken(action){
     if(response.ok){
         const result = yield call(() => response.json())
         yield put(actions.set_userinfo(result.id, result.username, result.email, token, result.lectures))
+        //yield call(localStorage.setItem, "auth-token", token)
+        localStorage.setItem("auth-token", token);
     }
     else{
         yield put(actions.login_fail())
@@ -79,6 +81,9 @@ export default function* () {
     yield takeEvery(actions.USER_LOGIN, watchLogin)
     yield takeEvery(actions.VALIDATE_TOKEN, watchValidateToken)
     yield takeEvery(actions.GET_ARTICLES, watchGetArticle)
+    
+    let token = localStorage.getItem("auth-token")
+    yield put(actions.validate_token(token))
 }
 
 

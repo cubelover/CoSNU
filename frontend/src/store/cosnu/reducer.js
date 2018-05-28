@@ -1,7 +1,7 @@
 import * as actions from './actions';
 import { combineReducers } from 'redux';
 
-const initialState = {"pk": 0, "username": "", "email": "", "token": "", "lectures": [], currunt_articles:[]}
+const initialState = {pk: 0, username: "", email: "", token: "", lectures: [], currunt_articles:[]}
 
 const user_state = (user_state = initialState, action) => {
     switch(action.type) {

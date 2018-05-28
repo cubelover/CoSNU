@@ -4,11 +4,14 @@ import { PageTemplate } from 'components'
 import { Input, Button } from 'components'
 import { Link } from 'react-router'
 
-const WriteArticlePage = ({action_post_article, children, ...props}) => {
+const WriteArticlePage = ({params, action_post_article, children, ...props}) => {
   let title, contents;
+  console.log(params)
   const post_article = () => {
     console.log('send_article')
-    action_post_article(title, contents);
+    console.log(title.value)
+    console.log(contents.value)
+    action_post_article(params.lecture_id, title.value, contents.value);
   }
   return (
     <PageTemplate>

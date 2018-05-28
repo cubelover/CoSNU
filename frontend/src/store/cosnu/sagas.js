@@ -55,10 +55,34 @@ export function* watchPostArticle(action){
             "Content-Type": "application/json",
             'Authorization': 'Token ' + token
         },
+        body: JSON.stringify({
+            'title': action.title,
+            'contents': action.contents
+        })
     });
     if(response.ok){
-        const result = yield call(() => response.json())
-        console.log(result)
+        console.log(response.status)
+    }
+    else{
+        yield put(actions.login_fail())
+    }
+}
+
+export function* watchDeleteArticle(action){
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const lecture_id = action.lecture_id
+    const article_id = action.article_id
+
+    const response = yield call (fetch, `/api/lecture/${lecture_id}/article/${article_id}/`, {
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        },
+    });
+    if(response.ok){
+        console.log(response.status)
     }
     else{
         yield put(actions.login_fail())
@@ -118,48 +142,12 @@ export default function* () {
     yield takeEvery(actions.VALIDATE_TOKEN, watchValidateToken)
     yield takeEvery(actions.GET_ARTICLES, watchGetArticles)
     yield takeEvery(actions.GET_ARTICLE, watchGetArticle)
-    // local storage related saga
     yield takeEvery(actions.SET_USERINFO, watchUSERINFO)
-    yield takeEvery(actions.USER_LOGOUT, watchLoginFail)
     yield takeEvery(actions.LOGIN_FAIL, watchLoginFail)
+    yield takeEvery(actions.POST_ARTICLE, watchPostArticle)
+    yield takeEvery(actions.DELETE_ARTICLE, watchDeleteArticle)
+    yield takeEvery(actions.USER_LOGOUT, watchLogout)
+    
+    let token = localStorage.getItem("auth-token")
+    yield put(actions.validate_token(token))
 }
-
-
-
-
-/*
-export function* getPromiseForId(userid) {
-    const request = yield call (fetch, users_url, {method: 'GET'});
-    if(request.status == 200) {
-        const allList = yield call (request.json.bind(request));
-        const user = allList.find((user)=>(user.id==userid));
-        yield put(actions.replace_promise({'inviter':user['promises_as_inviter'], 'invitee':user['promises_as_invitee']}));
-    }
-}
-
-export function* postPromise(user_state, sinceWhen, tilWhen, user2) {
-    const username = user_state['username'], password = user_state['password'], userid = user_state['userid'];
-    const getIdRequest = yield call (fetch, users_url, {method: 'GET'});
-    const userList = yield call (getIdRequest.json.bind(getIdRequest));
-    const user = userList.find((user)=>(user.username==user2));
-    if(user != undefined) {
-        const userId = user['id'];
-        const hash = new Buffer(`${username}:${password}`).toString('base64');
-        const response = yield call (fetch, post_url, {
-            method: 'POST',
-            headers: {
-                'Authorization' : `Basic ${hash}`,
-                'Content-Type' : 'application/json'
-            },
-            body: JSON.stringify({sinceWhen, tilWhen, 'user2':userId})
-        });
-        if(response.status == 201) {
-            yield call(getPromiseForId, userid);
-        }
-    }
-}
-
-export function* watchPostPromise(action) {
-    const { username, password, sinceWhen, tilWhen, user2 } = action;
-    yield call(postPromise, username, password, sinceWhen, tilWhen, user2)
-}*/

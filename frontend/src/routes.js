@@ -8,7 +8,7 @@ import { NotFoundPage } from 'components'
 import { ArticlePage } from 'containers'
 import { SignUpPage } from 'containers'
 import { EditProfilePage } from 'components'
-import { WriteArticlePage } from 'components'
+import { WriteArticlePage } from 'containers'
 
 export const routes = (store) => {
   const authRequired = (nextState, replace) => {

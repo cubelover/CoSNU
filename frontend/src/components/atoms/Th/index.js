@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { font, palette } from 'styled-theme'
 
 const styles = css`
-  padding: 12px;
+  padding: 8px;
   border: 1px solid #ccc;
 `
 

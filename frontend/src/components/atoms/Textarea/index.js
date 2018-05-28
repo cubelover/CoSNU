@@ -3,11 +3,12 @@ import styled, { css } from 'styled-components'
 import { font, palette } from 'styled-theme'
 
 const styles = css`
-  width: 960px;
-  border-spacing: 0;
-  border-collapse: collapse;
+  font-size: 16px;
+  padding: 8px;
+  width: 720px;
+  height: 480px;
 `
 
-const Table = styled.table`${styles}`
+const Textarea = styled.textarea`${styles}`
 
-export default Table
+export default Textarea

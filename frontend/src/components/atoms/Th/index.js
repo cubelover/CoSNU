@@ -3,11 +3,10 @@ import styled, { css } from 'styled-components'
 import { font, palette } from 'styled-theme'
 
 const styles = css`
-  width: 960px;
-  border-spacing: 0;
-  border-collapse: collapse;
+  padding: 8px;
+  border: 1px solid #ccc;
 `
 
-const Table = styled.table`${styles}`
+const Th = styled.th`${styles}`
 
-export default Table
+export default Th

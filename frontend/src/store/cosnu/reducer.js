@@ -10,7 +10,8 @@ const initialState = {
         title: "",
         author: "",
         create_time: "",
-        contents: ""
+        contents: "",
+        comments: []
     }
 }
   
@@ -18,7 +19,14 @@ const user_state = (user_state = initialState, action) => {
     switch(action.type) {
         case actions.LOGIN_FAIL:
         case actions.USER_LOGOUT:
-            return {"pk": 0, "username": "", "email": "", "token": "", "lectures": [], currunt_articles:[]}
+            return {...user_state, "pk": 0, "username": "", "email": "", "token": "", "lectures": [], current_articles:[], current_article:{
+                id: 0,
+                title: "",
+                author: "",
+                create_time: "",
+                contents: "",
+                comments: []
+            }}
         case actions.SET_USERINFO:
             return {...user_state, pk: action.pk, username: action.username, email: action.email, token: action.token, lectures: action.lectures}
         case actions.SET_ARTICLES:

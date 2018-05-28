@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { PageTemplate } from 'components'
-import { Input, Button } from 'components'
+import { Input, Button, Table, Tr, Th, Td } from 'components'
 import { Link } from 'react-router'
 
 const EditProfilePage = ({children, ...props}) => {
@@ -32,22 +32,22 @@ const EditProfilePage = ({children, ...props}) => {
       <Input type="password" placeholder="confirm_new_password" innerRef={(ref) => {confirm_new_password = ref;}}></Input>
       <Button onClick={send_set_password}>Change Password</Button>
       
-      <table>
+      <Table>
         <thead><tr>
-          <td>name</td>
-          <td>nickname</td>
-          <td>alias</td>
+          <Th>name</Th>
+          <Th>nickname</Th>
+          <Th>alias</Th>
         </tr></thead>
         <tbody>
           {lectures.map( (lecture) =>
             <tr key={lecture.lecture.id}>
-              <td>{lecture.lecture.name}</td>
-              <td><Input type="text" value={lecture.nickname}></Input></td>
-              <td><Input type="text" value={lecture.alias}></Input></td>
+              <Td>{lecture.lecture.name}</Td>
+              <Td><Input type="text" value={lecture.nickname}></Input></Td>
+              <Td><Input type="text" value={lecture.alias}></Input></Td>
             </tr>
           )}
         </tbody>
-      </table>
+      </Table>
       <Button onClick={send_set_lectureinfo}>Edit Lecture Information</Button>
       {children}
     </PageTemplate>

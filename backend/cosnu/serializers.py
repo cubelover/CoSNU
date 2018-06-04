@@ -44,10 +44,18 @@ class CommentSerializer(serializers.ModelSerializer):
 class ArticleSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(read_only=True, slug_field='nickname')
     comments = serializers.SerializerMethodField()
+    upvotes = serializers.SerializerMethodField()
+    downvotes = serializers.SerializerMethodField()
 
     class Meta:
         model = Article
-        fields = ('id', 'title', 'author', 'create_time', 'contents', 'comments')
+        fields = ('id', 'title', 'author', 'create_time', 'contents', 'comments', 'upvotes', 'downvotes')
+
+    def get_upvotes(self, instance):
+        return instance.upvote.count()
+
+    def get_downvotes(self, instance):
+        return instance.downvote.count()
 
     def get_comments(self, instance):
         comms = instance.comment_set.all().order_by('id')

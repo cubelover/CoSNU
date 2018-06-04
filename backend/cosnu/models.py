@@ -33,11 +33,11 @@ class Article(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     contents = models.CharField(max_length=2000)
     create_time = models.DateTimeField(auto_now_add=True)
+    upvote = models.ManyToManyField(Author, related_name='upvote_articles')
+    downvote = models.ManyToManyField(Author, related_name='downvote_articles')
 
     def __str__(self):
         return self.title
-#   upvotes, downvotes, ...
-#
 
 
 class Comment(models.Model):

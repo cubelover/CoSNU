@@ -8,6 +8,7 @@ from rest_framework import viewsets
 from cosnu.serializers import *
 from django.shortcuts import *
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import *
@@ -46,8 +47,15 @@ class IsMemberOrOwner(permissions.BasePermission):
         return obj.author.user == request.user
 
 
+class SmallNumberPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
+
+
 class ArticleViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, IsMemberOrOwner)
+    pagination_class = SmallNumberPagination
 
     def get_queryset(self):
         return Article.objects.filter(author__lecture_id__exact=self.kwargs['lid']).order_by('-id')

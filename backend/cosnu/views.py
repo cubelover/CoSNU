@@ -50,7 +50,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, IsMemberOrOwner)
 
     def get_queryset(self):
-        return Article.objects.filter(author__lecture_id__exact=self.kwargs['lid'])
+        return Article.objects.filter(author__lecture_id__exact=self.kwargs['lid']).order_by('-id')
 
     def get_serializer_class(self):
         if self.action == 'list':

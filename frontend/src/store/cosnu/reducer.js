@@ -5,7 +5,12 @@ const initialUserState = {
     pk: 0, username: "", email: "", token: "", lectures: [], 
 }
 const initialArticleState = {
-    current_articles:[], 
+    current_articles:{
+        count: 0,
+        next: null,
+        previous: null,
+        results: []
+    }, 
     current_article:{
         id: 0,
         title: "",
@@ -20,7 +25,7 @@ const user_state = (user_state = initialUserState, action) => {
     switch(action.type) {
         case actions.LOGIN_FAIL:
         case actions.USER_LOGOUT:
-            return {...user_state, pk: 0, username: "", email: "", token: "", lectures: []}
+            return initialUserState
         case actions.SET_USERINFO:
             return {...user_state, pk: action.pk, username: action.username, email: action.email, token: action.token, lectures: action.lectures}
         default:
@@ -31,14 +36,7 @@ const article_state = (article_state = initialArticleState, action) => {
     switch(action.type) {
         case actions.LOGIN_FAIL:
         case actions.USER_LOGOUT:
-            return {...article_state, current_articles:[], current_article:{
-                id: 0,
-                title: "",
-                author: "",
-                create_time: "",
-                contents: "",
-                comments: []
-            }}
+            return initialArticleState
         case actions.SET_ARTICLES:
             return {...article_state, current_articles: action.articles}
         case actions.SET_ARTICLE:

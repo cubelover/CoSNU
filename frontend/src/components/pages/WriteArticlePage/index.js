@@ -21,7 +21,7 @@ const WriteArticlePage = ({params, action_post_article, children, ...props}) => 
       <h1>WriteArticlePage</h1>
       <Wrapper>
         <Input type="text" placeholder="title" innerRef={(ref) => {title = ref;}}></Input>
-        <Button onClick={post_article}>POST</Button>
+        <Link to={{ pathname: '/lecture/' + params.lecture_id + '/list/' }}><Button onClick={post_article}>POST</Button></Link>
       </Wrapper>
       <Textarea type="contents" placeholder="contents" innerRef={(ref) => {contents = ref;}}></Textarea>
       {children}

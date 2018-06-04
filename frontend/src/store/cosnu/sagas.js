@@ -22,7 +22,6 @@ export function* watchValidateToken(action){
 }
 export function* watchLogout(action) {
     yield put(actions.set_userinfo(0, "", "", "", []))
-    localStorage.setItem("auth-token", "")
 }
 
 export function* watchLogin(action) {
@@ -62,6 +61,7 @@ export function* watchPostArticle(action){
     });
     if(response.ok){
         console.log(response.status)
+        yield put(actions.get_articles(lecture_id))
     }
     else{
         yield put(actions.login_fail())
@@ -86,6 +86,7 @@ export function* watchPostComment(action){
     });
     if(response.ok){
         console.log(response.status)
+        yield put(actions.get_article(lecture_id, article_id))
     }
     else{
         yield put(actions.login_fail())
@@ -108,6 +109,7 @@ export function* watchDeleteArticle(action){
     });
     if(response.ok){
         console.log(response.status)
+        yield put(actions.get_articles(lecture_id))
     }
     else{
         yield put(actions.login_fail())
@@ -155,11 +157,27 @@ export function* watchGetArticle(action){
 }
 
 export function* watchUSERINFO(action) {
-    localStorage.setItem("user_info", JSON.stringify({"pk": action.pk, "username": action.username, "email": action.email, "token": action.token, lectures: action.lectures, current_articles:[]}));
+    localStorage.setItem("user_info", JSON.stringify({"pk": action.pk, "username": action.username, "email": action.email, "token": action.token, lectures: action.lectures, current_articles:[],
+    current_article:{
+        id: 0,
+        title: "",
+        author: "",
+        create_time: "",
+        contents: "",
+        comments: []
+    }}));
 }
 
 export function* watchLoginFail(){
-    localStorage.setItem("user_info", JSON.stringify({"pk": 0, "username": "", "email": "", "token": "", "lectures": [], current_articles:[]}));
+    localStorage.setItem("user_info", JSON.stringify({"pk": 0, "username": "", "email": "", "token": "", "lectures": [], current_articles:[],
+    current_article:{
+        id: 0,
+        title: "",
+        author: "",
+        create_time: "",
+        contents: "",
+        comments: []
+    }}));
 }
 
 export default function* () {

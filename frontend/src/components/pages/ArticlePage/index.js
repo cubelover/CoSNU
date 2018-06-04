@@ -42,7 +42,7 @@ class ArticlePage extends React.Component {
         <span>{article.create_time}</span>
         <p>{article.contents}</p>
         <Button>Modify</Button>
-        <Button onClick = {delete_article}>Delete</Button>
+        <Link to={{ pathname: '/lecture/' + lecture_id + '/list/' }}><Button onClick = {delete_article}>Delete</Button></Link>
         <Input type="text"></Input>
         <Button>Report</Button>
         <CommentTable comments={(article.comments)} lecture_id={lecture_id} article_id={article_id}/>

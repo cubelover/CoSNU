@@ -16,6 +16,7 @@ const initialState = {
 }
   
 const user_state = (user_state = initialState, action) => {
+    console.log("reducer", user_state);
     switch(action.type) {
         case actions.LOGIN_FAIL:
         case actions.USER_LOGOUT:

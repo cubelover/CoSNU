@@ -43,11 +43,15 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class ArticleSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(read_only=True, slug_field='nickname')
-    comments = CommentSerializer(source='comment_set', read_only=True, many=True)
+    comments = serializers.SerializerMethodField()
 
     class Meta:
         model = Article
         fields = ('id', 'title', 'author', 'create_time', 'contents', 'comments')
+
+    def get_comments(self, instance):
+        comms = instance.comment_set.all().order_by('id')
+        return CommentSerializer(comms, many=True).data
 
 
 class LectureArticleSerializer(serializers.ModelSerializer):

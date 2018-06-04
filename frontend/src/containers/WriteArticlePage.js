@@ -8,9 +8,6 @@ const mapStateToProps = (state) => ({})
 const mapDispatchToProps = (dispatch) => {
     return {
         action_post_article: (lecture_id, title, contents) => {
-            console.log(lecture_id)
-            console.log(title)
-            console.log(contents)
             dispatch(post_article(lecture_id, title, contents))
         }
     }

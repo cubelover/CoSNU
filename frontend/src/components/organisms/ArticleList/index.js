@@ -15,22 +15,27 @@ class ArticleList extends React.Component {
     super(props)
   }
   componentDidMount(){
-    this.props.get_articles(this.props.lecture_id)
+    console.log(this.props.params)
+    this.props.get_articles(this.props.lecture_id, this.props.cur_page)
   }
   componentWillReceiveProps(nextProps) {
-    if(nextProps.lecture_id == this.props.lecture_id) return;
-    this.props.get_articles(this.props.lecture_id)
+    if(nextProps.cur_page == this.props.cur_page && nextProps.lecture_id == this.props.lecture_id) return;
+    this.props.get_articles(nextProps.lecture_id, nextProps.cur_page)
   }
   render(){
-    var {lecture_id, cur_page, children, articles, ...props} = this.props
+    var {lecture_id, cur_page, children, articles, location, ...props} = this.props
+    console.log(articles);
+    console.log(location);
     return (
       <Wrapper {...props}>
         <h3>Article List (Lecture_id = {lecture_id})</h3>
-        Sorted by Time<Input type="radio" name="sortedby" />
-        Sorted by Upvote<Input type="radio" name="sortedby" />
-        <ArticleTable articles={articles} lecture_id={lecture_id} page={cur_page}/>
+        Sorted by Time (Todo)<Input type="radio" name="sortedby" />
+        Sorted by Upvote (Todo)<Input type="radio" name="sortedby" />
         <Link to={{pathname : '/lecture/' + lecture_id + '/list/'}}><Button>List</Button></Link>
         <Link to={{pathname : '/lecture/' + lecture_id + '/write/'}}><Button>Write</Button></Link>
+        <ArticleTable articles={articles.results} lecture_id={lecture_id} page={cur_page}/>
+        <Link to={{pathname : '/lecture/' + lecture_id + '/list/', query: {page: cur_page-1}}}><Button>Prev</Button></Link>
+        <Link to={{pathname : '/lecture/' + lecture_id + '/list/', query: {page: cur_page+1}}}><Button>Next</Button></Link>
         {children}
       </Wrapper>
     )

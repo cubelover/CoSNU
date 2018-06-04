@@ -1,9 +1,10 @@
 import * as actions from './actions';
 import { combineReducers } from 'redux';
 
-const initialState = {
-    pk: 0, 
-    username: "", email: "", token: "", lectures: [], 
+const initialUserState = {
+    pk: 0, username: "", email: "", token: "", lectures: [], 
+}
+const initialArticleState = {
     current_articles:[], 
     current_article:{
         id: 0,
@@ -12,15 +13,25 @@ const initialState = {
         create_time: "",
         contents: "",
         comments: []
-    }
+    },
 }
   
-const user_state = (user_state = initialState, action) => {
-    console.log("reducer", user_state);
+const user_state = (user_state = initialUserState, action) => {
     switch(action.type) {
         case actions.LOGIN_FAIL:
         case actions.USER_LOGOUT:
-            return {...user_state, "pk": 0, "username": "", "email": "", "token": "", "lectures": [], current_articles:[], current_article:{
+            return {...user_state, pk: 0, username: "", email: "", token: "", lectures: []}
+        case actions.SET_USERINFO:
+            return {...user_state, pk: action.pk, username: action.username, email: action.email, token: action.token, lectures: action.lectures}
+        default:
+            return user_state
+    }
+}
+const article_state = (article_state = initialArticleState, action) => {
+    switch(action.type) {
+        case actions.LOGIN_FAIL:
+        case actions.USER_LOGOUT:
+            return {...article_state, current_articles:[], current_article:{
                 id: 0,
                 title: "",
                 author: "",
@@ -28,19 +39,18 @@ const user_state = (user_state = initialState, action) => {
                 contents: "",
                 comments: []
             }}
-        case actions.SET_USERINFO:
-            return {...user_state, pk: action.pk, username: action.username, email: action.email, token: action.token, lectures: action.lectures}
         case actions.SET_ARTICLES:
-            return {...user_state, current_articles: action.articles}
+            return {...article_state, current_articles: action.articles}
         case actions.SET_ARTICLE:
-            return {...user_state, current_article: action.article}
+            return {...article_state, current_article: action.article}
         default:
-            return user_state
+            return article_state
     }
 }
 
 const cosnu_reducer = combineReducers({
-    user_state
+    user_state,
+    article_state
 });
     
 export default cosnu_reducer;

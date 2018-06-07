@@ -70,6 +70,25 @@ class ArticleViewSet(viewsets.ModelViewSet):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @action(methods=['POST'], detail=True)
+    def upvote(self, request, lid, pk):
+        article = self.get_object()
+        if article.upvote.filter(pk=self.request.user.pk).count() == 1:
+            return Response("already upvote", status=status.HTTP_400_BAD_REQUEST)
+        else:
+            article.upvote.add(self.request.user)
+            return Response("success", status=status.HTTP_201_CREATED)
+
+    @action(methods=['POST'], detail=True)
+    def downvote(self, request, lid, pk):
+        article = self.get_object()
+        if article.downvote.filter(pk=self.request.user.pk).count() == 1:
+            return Response("already downvote", status=status.HTTP_400_BAD_REQUEST)
+        else:
+            article.downvote.add(self.request.user)
+            return Response("success", status=status.HTTP_201_CREATED)
+
+
 
 
 '''class CommentViewSet(viewsets.ModelViewSet):

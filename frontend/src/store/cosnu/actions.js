@@ -10,6 +10,8 @@ export const GET_ARTICLES = 'GET_ARTICLES'
 export const POST_ARTICLE = 'POST_ARTICLE'
 export const DELETE_ARTICLE = 'DELETE_ARTICLE'
 export const POST_COMMENT = 'POST_COMMENT'
+export const POST_UPVOTE = 'POST_UPVOTE'
+export const POST_DOWNVOTE = 'POST_DOWNVOTE'
 
 export const SET_USERINFO = 'SET_USERINFO'
 export const USER_LOGOUT = 'USER_LOGOUT'
@@ -37,3 +39,5 @@ export const get_articles = (lecture_id) => ({type: GET_ARTICLES, lecture_id})
 export const post_article = (lecture_id, title, contents) => ({type: POST_ARTICLE, lecture_id, title, contents})
 export const delete_article = (lecture_id, article_id) => ({type: DELETE_ARTICLE, lecture_id, article_id})
 export const post_comment = (lecture_id, article_id, comment_content) => ({type: POST_COMMENT, lecture_id, article_id, comment_content})
+export const post_upvote = (lecture_id, article_id) => ({type: POST_UPVOTE, lecture_id, article_id})
+export const post_downvote = (lecture_id, article_id) => ({type: POST_DOWNVOTE, lecture_id, article_id})

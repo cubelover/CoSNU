@@ -12,6 +12,8 @@ const initialArticleState = {
         author: "",
         create_time: "",
         contents: "",
+        upvotes: 0,
+        downvotes: 0,
         comments: []
     },
 }
@@ -37,6 +39,8 @@ const article_state = (article_state = initialArticleState, action) => {
                 author: "",
                 create_time: "",
                 contents: "",
+                upvotes: 0,
+                downvotes: 0,
                 comments: []
             }}
         case actions.SET_ARTICLES:

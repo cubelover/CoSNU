@@ -94,6 +94,49 @@ export function* watchPostComment(action){
     }
 }
 
+export function* watchPostUpvote(action){
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const lecture_id = action.lecture_id
+    const article_id = action.article_id
+
+    const response = yield call (fetch, `/api/lecture/${lecture_id}/article/${article_id}/upvote/`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        }
+    });
+    if(response.ok){
+        console.log(response.status)
+        yield put(actions.get_article(lecture_id, article_id))
+    }
+    else if(response.status == 401){
+        yield put(actions.login_fail())
+    }
+}
+
+export function* watchPostDownvote(action){
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const lecture_id = action.lecture_id
+    const article_id = action.article_id
+
+    const response = yield call (fetch, `/api/lecture/${lecture_id}/article/${article_id}/downvote/`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        }
+    });
+    if(response.ok){
+        console.log(response.status)
+        yield put(actions.get_article(lecture_id, article_id))
+    }
+    else if(response.status == 401){
+        yield put(actions.login_fail())
+    }
+}
 
 export function* watchDeleteArticle(action){
     const token = yield select((state) => state.cosnu.user_state.token)
@@ -150,6 +193,7 @@ export function* watchGetArticle(action){
     })
     if(response.ok){
         const result = yield call(() => response.json())
+        console.log(result)
         yield put(actions.set_article(result))
     }
     else if(response.status == 401){
@@ -192,4 +236,6 @@ export default function* () {
     yield takeEvery(actions.SET_USERINFO, watchUSERINFO)
     yield takeEvery(actions.USER_LOGOUT, watchLogout)
     yield takeEvery(actions.LOGIN_FAIL, watchLoginFail)
+    yield takeEvery(actions.POST_UPVOTE, watchPostUpvote)
+    yield takeEvery(actions.POST_DOWNVOTE, watchPostDownvote)
 }

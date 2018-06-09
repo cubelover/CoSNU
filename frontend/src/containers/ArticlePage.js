@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ArticlePage } from 'components'
-import { get_article, delete_article, post_comment } from '../store/cosnu/actions'
+import { get_article, delete_article, post_comment, post_upvote, post_downvote } from '../store/cosnu/actions'
 
 
 const mapStateToProps = (state) => {
@@ -17,6 +17,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         action_post_comment: (lecture_id, article_id, comment_content) => {
             dispatch(post_comment(lecture_id, article_id, comment_content))
+        },
+        action_post_upvote: (lecture_id, article_id) => {
+            dispatch(post_upvote(lecture_id, article_id))
+        },
+        action_post_downvote: (lecture_id, article_id) => {
+            dispatch(post_downvote(lecture_id, article_id))
         }
     }
 }

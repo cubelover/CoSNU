@@ -17,6 +17,8 @@ const initialArticleState = {
         author: "",
         create_time: "",
         contents: "",
+        upvotes: 0,
+        downvotes: 0,
         comments: []
     },
 }

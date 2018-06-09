@@ -13,6 +13,7 @@ class Lecture(models.Model):
     code = models.CharField(max_length=50)
     professor = models.CharField(max_length=20)
     semester = models.CharField(max_length=50)
+    credit = models.IntegerField()
 
     def __str__(self):
         return "%s %s %s" % (self.name, self.semester, self.code)

@@ -25,6 +25,9 @@ class Author(models.Model):
     nickname = models.CharField(max_length=20)
     alias = models.CharField(max_length=20)
 
+    class Meta:
+        unique_together = ('user', 'lecture')
+
     def __str__(self):
         return "%s %s" % (self.user, self.lecture)
 

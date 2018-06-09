@@ -40,7 +40,7 @@ class IsMemberOrOwner(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
 
-        if request.method in permissions.SAFE_METHODS:
+        if (request.method in permissions.SAFE_METHODS) or (view.action in ['comment', 'upvote', 'downvote']):
             return True
 
         return obj.author.user == request.user
@@ -62,13 +62,12 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
     @action(methods=['POST'], detail=True)
     def comment(self, request, lid, pk):
-        if request.method == 'POST':
-            serializer = CommentSerializer(data=request.data)
-            if serializer.is_valid():
-                serializer.save(author=Author.objects.get(user=self.request.user, lecture_id__exact=lid),
-                                article=Article.objects.get(id=pk))
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(author=Author.objects.get(user=self.request.user, lecture_id__exact=lid),
+                            article=self.get_object())
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @action(methods=['POST'], detail=True)
     def upvote(self, request, lid, pk):

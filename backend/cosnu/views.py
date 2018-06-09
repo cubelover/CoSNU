@@ -11,12 +11,19 @@ from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
 
 
 # class UserList(generics.ListAPIView):
 #    queryset = User.objects.all()
 #    serializer_class = UserSerializer
+
+
+class SmallNumberPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
 
 
 class ProfileView(APIView):
@@ -27,11 +34,26 @@ class ProfileView(APIView):
         return Response(serializer.data)
 
 
+class RegisterView(generics.CreateAPIView):
+    queryset = Author.objects.all()
+    serializer_class = AuthorMakeSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+
 class LectureView(APIView):
 
     def get(self, request, pk):
         serializer = LectureSerializer(get_object_or_404(Lecture, pk=pk))
         return Response(serializer.data)
+
+
+class LectureListView(generics.ListAPIView):
+    queryset = Lecture.objects.all()
+    serializer_class = LectureSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('name', 'code')
+    pagination_class = SmallNumberPagination
 
 
 class IsMemberOrOwner(permissions.BasePermission):
@@ -45,12 +67,6 @@ class IsMemberOrOwner(permissions.BasePermission):
             return True
 
         return obj.author.user == request.user
-
-
-class SmallNumberPagination(PageNumberPagination):
-    page_size = 10
-    page_size_query_param = 'page_size'
-    max_page_size = 1000
 
 
 class ArticleViewSet(viewsets.ModelViewSet):

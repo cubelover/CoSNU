@@ -62,7 +62,7 @@ export function* watchPostArticle(action){
     console.log(response)
     if(response.ok){
         console.log(response.status)
-        yield put(actions.get_articles(lecture_id))
+        yield put(actions.get_articles(lecture_id, 1))
     }
     else if(response.status == 401){
         yield put(actions.login_fail())
@@ -153,7 +153,7 @@ export function* watchDeleteArticle(action){
     });
     if(response.ok){
         console.log(response.status)
-        yield put(actions.get_articles(lecture_id))
+        yield put(actions.get_articles(lecture_id, 1))
     }
     else if(response.status == 401){
         yield put(actions.login_fail())
@@ -162,8 +162,8 @@ export function* watchDeleteArticle(action){
 
 export function* watchGetArticles(action){
     const token = yield select((state) => state.cosnu.user_state.token)
-    const lecture_id = action.lecture_id
-    const response = yield call (fetch, `/api/lecture/${lecture_id}/article/`, {
+    const {lecture_id, cur_page} = action
+    const response = yield call (fetch, `/api/lecture/${lecture_id}/article/?page=${cur_page}`, {
         method: "GET",
         headers: {
             "Accept": "application/json",

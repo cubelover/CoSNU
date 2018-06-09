@@ -9,8 +9,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        get_articles: (lecture_id) => {
-            dispatch(get_articles(lecture_id))
+        get_articles: (lecture_id, cur_page) => {
+            dispatch(get_articles(lecture_id, cur_page))
         }
     }
 }

@@ -22,9 +22,9 @@ class ArticlePage extends React.Component {
   render(){
     var {location, action_delete_article, action_post_comment, action_post_upvote, action_post_downvote, children, article, ...props} = this.props
     var {lecture_id, article_id} = this.props.params;
-    let cur_page = 1//query.page ? parseInt(query.page, 10) : 1
-    if(isNaN(cur_page)) cur_page = 1
-
+    let cur_page = (location.query.page ? parseInt(location.query.page, 10) : 1);
+    if(isNaN(cur_page)) cur_page = 1;
+  
     const delete_article = () => {
       action_delete_article(lecture_id, article_id)
     }

@@ -34,6 +34,12 @@ class ProfileView(APIView):
         return Response(serializer.data)
 
 
+class RegisterView(generics.CreateAPIView):
+    queryset = Author.objects.all()
+    serializer_class = AuthorMakeSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+
 class LectureView(APIView):
 
     def get(self, request, pk):

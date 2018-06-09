@@ -11,12 +11,19 @@ from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
 
 
 # class UserList(generics.ListAPIView):
 #    queryset = User.objects.all()
 #    serializer_class = UserSerializer
+
+
+class SmallNumberPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
 
 
 class ProfileView(APIView):
@@ -34,6 +41,15 @@ class LectureView(APIView):
         return Response(serializer.data)
 
 
+class LectureListView(generics.ListAPIView):
+    queryset = Lecture.objects.all()
+    serializer_class = LectureSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('name', 'code')
+    pagination_class = SmallNumberPagination
+
+
 class IsMemberOrOwner(permissions.BasePermission):
 
     def has_permission(self, request, view):
@@ -45,12 +61,6 @@ class IsMemberOrOwner(permissions.BasePermission):
             return True
 
         return obj.author.user == request.user
-
-
-class SmallNumberPagination(PageNumberPagination):
-    page_size = 10
-    page_size_query_param = 'page_size'
-    max_page_size = 1000
 
 
 class ArticleViewSet(viewsets.ModelViewSet):

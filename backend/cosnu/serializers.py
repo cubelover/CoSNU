@@ -6,7 +6,7 @@ from .models import *
 class LectureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lecture
-        fields = ('id', 'name', 'semester', 'professor', 'code')
+        fields = ('id', 'name', 'semester', 'professor', 'code', 'credit')
 
 
 class AuthorSerializer(serializers.ModelSerializer):

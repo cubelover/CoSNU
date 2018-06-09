@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from rest_framework.validators import UniqueTogetherValidator
 from .models import *
 
 
@@ -15,6 +16,20 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = ('user', 'lecture', 'nickname', 'alias')
+
+
+class AuthorMakeSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Author
+        fields = ('user', 'lecture', 'nickname', 'alias')
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Author.objects.all(),
+                fields=('user', 'lecture')
+            )
+        ]
 
 
 class UserSerializer(serializers.ModelSerializer):

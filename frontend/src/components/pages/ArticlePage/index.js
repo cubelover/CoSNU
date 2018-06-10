@@ -64,6 +64,5 @@ class ArticlePage extends React.Component {
     )
   }
 }
-/*
-*/
+
 export default ArticlePage

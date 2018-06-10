@@ -6,6 +6,7 @@ import { Input, Button } from 'components'
 import { Link } from 'react-router'
 
 class EditProfilePage extends React.Component {
+  
   constructor(props) {
     super(props)
   }
@@ -71,7 +72,7 @@ class EditProfilePage extends React.Component {
         </table>
         <Button onClick={send_set_lectureinfo}>Edit Lecture Information (Todo)</Button>
 
-        <LectureList lectures={user_lectures} location={location}/>
+        <LectureList lectures={user_lectures}/>
         <Input type="text" placeholder="name" innerRef={(ref) => {lecture_name = ref;}}></Input>
         <Input type="text" placeholder="code" innerRef={(ref) => {lecture_code = ref;}}></Input>
         <Button onClick={send_search_lecture}>Search Lectures With Name and Code</Button>

@@ -49,7 +49,7 @@ class EmailAuthView(APIView):
         data = signing.dumps({'email': email, 'time': datetime.datetime.now().timestamp()})
         email = EmailMessage("CoSNU 회원가입을 위한 인증메일",
                              ("인증코드는 아래와 같습니다.\n\n%s\n\n위 코드를 회원가입 화면에 입력해 주시고,"
-                              " 한시간 안에 가입을 완료해주세요.") % data, to=['woqja125@snu.ac.kr'])
+                              " 한시간 안에 가입을 완료해주세요.") % data, to=[email])
         email.send()
         return Response("sucess")
 

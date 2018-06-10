@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { Link } from 'react-router'
 
-import { ArticleTable, Input, Button } from 'components'
+import { Page, CurrPage, ArticleTable, Input, Button } from 'components'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
@@ -34,18 +34,20 @@ class ArticleList extends React.Component {
         <Link to={{pathname : '/lecture/' + lecture_id + '/list/'}}><Button>List</Button></Link>
         <Link to={{pathname : '/lecture/' + lecture_id + '/write/'}}><Button>Write</Button></Link>
         <ArticleTable articles={articles.results} lecture_id={lecture_id} page={cur_page}/>
-        <Link to={{pathname : '/lecture/' + lecture_id + '/list/', query: {page: 1}}}><Button>First Page</Button></Link>
-        {cur_page > 1 && <Link to={{pathname : '/lecture/' + lecture_id + '/list/', query: {page: cur_page-1}}}><Button>Prev</Button></Link>}
-        {Array.from(new Array(show_page_number), (val,index)=>page_base+index).map( (page) => {
-          if(page == cur_page) {
-            return <Link to={{ pathname: "/lecture/" + lecture_id + '/list', query: { page: page } }} style={{color: 'red', padding: '5'}} key={page}>{page}</Link>
-          }else if(page <= max_page_num) {
-            return <Link to={{ pathname: "/lecture/" + lecture_id + '/list', query: { page: page } }} style={{padding: '5'}} key={page}>{page}</Link>
+        <div style={{'text-align': 'center'}}>
+          <Page to={{pathname : '/lecture/' + lecture_id + '/list/', query: {page: 1}}}>&lt;&lt;</Page>
+          {cur_page > 1 && <Link to={{pathname : '/lecture/' + lecture_id + '/list/', query: {page: cur_page-1}}}><Button>Prev</Button></Link>}
+          {Array.from(new Array(show_page_number), (val,index)=>page_base+index).map( (page) => {
+            if(page == cur_page) {
+              return <CurrPage to={{ pathname: "/lecture/" + lecture_id + '/list', query: { page: page } }} key={page}>{page}</CurrPage>
+            }else if(page <= max_page_num) {
+              return <Link to={{ pathname: "/lecture/" + lecture_id + '/list', query: { page: page } }} style={{padding: '5'}} key={page}>{page}</Link>
+            }
           }
-        }
-        )}
-        {cur_page < max_page_num && <Link to={{pathname : '/lecture/' + lecture_id + '/list/', query: {page: cur_page+1}}}><Button>Next</Button></Link>}
-        <Link to={{pathname : '/lecture/' + lecture_id + '/list/', query: {page: max_page_num}}}><Button>Last Page</Button></Link>
+          )}
+          {cur_page < max_page_num && <Page to={{pathname : '/lecture/' + lecture_id + '/list/', query: {page: cur_page+1}}}>&gt;</Page>}
+          <Page to={{pathname : '/lecture/' + lecture_id + '/list/', query: {page: max_page_num}}}>&gt;&gt;</Page>
+        </div>
         {children}
       </Wrapper>
     )

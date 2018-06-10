@@ -2,13 +2,13 @@ import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 
 import App from 'components/App'
-import { HomePage } from 'components'
 import { LecturePage } from 'components'
 import { NotFoundPage } from 'components'
 import { ArticlePage } from 'containers'
 import { SignUpPage } from 'containers'
-import { EditProfilePage } from 'components'
+import { EditProfilePage } from 'containers'
 import { WriteArticlePage } from 'containers'
+import { HomePage } from 'containers'
 
 export const routes = (store) => {
   const authRequired = (nextState, replace) => {
@@ -22,12 +22,11 @@ export const routes = (store) => {
   const authNotRequired = (nextState, replace) => {
     const state = store.getState();
     let username = state.cosnu.user_state.username;
-    if (username === "") {
+    if (username != "") {
       replace('/needlogin')
       //replaceState({ nextPathname: nextState.location.pathname }, '/login');
     }
   };
-
   return (
     <Route path="/" component={App}>
       <IndexRoute component={HomePage} />

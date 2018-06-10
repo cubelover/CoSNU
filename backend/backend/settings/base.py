@@ -13,14 +13,12 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'r94_krl@stz+z!w90i2s%e3)hebce1z305hh4^1&wc_7suu!rm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -131,3 +129,43 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Email Setting
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = 'cosnu.swpp@gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+# load secret.json
+
+import json
+from collections import namedtuple
+
+# Normally you should not import ANYTHING from Django directly
+# into your settings, but ImproperlyConfigured is an exception.
+from django.core.exceptions import ImproperlyConfigured
+
+# JSON-based secrets module
+with open("backend/settings/secret.json") as f:
+    data = json.loads(f.read())
+    
+# Use namedtuple so secrets becomes a static object.
+# secrets is a static object so we don't risk corruption of secret data.
+SecretsNamedTuple = namedtuple('SecretsNamedTuple', data.keys(), verbose=False)
+secrets = SecretsNamedTuple(*[data[x] for x in data.keys()])
+
+def get_secret(setting, secrets=secrets):
+    """ Get the secret variable or return explicit exception """
+    try:
+        return getattr(secrets, setting)
+    except KeyError:
+        error_msg = "Set the {0} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
+SECRET_KEY = get_secret("SECRET_KEY")
+EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
+

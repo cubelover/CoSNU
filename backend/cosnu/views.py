@@ -12,6 +12,10 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import exceptions
+from django.core import signing
+import datetime
+from django.core.mail import EmailMessage
 from .models import *
 
 
@@ -32,6 +36,22 @@ class ProfileView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
+
+
+class EmailAuthView(APIView):
+
+    def post(self, request):
+        email = request.data['email']
+        if email is None:
+            raise exceptions.ParseError(detail="email required")
+        if not email.endswith('@snu.ac.kr'):
+            raise exceptions.ParseError(detail="snu-mail required")
+        data = signing.dumps({'email': email, 'time': datetime.datetime.now().timestamp()})
+        email = EmailMessage("CoSNU 회원가입을 위한 인증메일",
+                             ("인증코드는 아래와 같습니다.\n\n%s\n\n위 코드를 회원가입 화면에 입력해 주시고,"
+                              " 한시간 안에 가입을 완료해주세요.") % data, to=[email])
+        email.send()
+        return Response("sucess")
 
 
 class RegisterView(generics.CreateAPIView):

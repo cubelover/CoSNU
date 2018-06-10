@@ -19,8 +19,8 @@ const mapDispatchToProps = (dispatch) => {
         action_set_lectureinfo: () => {
             dispatch(set_lectureinfo()) 
         },
-        action_search_lecture: (name, code) => {
-            dispatch(search_lecture(name, code)) 
+        action_search_lecture: (name, code, page) => {
+            dispatch(search_lecture(name, code, page)) 
         },
     }
 }

@@ -44,5 +44,5 @@ export const post_downvote = (lecture_id, article_id) => ({type: POST_DOWNVOTE, 
 
 export const SEARCH_LECTURE = 'SEARCH_LECTURE'
 export const SET_SEARCH_LECTURE = 'SET_SEARCH_LECTURE'
-export const search_lecture = (name, code) => ({type: SEARCH_LECTURE, name, code})
+export const search_lecture = (name, code, page) => ({type: SEARCH_LECTURE, name, code, page})
 export const set_search_lecture = (result) => ({type: SET_SEARCH_LECTURE, result})

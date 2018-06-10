@@ -203,8 +203,8 @@ export function* watchGetArticle(action){
 
 export function* watchSearchLecture(action) {
     const token = yield select((state) => state.cosnu.user_state.token)
-    const {name, code} = action
-    const response = yield call (fetch, `/api/lectures/?name=${name}&code=${code}`, {
+    const {name, code, page} = action
+    const response = yield call (fetch, `/api/lectures/?name=${name}&code=${code}&page=${page}`, {
         method: "GET",
         headers: {
             "Accept": "application/json",

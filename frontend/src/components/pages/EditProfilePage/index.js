@@ -6,24 +6,30 @@ import { Input, Button } from 'components'
 import { Link } from 'react-router'
 
 class EditProfilePage extends React.Component {
-  
   constructor(props) {
     super(props)
+    this.memo_name = "no name";
+    this.memo_code = "no code";
+    this.cur_page = 1;
   }
   componentDidMount() {
-    //var {lecture_id, article_id} = this.props.params;
-    //this.props.get_article(lecture_id, article_id)
+    var {location} = this.props
+    this.cur_page = (location.query.page ? parseInt(location.query.page, 10) : 1)
+    if(isNaN(this.cur_page)) this.cur_page = 1
+    this.props.action_search_lecture(this.memo_name, this.memo_code, this.cur_page)
   }
   componentWillReceiveProps(nextProps) {
-    //if(nextProps.params.lecture_id == this.props.params.lecture_id && nextProps.params.article_id == this.props.params.article_id) return;
-    //this.props.get_article(nextProps.params.lecture_id, nextProps.params.article_id)
+    var {location} = nextProps;
+    var next_page = (location.query.page ? parseInt(location.query.page, 10) : 1)
+    if(isNaN(next_page)) next_page = 1
+    if(next_page == this.cur_page) return
+    this.cur_page = next_page
+    this.props.action_search_lecture(this.memo_name, this.memo_code, this.cur_page)
   }
   render() {
     var {user_state, search_state} = this.props
     var {action_set_password, action_set_lectureinfo, action_search_lecture} = this.props
     var {location, children, ...props} = this.props
-    let cur_page = (location.query.page ? parseInt(location.query.page, 10) : 1);
-    if(isNaN(cur_page)) cur_page = 1;
     var user_lectures = {count: user_state.lectures.length, results:[]}
     for(var i=0; i<user_state.lectures.length; i++) user_lectures.results.push(user_state.lectures[i].lecture);
 
@@ -41,7 +47,9 @@ class EditProfilePage extends React.Component {
     }
     let lecture_name, lecture_code;
     const send_search_lecture = () => {
-      action_search_lecture(lecture_name.value, lecture_code.value)
+      this.memo_name = lecture_name.value
+      this.memo_code = lecture_code.value
+      this.cur_page = 2;
     }
     return (
       <PageTemplate>
@@ -75,8 +83,11 @@ class EditProfilePage extends React.Component {
         <LectureList lectures={user_lectures}/>
         <Input type="text" placeholder="name" innerRef={(ref) => {lecture_name = ref;}}></Input>
         <Input type="text" placeholder="code" innerRef={(ref) => {lecture_code = ref;}}></Input>
-        <Button onClick={send_search_lecture}>Search Lectures With Name and Code</Button>
-        <LectureList lectures={search_state} location={location} cur_page={cur_page}/>
+
+        <Link to={{pathname : location.pathname, query: {page: 1}}}>
+          <Button onClick={send_search_lecture}>Search Lectures With Name and Code</Button>
+        </Link>
+        <LectureList lectures={search_state} location={location} cur_page={this.cur_page}/>
         {children}
       </PageTemplate>
     )

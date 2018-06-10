@@ -8,8 +8,8 @@ import { SignIn } from 'components'
 const Wrapper = styled.div`
   float: right;
   padding: 20px;
+  color: #ddd;
   font-family: ${font('primary')};
-  color: ${palette('grayscale', 0)};
 `
 
 const AccountInfo = ( {user_state, action_login, action_logout, children, ...props}) => {

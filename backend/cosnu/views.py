@@ -41,17 +41,20 @@ class ProfileView(APIView):
 class EmailAuthView(APIView):
 
     def post(self, request):
-        email = request.data['email']
+        email = request.data.get('email')
         if email is None:
             raise exceptions.ParseError(detail="email required")
         if not email.endswith('@snu.ac.kr'):
             raise exceptions.ParseError(detail="snu-mail required")
         data = signing.dumps({'email': email, 'time': datetime.datetime.now().timestamp()})
-        email = EmailMessage("CoSNU 회원가입을 위한 인증메일",
-                             ("인증코드는 아래와 같습니다.\n\n%s\n\n위 코드를 회원가입 화면에 입력해 주시고,"
-                              " 한시간 안에 가입을 완료해주세요.") % data, to=[email])
-        email.send()
-        return Response("sucess")
+        try:
+            email = EmailMessage("CoSNU 회원가입을 위한 인증메일",
+                                 ("인증코드는 아래와 같습니다.\n\n%s\n\n위 코드를 회원가입 화면에 입력해 주시고,"
+                                  " 한시간 안에 가입을 완료해주세요.") % data, to=[email])
+            email.send()
+        except Exception:
+            return Response("Error To send mail", status=status.HTTP_400_BAD_REQUEST)
+        return Response("success")
 
 
 class RegisterView(generics.CreateAPIView):

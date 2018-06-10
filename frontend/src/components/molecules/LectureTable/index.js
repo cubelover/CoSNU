@@ -1,21 +1,12 @@
 import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
-import { Link } from 'react-router'
-import { Table, Tr, Th, Td } from 'components'
+import { StyledLink, Table, Tr, Th, Td } from 'components'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
   color: ${palette('grayscale', 0)};
 `
-
-/*
-class Lecture(models.Model):
-    name = models.CharField(max_length=50)
-    code = models.CharField(max_length=50)
-    professor = models.CharField(max_length=20)
-    semester = models.CharField(max_length=50)
-*/
 
 const LectureTable = ({lectures, children, ...props}) => {
   return (
@@ -30,7 +21,7 @@ const LectureTable = ({lectures, children, ...props}) => {
         <tbody>
           {lectures.map( (lecture) =>
             <tr key={lecture.id}>
-              <Td><Link to={'/lecture/' + lecture.id + '/list'}>{lecture.name}</Link></Td>
+              <Td><StyledLink to={'/lecture/' + lecture.id + '/list'}>{lecture.name}</StyledLink></Td>
               <Td>{lecture.code}</Td>
               <Td>{lecture.professor}</Td>
               <Td>{lecture.semester}</Td>

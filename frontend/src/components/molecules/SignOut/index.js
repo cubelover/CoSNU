@@ -4,22 +4,18 @@ import { font, palette } from 'styled-theme'
 import { Link } from 'react-router'
 import { Input, Button } from 'components'
 
-const Wrapper = styled.div`
-  font-family: ${font('primary')};
-  color: ${palette('grayscale', 0)};
-`
-
 const SignOut = ( {username, action_logout, children, ...props}) => {
   const send_logout = () => {
     action_logout()
   }
   return (
-    <Wrapper {...props}>
-      <span>Welcome {username}!</span>
-      <Link to = "/"><Button onClick={send_logout}>Sign Out</Button></Link>
-      <Link to = "/edit"><Button>Edit Profile</Button></Link>
+    <div {...props}>
+      {username}님, 환영합니다.&nbsp;
+      <Link to = "/edit"><Button>설정</Button></Link>
+      &nbsp;
+      <Link to = "/"><Button onClick={send_logout}>로그아웃</Button></Link>
       {children}
-    </Wrapper>
+    </div>
   )
 }
 

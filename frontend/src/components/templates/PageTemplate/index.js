@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { AccountInfo } from 'containers'
 import { Link } from 'react-router'
@@ -13,13 +13,31 @@ const Wrapper = styled.div`
   height: 100%;
 `
 
+const Header = styled.div`
+  position: relative;
+  width: 100%;
+  background-color: #222;
+`
+
+const Title = styled.h1`
+  padding: 20px;
+  margin: 0;
+  font-size: 2em;
+  font-weight: bold;
+  color: #ddd;
+`
+
 const PageTemplate = ( {children, ...props} ) => {
   return (
-    <Wrapper>
-      <Link to="/"><h1>CoSNU</h1></Link>
-      <AccountInfo/>
-      {children}
-    </Wrapper>
+    <div>
+      <Header>
+        <AccountInfo/>
+        <Link to="/" style={{'text-decoration': 'none'}}><Title>CoSNU</Title></Link>
+      </Header>
+      <Wrapper>
+        {children}
+      </Wrapper>
+    </div>
   )
 }
 

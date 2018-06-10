@@ -11,12 +11,6 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const InputStyles = css`
-  padding: .5rem .75rem;
-  border: 1px solid #ccc;
-  border-radius: .3rem;
-`
-
 const SignIn = ({ action_login, children, ...props }) => {
   let username, password;
   const send_login = () => {
@@ -25,13 +19,13 @@ const SignIn = ({ action_login, children, ...props }) => {
   }
   return (
     <Wrapper {...props}>
-      <Input type="text" placeholder="username" innerRef={(ref) => {username = ref}}></Input>
+      <Input type="text" placeholder="아이디" innerRef={(ref) => {username = ref}}></Input>
       &nbsp;
-      <Input type="password" placeholder="password" innerRef={(ref) => {password = ref}}></Input>
+      <Input type="password" placeholder="비밀번호" innerRef={(ref) => {password = ref}}></Input>
       &nbsp;
-      <Link to = "/"><Button onClick={send_login}>Sign In</Button></Link>
+      <Link to = "/"><Button onClick={send_login}>로그인</Button></Link>
       &nbsp;
-      <Link to="/signup"><Button>Sign Up</Button></Link>
+      <Link to="/signup"><Button>회원가입</Button></Link>
       {children}
     </Wrapper>
   )

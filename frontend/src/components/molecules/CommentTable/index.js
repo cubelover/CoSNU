@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
+import { Table, Tr, Th, Td } from 'components'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
@@ -10,24 +11,24 @@ const Wrapper = styled.div`
 const CommentTable = ({ comments, lecture_id, article_id, children, ...props }) => {
   return (
     <Wrapper {...props}>
-      <table>
+      <Table>
         <thead><tr>
-          <td>article</td>
-          <td>author</td>
-          <td>contents</td>
-          <td>create_time</td>
+          <Th>article</Th>
+          <Th>author</Th>
+          <Th>contents</Th>
+          <Th>create_time</Th>
         </tr></thead>
         <tbody>
           {(comments).map( (comment) =>
             <tr key={comment.id}>
-              <td>{comment.article}</td>
-              <td>{comment.author}</td>
-              <td>{comment.contents}</td>
-              <td>{comment.create_time}</td>
+              <Td>{comment.article}</Td>
+              <Td>{comment.author}</Td>
+              <Td>{comment.contents}</Td>
+              <Td>{comment.create_time}</Td>
             </tr>
           )}
         </tbody>
-      </table>
+      </Table>
       {children}
     </Wrapper>
   )

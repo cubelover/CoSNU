@@ -2,7 +2,7 @@ import React from 'react'
 
 import { LectureList } from 'components'
 import { PageTemplate } from 'components'
-import { Input, Button } from 'components'
+import { Input, Button, Table, Tr, Th, Td } from 'components'
 import { Link } from 'react-router'
 
 class EditProfilePage extends React.Component {

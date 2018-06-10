@@ -1,45 +1,75 @@
 import * as actions from './actions';
 import { combineReducers } from 'redux';
 
-const initialState = {
-    pk: 0, 
-    username: "", email: "", token: "", lectures: [], 
-    current_articles:[], 
+const initialUserState = {
+    pk: 0, username: "", email: "", token: "", lectures: [], 
+}
+  
+const user_state = (user_state = initialUserState, action) => {
+    switch(action.type) {
+        case actions.LOGIN_FAIL:
+        case actions.USER_LOGOUT:
+            return initialUserState
+        case actions.SET_USERINFO:
+            return {...user_state, pk: action.pk, username: action.username, email: action.email, token: action.token, lectures: action.lectures}
+        default:
+            return user_state
+    }
+}
+
+
+const initialArticleState = {
+    current_articles:{
+        count: 0,
+        next: null,
+        previous: null,
+        results: []
+    }, 
     current_article:{
         id: 0,
         title: "",
         author: "",
         create_time: "",
         contents: "",
+        upvotes: 0,
+        downvotes: 0,
         comments: []
-    }
+    },
 }
-  
-const user_state = (user_state = initialState, action) => {
+const article_state = (article_state = initialArticleState, action) => {
     switch(action.type) {
         case actions.LOGIN_FAIL:
         case actions.USER_LOGOUT:
-            return {...user_state, "pk": 0, "username": "", "email": "", "token": "", "lectures": [], current_articles:[], current_article:{
-                id: 0,
-                title: "",
-                author: "",
-                create_time: "",
-                contents: "",
-                comments: []
-            }}
-        case actions.SET_USERINFO:
-            return {...user_state, pk: action.pk, username: action.username, email: action.email, token: action.token, lectures: action.lectures}
+            return initialArticleState
         case actions.SET_ARTICLES:
-            return {...user_state, current_articles: action.articles}
+            return {...article_state, current_articles: action.articles}
         case actions.SET_ARTICLE:
-            return {...user_state, current_article: action.article}
+            return {...article_state, current_article: action.article}
         default:
-            return user_state
+            return article_state
+    }
+}
+
+const initialSearchState = {
+    "count": 0,
+    "next": null,
+    "previous": null,
+    "results": [
+    ]
+}
+const search_state = (search_state = initialSearchState, action) => {
+    switch(action.type) {
+        case actions.SET_SEARCH_LECTURE:
+            return action.result
+        default:
+            return search_state
     }
 }
 
 const cosnu_reducer = combineReducers({
-    user_state
+    user_state,
+    article_state,
+    search_state
 });
     
 export default cosnu_reducer;

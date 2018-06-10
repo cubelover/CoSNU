@@ -6,13 +6,17 @@ const wrap = (props = {}) => shallow(<Lecture {...props} />)
 
 
 it('renders lectures when passed in', () => {
-  let lecture = {
-    alias: "우리원실", 
-    lecture: {id: 1, name: "LECTURE_NAME", semester: "LECTURE_SEMESTER", professor: "LECTURE_PROFESSOR", code: "LECTURE_CODE"}, 
-    nickname:"소개수강생1", 
-    user:1
-  }
-  const wrapper = wrap({lectures: [lecture]})
+  let lectures = [
+    {
+      code:"LECTURE_CODE",
+      credit:3,
+      id:1,
+      name:"LECTURE_NAME",
+      professor:"LECTURE_PROFESSOR",
+      semester:"LECTURE_SEMESTER"
+    }
+  ]
+  const wrapper = wrap({lectures: lectures})
   expect(wrapper.contains('LECTURE_NAME')).toBe(true)
   expect(wrapper.contains('LECTURE_SEMESTER')).toBe(true)
   expect(wrapper.contains('LECTURE_PROFESSOR')).toBe(true)

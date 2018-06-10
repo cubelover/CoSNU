@@ -22,7 +22,6 @@ export function* watchValidateToken(action){
 }
 export function* watchLogout(action) {
     yield put(actions.set_userinfo(0, "", "", "", []))
-    localStorage.setItem("auth-token", "")
 }
 
 export function* watchLogin(action) {
@@ -39,7 +38,7 @@ export function* watchLogin(action) {
         const result = yield call(() => response.json())
         yield put(actions.validate_token(result.token))
     }
-    else {
+    else{
         yield put(actions.login_fail())
     }
 }
@@ -60,10 +59,12 @@ export function* watchPostArticle(action){
             'contents': action.contents
         })
     });
+    console.log(response)
     if(response.ok){
         console.log(response.status)
+        yield put(actions.get_articles(lecture_id, 1))
     }
-    else{
+    else if(response.status == 401){
         yield put(actions.login_fail())
     }
 }
@@ -86,12 +87,56 @@ export function* watchPostComment(action){
     });
     if(response.ok){
         console.log(response.status)
+        yield put(actions.get_article(lecture_id, article_id))
     }
-    else{
+    else if(response.status == 401){
         yield put(actions.login_fail())
     }
 }
 
+export function* watchPostUpvote(action){
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const lecture_id = action.lecture_id
+    const article_id = action.article_id
+
+    const response = yield call (fetch, `/api/lecture/${lecture_id}/article/${article_id}/upvote/`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        }
+    });
+    if(response.ok){
+        console.log(response.status)
+        yield put(actions.get_article(lecture_id, article_id))
+    }
+    else if(response.status == 401){
+        yield put(actions.login_fail())
+    }
+}
+
+export function* watchPostDownvote(action){
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const lecture_id = action.lecture_id
+    const article_id = action.article_id
+
+    const response = yield call (fetch, `/api/lecture/${lecture_id}/article/${article_id}/downvote/`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        }
+    });
+    if(response.ok){
+        console.log(response.status)
+        yield put(actions.get_article(lecture_id, article_id))
+    }
+    else if(response.status == 401){
+        yield put(actions.login_fail())
+    }
+}
 
 export function* watchDeleteArticle(action){
     const token = yield select((state) => state.cosnu.user_state.token)
@@ -108,16 +153,17 @@ export function* watchDeleteArticle(action){
     });
     if(response.ok){
         console.log(response.status)
+        yield put(actions.get_articles(lecture_id, 1))
     }
-    else{
+    else if(response.status == 401){
         yield put(actions.login_fail())
     }
 }
 
 export function* watchGetArticles(action){
     const token = yield select((state) => state.cosnu.user_state.token)
-    const lecture_id = action.lecture_id
-    const response = yield call (fetch, `/api/lecture/${lecture_id}/article/`, {
+    const {lecture_id, cur_page} = action
+    const response = yield call (fetch, `/api/lecture/${lecture_id}/article/?page=${cur_page}`, {
         method: "GET",
         headers: {
             "Accept": "application/json",
@@ -129,7 +175,7 @@ export function* watchGetArticles(action){
         const result = yield call(() => response.json())
         yield put(actions.set_articles(result))
     }
-    else{
+    else if(response.status == 401){
         yield put(actions.login_fail())
     }
 }
@@ -147,20 +193,59 @@ export function* watchGetArticle(action){
     })
     if(response.ok){
         const result = yield call(() => response.json())
+        console.log(result)
         yield put(actions.set_article(result))
     }
-    else{
+    else if(response.status == 401){
+        yield put(actions.login_fail())
+    }
+}
+
+export function* watchSearchLecture(action) {
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const {name, code, page} = action
+    const response = yield call (fetch, `/api/lectures/?name=${name}&code=${code}&page=${page}`, {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        },
+    })
+    if(response.ok){
+        const result = yield call(() => response.json())
+        yield put(actions.set_search_lecture(result))
+    }else if(response.status == 401){
         yield put(actions.login_fail())
     }
 }
 
 export function* watchUSERINFO(action) {
-    localStorage.setItem("user_info", JSON.stringify({"pk": action.pk, "username": action.username, "email": action.email, "token": action.token, lectures: action.lectures, current_articles:[]}));
+    localStorage.setItem("user_info", JSON.stringify({"pk": action.pk, "username": action.username, "email": action.email, "token": action.token, lectures: action.lectures, current_articles:[],
+    current_article:{
+        id: 0,
+        title: "",
+        author: "",
+        create_time: "",
+        contents: "",
+        comments: []
+    }}));
 }
 
-export function* watchLoginFail(){
-    localStorage.setItem("user_info", JSON.stringify({"pk": 0, "username": "", "email": "", "token": "", "lectures": [], current_articles:[]}));
+export function* watchLoginFail() {
+    localStorage.setItem("user_info", JSON.stringify({"pk": 0, "username": "", "email": "", "token": "", "lectures": [], current_articles:[],
+    current_article:{
+        id: 0,
+        title: "",
+        author: "",
+        create_time: "",
+        contents: "",
+        comments: []
+    }}));
 }
+
+
+
 
 export default function* () {
     yield takeEvery(actions.USER_LOGIN, watchLogin)
@@ -173,4 +258,8 @@ export default function* () {
     yield takeEvery(actions.SET_USERINFO, watchUSERINFO)
     yield takeEvery(actions.USER_LOGOUT, watchLogout)
     yield takeEvery(actions.LOGIN_FAIL, watchLoginFail)
+    yield takeEvery(actions.POST_UPVOTE, watchPostUpvote)
+    yield takeEvery(actions.POST_DOWNVOTE, watchPostDownvote)
+
+    yield takeEvery(actions.SEARCH_LECTURE, watchSearchLecture)
 }

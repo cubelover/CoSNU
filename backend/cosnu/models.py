@@ -13,6 +13,7 @@ class Lecture(models.Model):
     code = models.CharField(max_length=50)
     professor = models.CharField(max_length=20)
     semester = models.CharField(max_length=50)
+    credit = models.IntegerField()
 
     def __str__(self):
         return "%s %s %s" % (self.name, self.semester, self.code)
@@ -24,6 +25,9 @@ class Author(models.Model):
     nickname = models.CharField(max_length=20)
     alias = models.CharField(max_length=20)
 
+    class Meta:
+        unique_together = ('user', 'lecture')
+
     def __str__(self):
         return "%s %s" % (self.user, self.lecture)
 
@@ -33,11 +37,11 @@ class Article(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     contents = models.CharField(max_length=2000)
     create_time = models.DateTimeField(auto_now_add=True)
+    upvote = models.ManyToManyField(User, related_name='upvote_articles')
+    downvote = models.ManyToManyField(User, related_name='downvote_articles')
 
     def __str__(self):
         return self.title
-#   upvotes, downvotes, ...
-#
 
 
 class Comment(models.Model):

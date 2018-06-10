@@ -1,12 +1,13 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from rest_framework.validators import UniqueTogetherValidator
 from .models import *
 
 
 class LectureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lecture
-        fields = ('id', 'name', 'semester', 'professor', 'code')
+        fields = ('id', 'name', 'semester', 'professor', 'code', 'credit')
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -15,6 +16,20 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = ('user', 'lecture', 'nickname', 'alias')
+
+
+class AuthorMakeSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Author
+        fields = ('user', 'lecture', 'nickname', 'alias')
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Author.objects.all(),
+                fields=('user', 'lecture')
+            )
+        ]
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -43,11 +58,23 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class ArticleSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(read_only=True, slug_field='nickname')
-    comments = CommentSerializer(source='comment_set', read_only=True, many=True)
+    comments = serializers.SerializerMethodField()
+    upvotes = serializers.SerializerMethodField()
+    downvotes = serializers.SerializerMethodField()
 
     class Meta:
         model = Article
-        fields = ('id', 'title', 'author', 'create_time', 'contents', 'comments')
+        fields = ('id', 'title', 'author', 'create_time', 'contents', 'comments', 'upvotes', 'downvotes')
+
+    def get_upvotes(self, instance):
+        return instance.upvote.count()
+
+    def get_downvotes(self, instance):
+        return instance.downvote.count()
+
+    def get_comments(self, instance):
+        comms = instance.comment_set.all().order_by('id')
+        return CommentSerializer(comms, many=True).data
 
 
 class LectureArticleSerializer(serializers.ModelSerializer):

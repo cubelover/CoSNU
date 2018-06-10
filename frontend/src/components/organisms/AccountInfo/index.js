@@ -6,6 +6,8 @@ import { SignOut } from 'components'
 import { SignIn } from 'components'
 
 const Wrapper = styled.div`
+  float: right;
+  padding: 20px;
   font-family: ${font('primary')};
   color: ${palette('grayscale', 0)};
 `

@@ -22,7 +22,7 @@ class ArticleList extends React.Component {
     this.props.get_articles(nextProps.lecture_id, nextProps.cur_page)
   }
   render(){
-    var {lecture_id, cur_page, children, articles, location, ...props} = this.props
+    var {lecture_id, cur_page, children, articles, ...props} = this.props
     
     var article_per_page = 10, max_page_num = Math.floor((articles.count + article_per_page - 1) / article_per_page)
     var show_page_number = 10, page_base = Math.floor((Math.max(1, cur_page) - 1) / show_page_number) * show_page_number + 1;

@@ -4,6 +4,20 @@ import { combineReducers } from 'redux';
 const initialUserState = {
     pk: 0, username: "", email: "", token: "", lectures: [], 
 }
+  
+const user_state = (user_state = initialUserState, action) => {
+    switch(action.type) {
+        case actions.LOGIN_FAIL:
+        case actions.USER_LOGOUT:
+            return initialUserState
+        case actions.SET_USERINFO:
+            return {...user_state, pk: action.pk, username: action.username, email: action.email, token: action.token, lectures: action.lectures}
+        default:
+            return user_state
+    }
+}
+
+
 const initialArticleState = {
     current_articles:{
         count: 0,
@@ -22,18 +36,6 @@ const initialArticleState = {
         comments: []
     },
 }
-  
-const user_state = (user_state = initialUserState, action) => {
-    switch(action.type) {
-        case actions.LOGIN_FAIL:
-        case actions.USER_LOGOUT:
-            return initialUserState
-        case actions.SET_USERINFO:
-            return {...user_state, pk: action.pk, username: action.username, email: action.email, token: action.token, lectures: action.lectures}
-        default:
-            return user_state
-    }
-}
 const article_state = (article_state = initialArticleState, action) => {
     switch(action.type) {
         case actions.LOGIN_FAIL:
@@ -48,9 +50,26 @@ const article_state = (article_state = initialArticleState, action) => {
     }
 }
 
+const initialSearchState = {
+    "count": 0,
+    "next": null,
+    "previous": null,
+    "results": [
+    ]
+}
+const search_state = (search_state = initialSearchState, action) => {
+    switch(action.type) {
+        case actions.SET_SEARCH_LECTURE:
+            return action.result
+        default:
+            return search_state
+    }
+}
+
 const cosnu_reducer = combineReducers({
     user_state,
-    article_state
+    article_state,
+    search_state
 });
     
 export default cosnu_reducer;

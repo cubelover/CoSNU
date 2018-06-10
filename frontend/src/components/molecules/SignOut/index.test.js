@@ -8,7 +8,7 @@ it('action_logout function called', () => {
   const action = jest.fn()
   const wrapper = wrap({ action_logout : action })
   expect(wrapper.find('Button')).toHaveLength(2)
-  wrapper.find('Button').at(0).simulate('click')
+  wrapper.find('Button').at(1).simulate('click')
   expect(action).toHaveBeenCalledTimes(1)
 })
 

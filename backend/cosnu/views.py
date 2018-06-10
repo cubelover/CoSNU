@@ -42,8 +42,8 @@ class EmailAuthView(APIView):
 
     def post(self, request):
         email = request.data.get('email')
-        if email is None:
-            raise exceptions.ParseError(detail="email required")
+        if (email is None) or (not isinstance(email, str)):
+            raise exceptions.ParseError(detail="email as string required")
         if not email.endswith('@snu.ac.kr'):
             raise exceptions.ParseError(detail="snu-mail required")
         data = signing.dumps({'email': email, 'time': datetime.datetime.now().timestamp()})

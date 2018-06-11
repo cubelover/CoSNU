@@ -3,9 +3,10 @@ import React from 'react'
 import { PageTemplate } from 'components'
 import { Input, Button } from 'components'
 
-const SignUpPage = ({ action_verify_email, action_sign_up, children, ...props }) => {
+const SignUpPage = ({ action_send_alert, action_verify_email, action_sign_up, children, ...props }) => {
   let username, password, confirm_password, email, verify_code;
   const send_verify_email = () => {
+    action_send_alert("Verify Email...")
     if(email.value != undefined) {
       action_verify_email(email.value);
     }else{

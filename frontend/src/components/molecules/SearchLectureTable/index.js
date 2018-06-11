@@ -8,32 +8,43 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const SearchLectureTable = ({lectures, children, ...props}) => {
-  return (
-    <Wrapper {...props}>
-      <Table>
-        <thead><tr>
-          <Th>name</Th>
-          <Th>code</Th>
-          <Th>professor</Th>
-          <Th>semester</Th>
-        </tr></thead>
-        <tbody>
-          {lectures.map( (lecture) =>
-            <tr key={lecture.id}>
-              <Td>{lecture.name}</Td>
-              <Td>{lecture.code}</Td>
-              <Td>{lecture.professor}</Td>
-              <Td>{lecture.semester}</Td>
-            </tr>
-          )}
-        </tbody>
-      </Table>
-      {children}
-    </Wrapper>
-  )
+class SearchLectureTable extends React.Component {
+  constructor( props ){
+    super(props)
+    this.lecture_id = -1;
+    this.row_click = this.row_click.bind(this);
+  }
+  row_click(id) {
+    this.lecture_id = id;
+    this.forceUpdate()
+  }
+  render(){
+    var {lectures, children, ...props} = this.props
+    return (
+      <Wrapper {...props}>
+        <Table>
+          <thead><tr>
+            <Th>name</Th>
+            <Th>code</Th>
+            <Th>professor</Th>
+            <Th>semester</Th>
+          </tr></thead>
+          <tbody>
+            {lectures.map( (lecture, index) =>
+              <tr key={lecture.id} onClick={()=>this.row_click(lecture.id)}>
+                <Td>{lecture.name+(this.lecture_id == lecture.id ? " " + "select" : "")}</Td>
+                <Td>{lecture.code}</Td>
+                <Td>{lecture.professor}</Td>
+                <Td>{lecture.semester}</Td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+        {children}
+      </Wrapper>
+    )
+  }
 }
-
 SearchLectureTable.propTypes = {
   reverse: PropTypes.bool,
   children: PropTypes.node,

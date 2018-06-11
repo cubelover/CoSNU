@@ -16,6 +16,7 @@ from rest_framework import exceptions
 from django.core import signing
 import datetime
 from django.core.mail import EmailMessage
+from rest_framework.decorators import api_view
 from .models import *
 
 
@@ -57,12 +58,23 @@ class UserView(APIView):
             return Response("Wrong Verify code", status=status.HTTP_400_BAD_REQUEST)
         time = verify.get('time')
         if (datetime.datetime.now() - datetime.datetime.fromtimestamp(time)).total_seconds() > 3600:
-            return Response("Verify code Expired", status = status.HTTP_400_BAD_REQUEST)
+            return Response("Verify code Expired", status=status.HTTP_400_BAD_REQUEST)
         try:
             User.objects.create_user(data['username'], password=data['password'], email=data['email'])
         except Exception:
-            return Response("Worng request", status = status.HTTP_400_BAD_REQUEST)
+            return Response("Worng request", status=status.HTTP_400_BAD_REQUEST)
         return Response("success")
+
+
+@api_view(['POST'])
+def change_password(request):
+    pwd = request.data.get('password')
+    if pwd is None:
+        return Response("'password' field required.", status=status.HTTP_400_BAD_REQUEST)
+    me = request.user
+    me.set_password(pwd)
+    me.save()
+    return Response("password changed")
 
 
 class EmailAuthView(APIView):

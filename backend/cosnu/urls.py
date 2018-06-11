@@ -10,6 +10,7 @@ router.register(r'article', views.ArticleViewSet, base_name='article')
 urlpatterns = [
 #    url(r'^users/$', views.UserList.as_view())
     url(r'^user/$', views.UserView.as_view()),
+    url(r'^user/set_password$', views.change_password),
     url(r'^register/$', views.RegisterView.as_view()),
     url(r'^author/(?P<pk>[0-9]+)/$', views.AuthorView.as_view()),
     url(r'^author/$', views.AuthorListView.as_view()),

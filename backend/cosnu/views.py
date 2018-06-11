@@ -113,7 +113,7 @@ class IsMemberOrOwner(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
 
-        if (request.method in permissions.SAFE_METHODS) or (view.action in ['comment', 'upvote', 'downvote']):
+        if (request.method in permissions.SAFE_METHODS) or (view.action in ['comment', 'upvote', 'downvote', 'report']):
             return True
 
         return obj.author.user == request.user
@@ -144,6 +144,14 @@ class ArticleViewSet(viewsets.ModelViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @action(methods=['POST'], detail=True)
+    def report(self, request, lid, pk):
+        serializer = ReportSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save(article=self.get_object())
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(methods=['POST'], detail=True)
     def upvote(self, request, lid, pk):
         article = self.get_object()
         if article.upvote.filter(pk=self.request.user.pk).count() == 1:
@@ -161,21 +169,3 @@ class ArticleViewSet(viewsets.ModelViewSet):
             article.downvote.add(self.request.user)
             return Response("success", status=status.HTTP_201_CREATED)
 
-
-
-
-'''class CommentViewSet(viewsets.ModelViewSet):
-    permission_classes = ()
-
-    def get_queryset(self):
-        return Comment.objects.filter()
-        return Article.objects.filter(author__lecture_id__exact=self.kwargs['lid'])
-
-    def get_serializer_class(self):
-        if self.action == 'list':
-            return ArticleThumbSerializer
-        return ArticleSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(author=Author.objects.get(user=self.request.user, lecture_id__exact=self.kwargs['lid']))
-'''

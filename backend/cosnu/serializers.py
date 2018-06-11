@@ -101,3 +101,10 @@ class LectureArticleSerializer(serializers.ModelSerializer):
         return serializer.data
 
 
+class ReportSerializer(serializers.ModelSerializer):
+    reporter = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Report
+        fields = ('id', 'title', 'reporter', 'contents', 'create_time')
+

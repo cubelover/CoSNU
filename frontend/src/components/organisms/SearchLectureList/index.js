@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 
-import { SearchLectureTable } from 'components'
+import { SearchLectureTable } from 'containers'
 import { LectureTable } from 'components'
 import { Page, CurrPage, Button } from 'components'
 

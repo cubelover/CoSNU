@@ -20,11 +20,16 @@ class SearchLectureTable extends React.Component {
     this.forceUpdate()
   }
   render(){
-    var {lectures, children, ...props} = this.props
+    var {action_register_lecture, lectures, children, ...props} = this.props
     var register_nickname, register_alias
     const send_register_lecture = () => {
-      
-      action_register_lecture(register_nickname.value, register_alias.value, this.lecture_id)
+      for(var i=0; i<lectures.length; i++) {
+        if(lectures[i].id == this.lecture_id) {
+          console.log(this.lecture_id, register_nickname.value, register_alias.value)
+          action_register_lecture(this.lecture_id, register_nickname.value, register_alias.value)
+          break;
+        }
+      }
     }    
     return (
       <Wrapper {...props}>

@@ -264,7 +264,27 @@ export function* watchLoginFail() {
     }}));
 }
 
-
+export function* watchRegisterLecture(action) {
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const {lecture_id, nickname, alias} = action
+    const response = yield call (fetch, '/api/register/', {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        },
+        body: JSON.stringify({lecture:lecture_id, nickname, alias})
+    })
+    if(response.ok) {
+        const result = yield call(() => response.json())
+        console.log(response.status)
+        yield put(actions.validate_token(token))
+    }
+    else if(response.status == 401){
+        yield put(actions.login_fail())
+    }
+}
 
 
 export default function* () {
@@ -283,4 +303,6 @@ export default function* () {
     
     yield takeEvery(actions.SEARCH_LECTURE, watchSearchLecture)
     yield takeEvery(actions.VERIFY_EMAIL, watchVerifyEmail)
+
+    yield takeEvery(actions.REGISTER_LECTURE, watchRegisterLecture)
 }

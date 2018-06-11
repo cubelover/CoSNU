@@ -1,4 +1,5 @@
-import { takeEvery, put, call, fork, select } from 'redux-saga/effects'
+import { takeEvery, put, call, fork, select, throttle } from 'redux-saga/effects'
+import {delay} from 'redux-saga';
 import api from 'services/api'
 import * as actions from './actions'
 
@@ -43,6 +44,9 @@ export function* watchLogin(action) {
     }
 }
 
+export function* watchDelAlert() {
+    yield put(actions.del_alert())
+}
 export function* watchVerifyEmail(action){
     const response = yield call (fetch, `/api/email-auth/`, {
         method: "POST",
@@ -57,11 +61,15 @@ export function* watchVerifyEmail(action){
 	
     console.log(response)
     if(response.ok){
-        yield put(actions.set_alert('valid email'))
+        yield put(actions.send_alert('valid email'))
+    }else if(response.status == 400){
+        yield put(actions.send_alert('invalid email'))
     }
-    else if(response.status == 400){
-        yield put(actions.set_alert('invalid email'))
-    }
+}
+export function* watchSendAlert(action) {
+    yield put(actions.add_alert(action.message))
+    yield call(delay, 5000)
+    yield put(actions.del_alert())
 }
 
 export function* watchPostArticle(action){
@@ -328,4 +336,6 @@ export default function* () {
     yield takeEvery(actions.VERIFY_EMAIL, watchVerifyEmail)
 
     yield takeEvery(actions.REGISTER_LECTURE, watchRegisterLecture)
+    
+    yield takeEvery(actions.SEND_ALERT, watchSendAlert)
 }

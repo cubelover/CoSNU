@@ -66,12 +66,14 @@ const search_state = (search_state = initialSearchState, action) => {
 }
 
 const initialAlertState = {
-    message: ""
+    messages: []
 }
 const alert_state = (alert_state = initialAlertState, action) => {
     switch(action.type) {
-        case actions.SET_ALERT:
-            return {...alert_state, message: action.message}
+        case actions.DEL_ALERT:
+            return {...alert_state, messages:(alert_state.messages.slice(1))}
+        case actions.ADD_ALERT:
+            return {...alert_state, messages:[...alert_state.messages, action.message]}
         case actions.INIT_ALERT:
             return initialAlertState
         default:

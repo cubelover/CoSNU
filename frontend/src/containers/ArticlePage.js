@@ -5,7 +5,10 @@ import { get_article, delete_article, post_comment, post_upvote, post_downvote }
 
 
 const mapStateToProps = (state) => {
-    return ({article : state.cosnu.article_state.current_article})
+    return ({
+        user_lectures: state.cosnu.user_state.lectures,
+        article: state.cosnu.article_state.current_article
+    })
 }
 const mapDispatchToProps = (dispatch) => {
     return {

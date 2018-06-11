@@ -20,6 +20,8 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 class AuthorMakeSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    id = serializers.PrimaryKeyRelatedField(read_only=True)
+    lecture = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Author

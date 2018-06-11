@@ -36,23 +36,17 @@ class EditProfilePage extends React.Component {
     let password, new_password, confirm_new_password
     const send_set_password = () => {
       if(password.value != undefined && new_password.value != undefined && confirm_new_password.value != undefined && new_password.value == confirm_new_password.value) {
-        console.log("SEND_SET_PASSWORD")
         action_set_password(password.value, new_password.value)
       }else{
       }
     }
     const send_set_lectureinfo = () => {
-      console.log("SEND_SET_LECTUREINFO")
       //todo
     }
     let lecture_name, lecture_code;
     var lectures_tmp = user_state.lectures;
     var tp = lectures_tmp.find(item => item.lecture.id == 1)
-    console.log(lectures_tmp)
-    //tp.lecture.id = 2
-    console.log(tp)
-    console.log(user_state.lectures)
-    console.log(lectures_tmp)
+
     const send_search_lecture = () => {
       this.memo_name = lecture_name.value
       this.memo_code = lecture_code.value

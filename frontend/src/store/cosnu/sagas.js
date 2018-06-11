@@ -43,6 +43,28 @@ export function* watchLogin(action) {
     }
 }
 
+export function* watchVerifyEmail(action){
+    const response = yield call (fetch, `/api/email-auth/`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            'email': action.email
+        })
+	});
+	
+    console.log(response)
+    if(response.ok){
+		console.log(response.json())
+        console.log(response.status)
+    }
+    else if(response.status == 400){
+		//TODO
+    }
+}
+
 export function* watchPostArticle(action){
     const token = yield select((state) => state.cosnu.user_state.token)
     const lecture_id = action.lecture_id
@@ -259,6 +281,7 @@ export default function* () {
     yield takeEvery(actions.LOGIN_FAIL, watchLoginFail)
     yield takeEvery(actions.POST_UPVOTE, watchPostUpvote)
     yield takeEvery(actions.POST_DOWNVOTE, watchPostDownvote)
-
+    
     yield takeEvery(actions.SEARCH_LECTURE, watchSearchLecture)
+    yield takeEvery(actions.VERIFY_EMAIL, watchVerifyEmail)
 }

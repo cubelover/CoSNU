@@ -9,6 +9,16 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
+const HoverTr = styled.tr`
+  &:hover {
+    background-color: #bdf;
+  }
+`
+
+const SelectTr = styled.tr`
+  background-color: #fdb;
+`
+
 class SearchLectureTable extends React.Component {
   constructor( props ){
     super(props)
@@ -42,12 +52,21 @@ class SearchLectureTable extends React.Component {
           </tr></thead>
           <tbody>
             {lectures.map( (lecture) =>
-              <tr key={lecture.id} onClick={()=>this.row_click(lecture.id)}>
-                <Td>{lecture.name+(this.lecture_id == lecture.id ? " " + "select" : "")}</Td>
-                <Td>{lecture.code}</Td>
-                <Td>{lecture.professor}</Td>
-                <Td>{lecture.semester}</Td>
-              </tr>
+              {return this.lecture_id == lecture.id ?
+                <SelectTr key={lecture.id} onClick={()=>this.row_click(lecture.id)}>
+                  <Td>{lecture.name}</Td>
+                  <Td>{lecture.code}</Td>
+                  <Td>{lecture.professor}</Td>
+                  <Td>{lecture.semester}</Td>
+                </SelectTr>
+                :
+                <HoverTr key={lecture.id} onClick={()=>this.row_click(lecture.id)}>
+                  <Td>{lecture.name}</Td>
+                  <Td>{lecture.code}</Td>
+                  <Td>{lecture.professor}</Td>
+                  <Td>{lecture.semester}</Td>
+                </HoverTr>
+              }
             )}
           </tbody>
         </Table>

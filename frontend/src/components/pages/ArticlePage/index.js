@@ -20,11 +20,28 @@ class ArticlePage extends React.Component {
     this.props.get_article(nextProps.params.lecture_id, nextProps.params.article_id)
   }
   render(){
-    var {location, action_delete_article, action_post_comment, action_post_upvote, action_post_downvote, children, article, ...props} = this.props
+    var {user_lectures} = this.props
+    var {action_delete_article, action_post_comment, action_post_upvote, action_post_downvote} = this.props
     var {lecture_id, article_id} = this.props.params;
+    var {location, children, article, ...props} = this.props
     let cur_page = (location.query.page ? parseInt(location.query.page, 10) : 1);
     if(isNaN(cur_page)) cur_page = 1;
-  
+    var lecture_name = "none_lecture_name"
+    for(var i=0; i<user_lectures.length; i++) {
+      if((user_lectures[i].lecture.id).toString() == lecture_id) {
+        lecture_name = user_lectures[i].lecture.name
+        break;
+      }
+    }
+    if(lecture_name == "none_lecture_name") {
+      return (
+        <PageTemplate>
+          <h1>Invalid</h1>
+          <Link to="/"><Button>Home</Button></Link>
+          {children}
+        </PageTemplate>
+      )
+    }
     const delete_article = () => {
       action_delete_article(lecture_id, article_id)
     }
@@ -42,7 +59,7 @@ class ArticlePage extends React.Component {
     }
     return (
       <PageTemplate>
-        <h1>ArticlePage {lecture_id} + {article_id}</h1>
+        <h1>{lecture_name}</h1>
         <span>{article.title}</span>
         <span>{article.author}</span>
         <span>{article.create_time}</span>

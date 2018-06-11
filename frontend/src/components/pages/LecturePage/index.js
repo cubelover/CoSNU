@@ -2,18 +2,38 @@ import React from 'react'
 
 import { PageTemplate } from 'components'
 import { ArticleList } from 'containers'
+import { Input, Button, Table, Tr, Th, Td } from 'components'
+import { Link } from 'react-router'
 
-const LecturePage = ({ params, location, children, ...props}) => {
+const LecturePage = ({ user_lectures, params, location, children, ...props}) => {
   let lecture_id = params.lecture_id;
   let cur_page = (location.query.page ? parseInt(location.query.page, 10) : 1);
   if(isNaN(cur_page)) cur_page = 1;
-  return (
-    <PageTemplate>
-      <h1>LecturePage {lecture_id}</h1>
-      <ArticleList lecture_id={lecture_id} cur_page={cur_page}/>
-      {children}
-    </PageTemplate>
-  )
+
+  var lecture_name = "none_lecture_name"
+  for(var i=0; i<user_lectures.length; i++) {
+    if((user_lectures[i].lecture.id).toString() == lecture_id) {
+      lecture_name = user_lectures[i].lecture.name
+      break;
+    }
+  }
+  if(lecture_name == "none_lecture_name") {
+    return (
+      <PageTemplate>
+        <h1>Invalid</h1>
+        <Link to="/"><Button>Home</Button></Link>
+        {children}
+      </PageTemplate>
+    )
+  }else{
+    return (
+      <PageTemplate>
+        <h1>{lecture_name}</h1>
+        <ArticleList lecture_id={lecture_id} cur_page={cur_page}/>
+        {children}
+      </PageTemplate>
+    )
+  }
 }
 
 export default LecturePage

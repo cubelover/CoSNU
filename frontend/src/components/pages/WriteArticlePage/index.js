@@ -32,14 +32,14 @@ const WriteArticlePage = ({user_lectures, params, action_post_article, children,
         <h1>{lecture_name}</h1>
         <div>
           <div style={{'padding': '8px', 'text-align': 'center'}}>
-            <Input type="text" placeholder="title" innerRef={(ref) => {title = ref;}} style={{'width': '560px'}}></Input>
+            <Input type="text" placeholder="제목" innerRef={(ref) => {title = ref;}} style={{'width': '560px'}}></Input>
             &nbsp;
             <Link to={{ pathname: '/lecture/' + params.lecture_id + '/list/'}}><Button onClick={post_article}>글쓰기</Button></Link>
             &nbsp;
             <Link to={{ pathname: '/lecture/' + params.lecture_id + '/list/'}}><Button>취소</Button></Link>
           </div>
           <div style={{'padding': '8px', 'text-align': 'center'}}>
-            <Textarea type="contents" placeholder="contents" innerRef={(ref) => {contents = ref;}}></Textarea>
+            <Textarea type="contents" placeholder="내용" innerRef={(ref) => {contents = ref;}}></Textarea>
           </div>
         </div>
         {children}

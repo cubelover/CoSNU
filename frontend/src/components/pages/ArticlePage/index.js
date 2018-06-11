@@ -72,7 +72,7 @@ class ArticlePage extends React.Component {
         <Button onClick = {post_downvote}>Downvote</Button>
         <Link to={{ pathname: '/lecture/' + lecture_id + '/list/' }}><Button onClick = {delete_article}>Delete</Button></Link>
         <Input type="text"></Input>
-        <Button>Report(todo)</Button>
+        <Link to = {{ pathname: '/lecture/' + lecture_id + '/article/' + article_id + '/report/'}}><Button>Report</Button></Link>
         <CommentTable comments={(article.comments)} lecture_id={lecture_id} article_id={article_id}/>
         <Input type="text" innerRef={(ref) => {input_comment = ref}}></Input>
         <Button onClick = {post_comment}>Add Comment</Button>

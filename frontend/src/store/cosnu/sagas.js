@@ -169,6 +169,30 @@ export function* watchPostDownvote(action){
     }
 }
 
+export function* watchPostReport(action){
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const {lecture_id, article_id, title, contents, cur_page} = action
+
+    const response = yield call (fetch, `/api/lecture/${lecture_id}/article/${article_id}/report/`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        },
+        body: JSON.stringify({
+            'title': action.title,
+            'contents': action.contents
+        })
+    });
+    if(response.ok){
+        yield put(actions.get_articles(lecture_id, cur_page))
+    }
+    else if(response.status == 401){
+        yield put(actions.login_fail())
+    }
+}
+
 export function* watchDeleteArticle(action){
     const token = yield select((state) => state.cosnu.user_state.token)
     const lecture_id = action.lecture_id
@@ -338,8 +362,7 @@ export default function* () {
     
     yield takeEvery(actions.SEARCH_LECTURE, watchSearchLecture)
     yield takeEvery(actions.VERIFY_EMAIL, watchVerifyEmail)
-
+    yield takeEvery(actions.POST_REPORT, watchPostReport)
     yield takeEvery(actions.REGISTER_LECTURE, watchRegisterLecture)
-    
     yield takeEvery(actions.SEND_ALERT, watchSendAlert)
 }

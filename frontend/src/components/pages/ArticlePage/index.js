@@ -52,10 +52,10 @@ class ArticlePage extends React.Component {
       input_comment.value = ''
     }
     const post_upvote = () => {
-      action_post_upvote(lecture_id, article_id)
+      action_post_upvote(lecture_id, article_id, cur_page)
     }
     const post_downvote = () => {
-      action_post_downvote(lecture_id, article_id)
+      action_post_downvote(lecture_id, article_id, cur_page)
     }
     return (
       <PageTemplate>

@@ -118,8 +118,7 @@ export function* watchPostComment(action){
 
 export function* watchPostUpvote(action){
     const token = yield select((state) => state.cosnu.user_state.token)
-    const lecture_id = action.lecture_id
-    const article_id = action.article_id
+    const {lecture_id, article_id, cur_page} = action
 
     const response = yield call (fetch, `/api/lecture/${lecture_id}/article/${article_id}/upvote/`, {
         method: "POST",
@@ -132,6 +131,7 @@ export function* watchPostUpvote(action){
     if(response.ok){
         console.log(response.status)
         yield put(actions.get_article(lecture_id, article_id))
+        yield put(actions.get_articles(lecture_id, cur_page))
     }
     else if(response.status == 401){
         yield put(actions.login_fail())
@@ -140,8 +140,7 @@ export function* watchPostUpvote(action){
 
 export function* watchPostDownvote(action){
     const token = yield select((state) => state.cosnu.user_state.token)
-    const lecture_id = action.lecture_id
-    const article_id = action.article_id
+    const {lecture_id, article_id, cur_page} = action
 
     const response = yield call (fetch, `/api/lecture/${lecture_id}/article/${article_id}/downvote/`, {
         method: "POST",
@@ -154,6 +153,7 @@ export function* watchPostDownvote(action){
     if(response.ok){
         console.log(response.status)
         yield put(actions.get_article(lecture_id, article_id))
+        yield put(actions.get_articles(lecture_id, cur_page))
     }
     else if(response.status == 401){
         yield put(actions.login_fail())

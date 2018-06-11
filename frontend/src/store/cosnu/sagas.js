@@ -3,6 +3,25 @@ import {delay} from 'redux-saga';
 import api from 'services/api'
 import * as actions from './actions'
 
+
+export function* watchTokenToUser(action){
+    const {token} = action
+    const response = yield call (fetch, '/api/user/', {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        },
+    })
+    if(response.ok){
+        const result = yield call(() => response.json())
+        yield put(actions.set_userinfo(result.id, result.username, result.email, token, result.lectures))
+    }
+    else{
+        yield put(actions.login_fail())
+    }
+}
 export function* watchValidateToken(action){
     const {token} = action
     const response = yield call (fetch, '/api/user/', {
@@ -337,7 +356,7 @@ export function* watchRegisterLecture(action) {
     if(response.ok) {
         const result = yield call(() => response.json())
         console.log(response.status)
-        yield put(actions.validate_token(token))
+        yield put(actions.token_to_user(token))
     }
     else if(response.status == 401){
         yield put(actions.login_fail())
@@ -365,4 +384,6 @@ export default function* () {
     yield takeEvery(actions.POST_REPORT, watchPostReport)
     yield takeEvery(actions.REGISTER_LECTURE, watchRegisterLecture)
     yield takeEvery(actions.SEND_ALERT, watchSendAlert)
+
+    yield takeEvery(actions.TOKEN_TO_USER, watchTokenToUser)
 }

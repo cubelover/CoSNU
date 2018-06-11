@@ -49,6 +49,7 @@ class ArticlePage extends React.Component {
         <span>{article.upvotes}</span>
         <span>{article.downvotes}</span>
         <p>{article.contents}</p>
+        <Button>Modify(todo)</Button>
         <Button onClick = {post_upvote}>Upvote</Button>
         <Button onClick = {post_downvote}>Downvote</Button>
         <Link to={{ pathname: '/lecture/' + lecture_id + '/list/' }}><Button onClick = {delete_article}>Delete</Button></Link>

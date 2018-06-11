@@ -20,6 +20,9 @@ export const VERIFY_EMAIL = 'VERIFY_EMAIL'
 export const SET_PASSWORD = 'SET_PASSWORD'
 export const SET_LECTUREINFO = 'SET_LECTUREINFO'
 
+export const SET_ALERT = 'SET_ALERT'
+export const INIT_ALERT = 'INIT_ALERT'
+
 export const user_login = (username, password) => ({type: USER_LOGIN, username, password})
 export const login_success = () => ({type: LOGIN_SUCCESS})
 export const login_fail = () => ({type: LOGIN_FAIL})
@@ -46,3 +49,5 @@ export const SEARCH_LECTURE = 'SEARCH_LECTURE'
 export const SET_SEARCH_LECTURE = 'SET_SEARCH_LECTURE'
 export const search_lecture = (name, code, page) => ({type: SEARCH_LECTURE, name, code, page})
 export const set_search_lecture = (result) => ({type: SET_SEARCH_LECTURE, result})
+export const set_alert = (message) => ({type:SET_ALERT, message})
+export const init_alert = () => ({type:INIT_ALERT})

@@ -3,5 +3,9 @@ import { shallow } from 'enzyme'
 import SignUpPage from '.'
 
 it('renders', () => {
-  shallow(<SignUpPage />)
+  shallow(<SignUpPage 
+    alert_state={{
+      message: ""
+    }}
+  />)
 })

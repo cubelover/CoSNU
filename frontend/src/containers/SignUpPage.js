@@ -4,7 +4,7 @@ import { SignUpPage } from 'components'
 import { verify_email, sign_up } from '../store/cosnu/actions'
 
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({alert_state: state.cosnu.alert_state})
 const mapDispatchToProps = (dispatch) => {
     return {
         action_verify_email: (email) => {

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { LectureList } from 'components'
+import { SearchLectureList } from 'components'
 import { PageTemplate } from 'components'
 import { Input, Button, Table, Tr, Th, Td } from 'components'
 import { Link } from 'react-router'
@@ -46,6 +47,13 @@ class EditProfilePage extends React.Component {
       //todo
     }
     let lecture_name, lecture_code;
+    var lectures_tmp = user_state.lectures;
+    var tp = lectures_tmp.find(item => item.lecture.id == 1)
+    console.log(lectures_tmp)
+    //tp.lecture.id = 2
+    console.log(tp)
+    console.log(user_state.lectures)
+    console.log(lectures_tmp)
     const send_search_lecture = () => {
       this.memo_name = lecture_name.value
       this.memo_code = lecture_code.value
@@ -71,7 +79,9 @@ class EditProfilePage extends React.Component {
           <tbody>
             {user_state.lectures.map( (lecture) =>
               <tr key={lecture.lecture.id}>
+                
                 <td>{lecture.lecture.name}</td>
+                
                 <td><Input type="text" value={lecture.nickname}></Input></td>
                 <td><Input type="text" value={lecture.alias}></Input></td>
               </tr>
@@ -87,11 +97,12 @@ class EditProfilePage extends React.Component {
         <Link to={{pathname : location.pathname, query: {page: 1}}}>
           <Button onClick={send_search_lecture}>Search Lectures With Name and Code</Button>
         </Link>
-        <LectureList lectures={search_state} location={location} cur_page={this.cur_page}/>
+        <SearchLectureList lectures={search_state} location={location} cur_page={this.cur_page}/>
         {children}
       </PageTemplate>
     )
   }
+//  <SearchLectureList lectures={search_state} location={location} cur_page={this.cur_page}/>
 }
 
 export default EditProfilePage

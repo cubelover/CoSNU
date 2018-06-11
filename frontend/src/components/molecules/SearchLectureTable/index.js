@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { StyledLink, Table, Tr, Th, Td } from 'components'
+import { Input, Button } from 'components'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
@@ -20,6 +21,11 @@ class SearchLectureTable extends React.Component {
   }
   render(){
     var {lectures, children, ...props} = this.props
+    var register_nickname, register_alias
+    const send_register_lecture = () => {
+      
+      action_register_lecture(register_nickname.value, register_alias.value, this.lecture_id)
+    }    
     return (
       <Wrapper {...props}>
         <Table>
@@ -30,7 +36,7 @@ class SearchLectureTable extends React.Component {
             <Th>semester</Th>
           </tr></thead>
           <tbody>
-            {lectures.map( (lecture, index) =>
+            {lectures.map( (lecture) =>
               <tr key={lecture.id} onClick={()=>this.row_click(lecture.id)}>
                 <Td>{lecture.name+(this.lecture_id == lecture.id ? " " + "select" : "")}</Td>
                 <Td>{lecture.code}</Td>
@@ -40,6 +46,11 @@ class SearchLectureTable extends React.Component {
             )}
           </tbody>
         </Table>
+        <div>
+          <Input type="text" placeholder="nickname" innerRef={(ref) => {register_nickname = ref;}}></Input>
+          <Input type="text" placeholder="alias" innerRef={(ref) => {register_alias = ref;}}></Input>
+          <Button onClick={send_register_lecture}>Register Lecture</Button>
+        </div>
         {children}
       </Wrapper>
     )

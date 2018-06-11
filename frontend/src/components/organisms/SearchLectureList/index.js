@@ -15,9 +15,8 @@ const SearchLectureList = ({lectures, location, cur_page, children, ...props}) =
   var article_per_page = 10, max_page_num = Math.floor((lectures.count + article_per_page - 1) / article_per_page)
   var show_page_number = 10, page_base = Math.floor((Math.max(1, cur_page) - 1) / show_page_number) * show_page_number + 1;
   if(max_page_num < 1) max_page_num = 1;
-//  <SectureLectureTable lectures={lectures.results}></SectureLectureTable>
-//<LectureTable lectures={lectures.results}></LectureTable>
-return (
+
+  return (
     <Wrapper {...props}>
       <SearchLectureTable lectures={lectures.results}></SearchLectureTable>
       <div style={{'text-align': 'center'}}>

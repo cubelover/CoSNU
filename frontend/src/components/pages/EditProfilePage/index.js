@@ -53,6 +53,7 @@ class EditProfilePage extends React.Component {
       this.memo_code = lecture_code.value
       this.cur_page = 2;
     }
+
     return (
       <PageTemplate>
         <h1>EditProfilePage</h1>

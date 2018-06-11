@@ -12,6 +12,7 @@ export const DELETE_ARTICLE = 'DELETE_ARTICLE'
 export const POST_COMMENT = 'POST_COMMENT'
 export const POST_UPVOTE = 'POST_UPVOTE'
 export const POST_DOWNVOTE = 'POST_DOWNVOTE'
+export const POST_REPORT = 'POST_REPORT'
 
 export const SET_USERINFO = 'SET_USERINFO'
 export const USER_LOGOUT = 'USER_LOGOUT'
@@ -20,8 +21,6 @@ export const VERIFY_EMAIL = 'VERIFY_EMAIL'
 export const SET_PASSWORD = 'SET_PASSWORD'
 export const SET_LECTUREINFO = 'SET_LECTUREINFO'
 
-export const SET_ALERT = 'SET_ALERT'
-export const INIT_ALERT = 'INIT_ALERT'
 
 export const user_login = (username, password) => ({type: USER_LOGIN, username, password})
 export const login_success = () => ({type: LOGIN_SUCCESS})
@@ -44,13 +43,20 @@ export const delete_article = (lecture_id, article_id) => ({type: DELETE_ARTICLE
 export const post_comment = (lecture_id, article_id, comment_content) => ({type: POST_COMMENT, lecture_id, article_id, comment_content})
 export const post_upvote = (lecture_id, article_id, cur_page) => ({type: POST_UPVOTE, lecture_id, article_id, cur_page})
 export const post_downvote = (lecture_id, article_id, cur_page) => ({type: POST_DOWNVOTE, lecture_id, article_id, cur_page})
+export const post_report = (lecture_id, article_id, title, contents, cur_page) => ({type: POST_REPORT, lecture_id, article_id, title, contents, cur_page})
+
 
 export const SEARCH_LECTURE = 'SEARCH_LECTURE'
 export const SET_SEARCH_LECTURE = 'SET_SEARCH_LECTURE'
 export const search_lecture = (name, code, page) => ({type: SEARCH_LECTURE, name, code, page})
 export const set_search_lecture = (result) => ({type: SET_SEARCH_LECTURE, result})
-export const set_alert = (message) => ({type:SET_ALERT, message})
-export const init_alert = () => ({type:INIT_ALERT})
+
+export const DEL_ALERT = 'DEL_ALERT'
+export const ADD_ALERT = 'ADD_ALERT'
+export const SEND_ALERT = 'SEND_ALERT'
+export const del_alert = () => ({type:DEL_ALERT})
+export const add_alert = (message) => ({type:ADD_ALERT, message})
+export const send_alert = (message) => ({type:SEND_ALERT, message})
 
 export const REGISTER_LECTURE = 'REGISTER_LECTURE'
 export const register_lecture = (lecture_id, nickname, alias) => ({type: REGISTER_LECTURE, lecture_id, nickname, alias})

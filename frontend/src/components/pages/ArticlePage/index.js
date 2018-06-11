@@ -34,6 +34,7 @@ class ArticlePage extends React.Component {
       }
     }
     if(lecture_name == "none_lecture_name") {
+      //action_send_alert("Invalid Lecture")
       return (
         <PageTemplate>
           <h1>Invalid</h1>
@@ -80,7 +81,7 @@ class ArticlePage extends React.Component {
           <div style={{'float': 'right', 'padding': '8px'}}>
             <Input type="text" placeholder="신고사유"></Input>
             &nbsp;
-            <Button>신고(todo)</Button>
+            <Link to = {{ pathname: '/lecture/' + lecture_id + '/article/' + article_id + '/report/'}}><Button>Report</Button></Link>
           </div>
           <div style={{'width': '160px', 'margin': 'auto', 'text-align': 'center', 'padding': '8px'}}>
             <Button onClick = {post_upvote}>추천</Button>

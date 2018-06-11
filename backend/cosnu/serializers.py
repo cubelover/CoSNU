@@ -34,6 +34,22 @@ class AuthorMakeSerializer(serializers.ModelSerializer):
         ]
 
 
+class AuthorModifySerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    id = serializers.PrimaryKeyRelatedField(read_only=True)
+    lecture = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = Author
+        fields = ('id', 'user', 'lecture', 'nickname', 'alias')
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Author.objects.all(),
+                fields=('user', 'lecture')
+            )
+        ]
+
+
 class UserSerializer(serializers.ModelSerializer):
     lectures = AuthorSerializer(source='author_set', read_only=True, many=True)
 

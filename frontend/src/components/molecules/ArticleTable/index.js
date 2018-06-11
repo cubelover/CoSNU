@@ -9,22 +9,29 @@ const Wrapper = styled.div`
 `
 
 const ArticleTable = ({articles, lecture_id, page, children, ...props}) => {
+  console.log(articles);
   return (
     <Wrapper {...props}>
       <Table>
         <thead><tr>
           <Th>id</Th>
           <Th>title</Th>
+          <Th>comments</Th>
           <Th>author</Th>
           <Th>create_time</Th>
+          <Th>upvotes</Th>
+          <Th>downvotes</Th>
         </tr></thead>
         <tbody>
           {articles.map( (article) =>
             <tr key={article.id}>
               <Td>{article.id}</Td>
               <Td><StyledLink to={{ pathname: '/lecture/' + lecture_id + '/article/' + article.id, query: { page: page } }}>{article.title}</StyledLink></Td>
+              <Td>{article.comments}</Td>
               <Td>{article.author}</Td>
               <Td>{article.create_time}</Td>
+              <Td>{article.upvotes}</Td>
+              <Td>{article.downvotes}</Td>
             </tr>
           )}
         </tbody>

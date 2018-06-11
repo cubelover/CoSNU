@@ -10,13 +10,6 @@ class LectureSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'semester', 'professor', 'code', 'credit')
 
 
-class AuthorModifySerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Author
-        fields = ('lecture', 'nickname', 'alias')
-
-
 class AuthorSerializer(serializers.ModelSerializer):
     lecture = LectureSerializer(read_only=True)
 
@@ -30,7 +23,7 @@ class AuthorMakeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Author
-        fields = ('user', 'lecture', 'nickname', 'alias')
+        fields = ('id', 'user', 'lecture', 'nickname', 'alias')
         validators = [
             UniqueTogetherValidator(
                 queryset=Author.objects.all(),

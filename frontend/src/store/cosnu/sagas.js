@@ -57,11 +57,10 @@ export function* watchVerifyEmail(action){
 	
     console.log(response)
     if(response.ok){
-		console.log(response.json())
-        console.log(response.status)
+        yield put(actions.set_alert('valid email'))
     }
     else if(response.status == 400){
-		//TODO
+        yield put(actions.set_alert('invalid email'))
     }
 }
 

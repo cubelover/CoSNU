@@ -17,7 +17,6 @@ const user_state = (user_state = initialUserState, action) => {
     }
 }
 
-
 const initialArticleState = {
     current_articles:{
         count: 0,
@@ -66,10 +65,26 @@ const search_state = (search_state = initialSearchState, action) => {
     }
 }
 
+const initialAlertState = {
+    message: ""
+}
+const alert_state = (alert_state = initialAlertState, action) => {
+    switch(action.type) {
+        case actions.SET_ALERT:
+            return {...alert_state, message: action.message}
+        case actions.INIT_ALERT:
+            return initialAlertState
+        default:
+            return alert_state
+    }
+}
+
+
 const cosnu_reducer = combineReducers({
     user_state,
     article_state,
-    search_state
+    search_state,
+    alert_state
 });
     
 export default cosnu_reducer;

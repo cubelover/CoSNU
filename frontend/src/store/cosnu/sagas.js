@@ -193,7 +193,6 @@ export function* watchGetArticle(action){
     })
     if(response.ok){
         const result = yield call(() => response.json())
-        console.log(result)
         yield put(actions.set_article(result))
     }
     else if(response.status == 401){

@@ -23,7 +23,7 @@ class AuthorMakeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Author
-        fields = ('user', 'lecture', 'nickname', 'alias')
+        fields = ('id', 'user', 'lecture', 'nickname', 'alias')
         validators = [
             UniqueTogetherValidator(
                 queryset=Author.objects.all(),

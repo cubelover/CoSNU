@@ -1,4 +1,5 @@
-import { takeEvery, put, call, fork, select } from 'redux-saga/effects'
+import { takeEvery, put, call, fork, select, throttle } from 'redux-saga/effects'
+import {delay} from 'redux-saga';
 import api from 'services/api'
 import * as actions from './actions'
 
@@ -15,6 +16,7 @@ export function* watchValidateToken(action){
     if(response.ok){
         const result = yield call(() => response.json())
         yield put(actions.set_userinfo(result.id, result.username, result.email, token, result.lectures))
+        yield put(actions.send_alert('정상적으로 로그인 되었습니다.'))
     }
     else{
         yield put(actions.login_fail())
@@ -22,6 +24,7 @@ export function* watchValidateToken(action){
 }
 export function* watchLogout(action) {
     yield put(actions.set_userinfo(0, "", "", "", []))
+    yield put(actions.send_alert('정상적으로 로그아웃 되었습니다.'))
 }
 
 export function* watchLogin(action) {
@@ -43,6 +46,9 @@ export function* watchLogin(action) {
     }
 }
 
+export function* watchDelAlert() {
+    yield put(actions.del_alert())
+}
 export function* watchVerifyEmail(action){
     const response = yield call (fetch, `/api/email-auth/`, {
         method: "POST",
@@ -57,11 +63,15 @@ export function* watchVerifyEmail(action){
 	
     console.log(response)
     if(response.ok){
-        yield put(actions.set_alert('valid email'))
+        yield put(actions.send_alert('메일이 전송되었습니다. 코드를 입력해주세요.'))
+    }else if(response.status == 400){
+        yield put(actions.send_alert('올바른 이메일을 입력하십시오. (@snu.ac.kr) '))
     }
-    else if(response.status == 400){
-        yield put(actions.set_alert('invalid email'))
-    }
+}
+export function* watchSendAlert(action) {
+    yield put(actions.add_alert(action.message))
+    yield call(delay, 5000)
+    yield put(actions.del_alert())
 }
 
 export function* watchPostArticle(action){
@@ -216,6 +226,7 @@ export function* watchGetArticles(action){
             'Authorization': 'Token ' + token
         },
     })
+    console.log(response.status);
     if(response.ok){
         const result = yield call(() => response.json())
         yield put(actions.set_articles(result))
@@ -299,6 +310,7 @@ export function* watchSignUp(action){
 }
 
 export function* watchLoginFail() {
+    yield put(actions.send_alert('로그인을 먼저 해주십시오.'))
     localStorage.setItem("user_info", JSON.stringify({"pk": 0, "username": "", "email": "", "token": "", "lectures": [], current_articles:[],
     current_article:{
         id: 0,
@@ -310,7 +322,27 @@ export function* watchLoginFail() {
     }}));
 }
 
-
+export function* watchRegisterLecture(action) {
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const {lecture_id, nickname, alias} = action
+    const response = yield call (fetch, '/api/register/', {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        },
+        body: JSON.stringify({lecture:lecture_id, nickname, alias})
+    })
+    if(response.ok) {
+        const result = yield call(() => response.json())
+        console.log(response.status)
+        yield put(actions.validate_token(token))
+    }
+    else if(response.status == 401){
+        yield put(actions.login_fail())
+    }
+}
 
 
 export default function* () {
@@ -331,4 +363,6 @@ export default function* () {
     yield takeEvery(actions.SEARCH_LECTURE, watchSearchLecture)
     yield takeEvery(actions.VERIFY_EMAIL, watchVerifyEmail)
     yield takeEvery(actions.POST_REPORT, watchPostReport)
+    yield takeEvery(actions.REGISTER_LECTURE, watchRegisterLecture)
+    yield takeEvery(actions.SEND_ALERT, watchSendAlert)
 }

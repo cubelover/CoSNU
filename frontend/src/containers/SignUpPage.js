@@ -1,12 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { SignUpPage } from 'components'
-import { verify_email, sign_up } from '../store/cosnu/actions'
+import { verify_email, sign_up, send_alert } from '../store/cosnu/actions'
 
 
-const mapStateToProps = (state) => ({alert_state: state.cosnu.alert_state})
+const mapStateToProps = (state) => ({})
 const mapDispatchToProps = (dispatch) => {
     return {
+        action_send_alert: (message) => {
+            dispatch(send_alert(message))
+        },
         action_verify_email: (email) => {
             dispatch(verify_email(email))
         },

@@ -34,6 +34,7 @@ class ArticlePage extends React.Component {
       }
     }
     if(lecture_name == "none_lecture_name") {
+      //action_send_alert("Invalid Lecture")
       return (
         <PageTemplate>
           <h1>Invalid</h1>

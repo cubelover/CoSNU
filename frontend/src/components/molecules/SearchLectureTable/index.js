@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { StyledLink, Table, Tr, Th, Td } from 'components'
+import { Input, Button } from 'components'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
@@ -19,7 +20,17 @@ class SearchLectureTable extends React.Component {
     this.forceUpdate()
   }
   render(){
-    var {lectures, children, ...props} = this.props
+    var {action_register_lecture, lectures, children, ...props} = this.props
+    var register_nickname, register_alias
+    const send_register_lecture = () => {
+      for(var i=0; i<lectures.length; i++) {
+        if(lectures[i].id == this.lecture_id) {
+          console.log(this.lecture_id, register_nickname.value, register_alias.value)
+          action_register_lecture(this.lecture_id, register_nickname.value, register_alias.value)
+          break;
+        }
+      }
+    }    
     return (
       <Wrapper {...props}>
         <Table>
@@ -30,7 +41,7 @@ class SearchLectureTable extends React.Component {
             <Th>semester</Th>
           </tr></thead>
           <tbody>
-            {lectures.map( (lecture, index) =>
+            {lectures.map( (lecture) =>
               <tr key={lecture.id} onClick={()=>this.row_click(lecture.id)}>
                 <Td>{lecture.name+(this.lecture_id == lecture.id ? " " + "select" : "")}</Td>
                 <Td>{lecture.code}</Td>
@@ -40,6 +51,11 @@ class SearchLectureTable extends React.Component {
             )}
           </tbody>
         </Table>
+        <div>
+          <Input type="text" placeholder="nickname" innerRef={(ref) => {register_nickname = ref;}}></Input>
+          <Input type="text" placeholder="alias" innerRef={(ref) => {register_alias = ref;}}></Input>
+          <Button onClick={send_register_lecture}>Register Lecture</Button>
+        </div>
         {children}
       </Wrapper>
     )

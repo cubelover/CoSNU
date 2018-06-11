@@ -11,6 +11,8 @@ urlpatterns = [
 #    url(r'^users/$', views.UserList.as_view())
     url(r'^user/$', views.UserView.as_view()),
     url(r'^register/$', views.RegisterView.as_view()),
+    url(r'^author/(?P<pk>[0-9]+)/$', views.AuthorView.as_view()),
+    url(r'^author/$', views.AuthorListView.as_view()),
     url(r'^email-auth/$', views.EmailAuthView.as_view()),
     url(r'^lectures/$', views.LectureListView.as_view()),
     url(r'^lecture/(?P<pk>[0-9]+)/$', views.LectureView.as_view()),

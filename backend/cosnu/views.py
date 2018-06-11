@@ -121,7 +121,7 @@ class IsOwner(permissions.BasePermission):
 
 
 class AuthorView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = AuthorMakeSerializer
+    serializer_class = AuthorModifySerializer
     permission_classes = (permissions.IsAuthenticated, IsOwner)
 
     def get_queryset(self):

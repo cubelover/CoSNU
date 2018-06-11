@@ -8,6 +8,7 @@ import { ArticlePage } from 'containers'
 import { SignUpPage } from 'containers'
 import { EditProfilePage } from 'containers'
 import { WriteArticlePage } from 'containers'
+import { ReportPage } from 'containers'
 import { HomePage } from 'containers'
 
 export const routes = (store) => {
@@ -40,6 +41,7 @@ export const routes = (store) => {
         <Route path="lecture/:lecture_id/list"  component = {LecturePage}/>
         <Route path="lecture/:lecture_id/article/:article_id"  component = {ArticlePage} />
         <Route path="lecture/:lecture_id/write" component = {WriteArticlePage} />
+        <Route path="lecture/:lecture_id/article/:article_id/report" component = {ReportPage} />
       </Route>
       <Route path='*' component={NotFoundPage} />
     </Route>

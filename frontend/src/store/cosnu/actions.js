@@ -12,6 +12,7 @@ export const DELETE_ARTICLE = 'DELETE_ARTICLE'
 export const POST_COMMENT = 'POST_COMMENT'
 export const POST_UPVOTE = 'POST_UPVOTE'
 export const POST_DOWNVOTE = 'POST_DOWNVOTE'
+export const POST_REPORT = 'POST_REPORT'
 
 export const SET_USERINFO = 'SET_USERINFO'
 export const USER_LOGOUT = 'USER_LOGOUT'
@@ -44,6 +45,8 @@ export const delete_article = (lecture_id, article_id) => ({type: DELETE_ARTICLE
 export const post_comment = (lecture_id, article_id, comment_content) => ({type: POST_COMMENT, lecture_id, article_id, comment_content})
 export const post_upvote = (lecture_id, article_id, cur_page) => ({type: POST_UPVOTE, lecture_id, article_id, cur_page})
 export const post_downvote = (lecture_id, article_id, cur_page) => ({type: POST_DOWNVOTE, lecture_id, article_id, cur_page})
+export const post_report = (lecture_id, article_id, title, contents, cur_page) => ({type: POST_REPORT, lecture_id, article_id, title, contents, cur_page})
+
 
 export const SEARCH_LECTURE = 'SEARCH_LECTURE'
 export const SET_SEARCH_LECTURE = 'SET_SEARCH_LECTURE'

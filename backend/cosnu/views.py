@@ -30,12 +30,39 @@ class SmallNumberPagination(PageNumberPagination):
     max_page_size = 1000
 
 
-class ProfileView(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
+class IsPostOrIsAuthenticated(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        if request.method == 'POST':
+            return True
+        return request.user and request.user.is_authenticated
+
+
+class UserView(APIView):
+    permission_classes = (IsPostOrIsAuthenticated,)
 
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
+
+    def post(self, request):
+        data = request.data
+        try:
+            verify = signing.loads(data["verify"])
+        except signing.BadSignature:
+            return Response("Wrong Verify code", status=status.HTTP_400_BAD_REQUEST)
+        if not isinstance(verify.get('email'), str) or not isinstance(verify.get('time'), float):
+            return Response("Wrong Verify code", status=status.HTTP_400_BAD_REQUEST)
+        if data.get('email') != verify.get('email'):
+            return Response("Wrong Verify code", status=status.HTTP_400_BAD_REQUEST)
+        time = verify.get('time')
+        if (datetime.datetime.now() - datetime.datetime.fromtimestamp(time)).total_seconds() > 3600:
+            return Response("Verify code Expired", status = status.HTTP_400_BAD_REQUEST)
+        try:
+            User.objects.create_user(data['username'], password=data['password'], email=data['email'])
+        except Exception:
+            return Response("Worng request", status = status.HTTP_400_BAD_REQUEST)
+        return Response("success")
 
 
 class EmailAuthView(APIView):

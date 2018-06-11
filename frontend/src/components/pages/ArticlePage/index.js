@@ -61,21 +61,40 @@ class ArticlePage extends React.Component {
     return (
       <PageTemplate>
         <h1>{lecture_name}</h1>
-        <span>{article.title}</span>
-        <span>{article.author}</span>
-        <span>{article.create_time}</span>
-        <span>{article.upvotes}</span>
-        <span>{article.downvotes}</span>
-        <p>{article.contents}</p>
-        <Button>Modify(todo)</Button>
-        <Button onClick = {post_upvote}>Upvote</Button>
-        <Button onClick = {post_downvote}>Downvote</Button>
-        <Link to={{ pathname: '/lecture/' + lecture_id + '/list/' }}><Button onClick = {delete_article}>Delete</Button></Link>
-        <Input type="text"></Input>
-        <Link to = {{ pathname: '/lecture/' + lecture_id + '/article/' + article_id + '/report/'}}><Button>Report</Button></Link>
+        <div style={{'width': '960px', 'border': '1px solid #ccc'}}>
+          <div style={{'background-color': '#eee', 'padding': '4px 8px 4px 16px'}}>
+            <div style={{'float': 'right', 'text-align': 'right', 'padding': '2px'}}>
+              <div style={{'padding': '2px'}}>{article.author}</div>
+              <div style={{'padding': '2px'}}>{article.create_time}</div>
+              <div style={{'padding': '2px'}}>추천 {article.upvotes} 비추천 {article.downvotes}</div>
+            </div> 
+            <div><h2>{article.title}</h2></div>
+          </div>
+          <div style={{'padding': '8px 16px'}}>{article.contents}</div>
+        </div>
+        <div style={{'width': '960px'}}>
+          <div style={{'float': 'left', 'padding': '8px'}}>
+            <Button>수정(todo)</Button>
+            &nbsp;
+            <Link to={{ pathname: '/lecture/' + lecture_id + '/list/' }}><Button onClick = {delete_article}>삭제</Button></Link>
+          </div>
+          <div style={{'float': 'right', 'padding': '8px'}}>
+            <Input type="text" placeholder="신고사유"></Input>
+            &nbsp;
+            <Link to = {{ pathname: '/lecture/' + lecture_id + '/article/' + article_id + '/report/'}}><Button>Report</Button></Link>
+          </div>
+          <div style={{'width': '160px', 'margin': 'auto', 'text-align': 'center', 'padding': '8px'}}>
+            <Button onClick = {post_upvote}>추천</Button>
+            &nbsp;
+            <Button onClick = {post_downvote}>비추천</Button>
+          </div>
+        </div>
         <CommentTable comments={(article.comments)} lecture_id={lecture_id} article_id={article_id}/>
-        <Input type="text" innerRef={(ref) => {input_comment = ref}}></Input>
-        <Button onClick = {post_comment}>Add Comment</Button>
+        <div style={{'padding': '8px'}}>
+          <Input type="text" innerRef={(ref) => {input_comment = ref}} style={{'width': '820px'}}></Input>
+          &nbsp;
+          <Button onClick = {post_comment}>댓글 작성</Button>
+        </div>
         <ArticleList lecture_id={lecture_id} cur_page={cur_page}/>
         {children}
       </PageTemplate>

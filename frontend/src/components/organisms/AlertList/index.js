@@ -19,7 +19,7 @@ class AlertList extends React.Component {
   render(){
     var {alert_state, ...props} = this.props
     return (
-      <div style={{'position': 'fixed', 'bottom': '0', 'right': '0'}}>
+      <div {...props} style={{'position': 'fixed', 'bottom': '0', 'right': '0'}}>
         {(alert_state.messages).map( (message, index) =>      
           <div style={{'background-color': '#f0f0f0f0', 'width': '320px', 'padding': '24px', 'margin': '12px', 'border': '1px solid #aaa', 'color': '#333', 'border-radius': '.5rem', 'text-align': 'center'}} key={index}>{message}</div>
         )}

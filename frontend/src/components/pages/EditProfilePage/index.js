@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { LectureList } from 'components'
+import { SearchLectureList } from 'components'
 import { PageTemplate } from 'components'
 import { Input, Button, Table, Tr, Th, Td } from 'components'
 import { Link } from 'react-router'
@@ -96,11 +97,12 @@ class EditProfilePage extends React.Component {
         <Link to={{pathname : location.pathname, query: {page: 1}}}>
           <Button onClick={send_search_lecture}>Search Lectures With Name and Code</Button>
         </Link>
-        <LectureList lectures={search_state} location={location} cur_page={this.cur_page}/>
+        <SearchLectureList lectures={search_state} location={location} cur_page={this.cur_page}/>
         {children}
       </PageTemplate>
     )
   }
+//  <SearchLectureList lectures={search_state} location={location} cur_page={this.cur_page}/>
 }
 
 export default EditProfilePage

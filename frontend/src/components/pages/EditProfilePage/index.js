@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { LectureList } from 'components'
-import { SearchLectureList } from 'components'
+import { SearchLectureList, EditLectureTable } from 'components'
 import { PageTemplate } from 'components'
 import { Input, Button, Table, Tr, Th, Td } from 'components'
 import { Link } from 'react-router'
@@ -65,24 +65,7 @@ class EditProfilePage extends React.Component {
         <Button onClick={send_set_password}>Change Password</Button>
 
         <h2>Change Alias</h2>
-        <table>
-          <thead><tr>
-            <td>name</td>
-            <td>nickname</td>
-            <td>alias</td>
-          </tr></thead>
-          <tbody>
-            {user_state.lectures.map( (lecture) =>
-              <tr key={lecture.lecture.id}>
-                
-                <td>{lecture.lecture.name}</td>
-                
-                <td><Input type="text" value={lecture.nickname}></Input></td>
-                <td><Input type="text" value={lecture.alias}></Input></td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+        <EditLectureTable lectures={user_state.lectures}/>
         <Button onClick={send_set_lectureinfo}>Edit Lecture Information (Todo)</Button>
 
         <LectureList lectures={user_lectures}/>

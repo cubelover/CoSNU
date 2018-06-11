@@ -2,11 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import AlertList from '.'
 
-const wrap = (props = {}) => shallow(<AlertList {...props} articles={{
-  count: 0,
-  next: null,
-  previous: null,
-  results: []
+const wrap = (props = {}) => shallow(<AlertList {...props} alert_state={{
+  messages: []
 }} />)
 
 it('renders props when passed in', () => {

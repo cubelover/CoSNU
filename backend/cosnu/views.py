@@ -106,6 +106,14 @@ class LectureListView(generics.ListAPIView):
     pagination_class = SmallNumberPagination
 
 
+class AuthorView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = AuthorModifySerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_queryset(self):
+        return Author.objects.filter(user=self.request.user)
+
+
 class IsMemberOrOwner(permissions.BasePermission):
 
     def has_permission(self, request, view):

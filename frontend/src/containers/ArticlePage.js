@@ -21,11 +21,11 @@ const mapDispatchToProps = (dispatch) => {
         action_post_comment: (lecture_id, article_id, comment_content) => {
             dispatch(post_comment(lecture_id, article_id, comment_content))
         },
-        action_post_upvote: (lecture_id, article_id) => {
-            dispatch(post_upvote(lecture_id, article_id))
+        action_post_upvote: (lecture_id, article_id, cur_page) => {
+            dispatch(post_upvote(lecture_id, article_id, cur_page))
         },
-        action_post_downvote: (lecture_id, article_id) => {
-            dispatch(post_downvote(lecture_id, article_id))
+        action_post_downvote: (lecture_id, article_id, cur_page) => {
+            dispatch(post_downvote(lecture_id, article_id, cur_page))
         }
     }
 }

@@ -39,8 +39,8 @@ export const get_articles = (lecture_id, cur_page) => ({type: GET_ARTICLES, lect
 export const post_article = (lecture_id, title, contents) => ({type: POST_ARTICLE, lecture_id, title, contents})
 export const delete_article = (lecture_id, article_id) => ({type: DELETE_ARTICLE, lecture_id, article_id})
 export const post_comment = (lecture_id, article_id, comment_content) => ({type: POST_COMMENT, lecture_id, article_id, comment_content})
-export const post_upvote = (lecture_id, article_id) => ({type: POST_UPVOTE, lecture_id, article_id})
-export const post_downvote = (lecture_id, article_id) => ({type: POST_DOWNVOTE, lecture_id, article_id})
+export const post_upvote = (lecture_id, article_id, cur_page) => ({type: POST_UPVOTE, lecture_id, article_id, cur_page})
+export const post_downvote = (lecture_id, article_id, cur_page) => ({type: POST_DOWNVOTE, lecture_id, article_id, cur_page})
 
 export const SEARCH_LECTURE = 'SEARCH_LECTURE'
 export const SET_SEARCH_LECTURE = 'SET_SEARCH_LECTURE'

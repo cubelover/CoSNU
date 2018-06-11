@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 import { PageTemplate } from 'components'
 import { ArticleList } from 'containers'
-import { Button, Input } from 'components'
+import { Button, Input, Textarea } from 'components'
 
 class ReportPage extends React.Component {
   constructor( props ){
@@ -49,12 +49,20 @@ class ReportPage extends React.Component {
     return (
       <PageTemplate>
         <h1>{lecture_name}</h1>
-        <span>{article.title}</span>
-        <span>{article.author}</span>
-
-        <Input type="text" innerRef={(ref) => {input_title = ref}}></Input>
-        <Input type="text" innerRef={(ref) => {input_contents = ref}}></Input>
-        <Link to = {{ pathname: '/lecture/' + lecture_id + '/list/'}}><Button onClick = {post_report}>Send Report</Button></Link>
+        <div style={{'padding': '8px'}}>
+          <div>제&nbsp;&nbsp;목: {article.title}</div>
+          <div>작성자: {article.author}</div>
+        </div>
+        <div>
+          <div style={{'text-align': 'center', 'padding': '8px'}}>
+            <Input type="text" placeholder="제목" innerRef={(ref) => {input_title = ref}} style={{'width': '640px'}}></Input>
+            &nbsp;
+            <Link to = {{ pathname: '/lecture/' + lecture_id + '/list/'}}><Button onClick = {post_report}>신고</Button></Link>
+          </div>
+          <div style={{'text-align': 'center', 'padding': '8px'}}>
+            <Textarea placeholder="내용" innerRef={(ref) => {input_contents = ref}}></Textarea>
+          </div>
+        </div>
         {children}
       </PageTemplate>
     )

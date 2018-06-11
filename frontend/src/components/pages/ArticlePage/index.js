@@ -79,9 +79,7 @@ class ArticlePage extends React.Component {
             <Link to={{ pathname: '/lecture/' + lecture_id + '/list/' }}><Button onClick = {delete_article}>삭제</Button></Link>
           </div>
           <div style={{'float': 'right', 'padding': '8px'}}>
-            <Input type="text" placeholder="신고사유"></Input>
-            &nbsp;
-            <Link to = {{ pathname: '/lecture/' + lecture_id + '/article/' + article_id + '/report/'}}><Button>Report</Button></Link>
+            <Link to = {{ pathname: '/lecture/' + lecture_id + '/article/' + article_id + '/report/'}}><Button>신고</Button></Link>
           </div>
           <div style={{'width': '160px', 'margin': 'auto', 'text-align': 'center', 'padding': '8px'}}>
             <Button onClick = {post_upvote}>추천</Button>

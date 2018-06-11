@@ -5,11 +5,6 @@ import { Link } from 'react-router'
 
 import { Page, CurrPage, ArticleTable, Input, Button } from 'components'
 
-const Wrapper = styled.div`
-  font-family: ${font('primary')};
-  color: ${palette('grayscale', 0)};
-`
-
 class AlertList extends React.Component {
   constructor( props ){
     super(props)
@@ -24,11 +19,11 @@ class AlertList extends React.Component {
   render(){
     var {alert_state, ...props} = this.props
     return (
-      <Wrapper {...props}>
+      <div style={{'position': 'fixed', 'bottom': '0', 'right': '0'}}>
         {(alert_state.messages).map( (message, index) =>      
-          <h2 key={index}>{message}</h2>
+          <div style={{'background-color': '#f0f0f0f0', 'width': '320px', 'padding': '24px', 'margin': '12px', 'border': '1px solid #aaa', 'color': '#333', 'border-radius': '.5rem', 'text-align': 'center'}} key={index}>{message}</div>
         )}
-      </Wrapper>
+      </div>
     )
   }
 }

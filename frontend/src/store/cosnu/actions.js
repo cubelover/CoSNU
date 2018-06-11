@@ -51,3 +51,6 @@ export const search_lecture = (name, code, page) => ({type: SEARCH_LECTURE, name
 export const set_search_lecture = (result) => ({type: SET_SEARCH_LECTURE, result})
 export const set_alert = (message) => ({type:SET_ALERT, message})
 export const init_alert = () => ({type:INIT_ALERT})
+
+export const REGISTER_LECTURE = 'REGISTER_LECTURE'
+export const register_lecture = (lecture_id, nickname, alias) => ({type: REGISTER_LECTURE, lecture_id, nickname, alias})

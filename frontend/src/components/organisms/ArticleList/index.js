@@ -36,12 +36,12 @@ class ArticleList extends React.Component {
         <ArticleTable articles={articles.results} lecture_id={lecture_id} page={cur_page}/>
         <div style={{'text-align': 'center'}}>
           <Page to={{pathname : '/lecture/' + lecture_id + '/list/', query: {page: 1}}}>&lt;&lt;</Page>
-          {cur_page > 1 && <Link to={{pathname : '/lecture/' + lecture_id + '/list/', query: {page: cur_page-1}}}><Button>Prev</Button></Link>}
+          {cur_page > 1 && <Page to={{pathname : '/lecture/' + lecture_id + '/list/', query: {page: cur_page-1}}}>&lt;</Page>}
           {Array.from(new Array(show_page_number), (val,index)=>page_base+index).map( (page) => {
             if(page == cur_page) {
               return <CurrPage to={{ pathname: "/lecture/" + lecture_id + '/list', query: { page: page } }} key={page}>{page}</CurrPage>
             }else if(page <= max_page_num) {
-              return <Link to={{ pathname: "/lecture/" + lecture_id + '/list', query: { page: page } }} style={{padding: '5'}} key={page}>{page}</Link>
+              return <Page to={{ pathname: "/lecture/" + lecture_id + '/list', query: { page: page } }} key={page}>{page}</Page>
             }
           }
           )}

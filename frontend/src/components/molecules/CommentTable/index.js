@@ -13,7 +13,6 @@ const CommentTable = ({ comments, lecture_id, article_id, children, ...props }) 
     <Wrapper {...props}>
       <Table>
         <thead><tr>
-          <Th>article</Th>
           <Th>author</Th>
           <Th>contents</Th>
           <Th>create_time</Th>
@@ -21,7 +20,6 @@ const CommentTable = ({ comments, lecture_id, article_id, children, ...props }) 
         <tbody>
           {(comments).map( (comment) =>
             <tr key={comment.id}>
-              <Td>{comment.article}</Td>
               <Td>{comment.author}</Td>
               <Td>{comment.contents}</Td>
               <Td>{comment.create_time}</Td>

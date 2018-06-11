@@ -4,7 +4,9 @@ import { WriteArticlePage } from 'components'
 import { post_article } from '../store/cosnu/actions'
 
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+    user_lectures: state.cosnu.user_state.lectures,
+})
 const mapDispatchToProps = (dispatch) => {
     return {
         action_post_article: (lecture_id, title, contents) => {

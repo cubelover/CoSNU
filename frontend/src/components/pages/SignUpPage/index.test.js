@@ -5,7 +5,7 @@ import SignUpPage from '.'
 it('renders', () => {
   shallow(<SignUpPage 
     alert_state={{
-      message: ""
+      messages: []
     }}
   />)
 })

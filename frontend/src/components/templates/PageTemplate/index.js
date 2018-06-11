@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { AccountInfo } from 'containers'
+import { AlertList } from 'containers'
 import { Link } from 'react-router'
 
 const Wrapper = styled.div`
@@ -36,6 +37,7 @@ const PageTemplate = ( {children, ...props} ) => {
       </Header>
       <Wrapper>
         {children}
+        <AlertList/>
       </Wrapper>
     </div>
   )

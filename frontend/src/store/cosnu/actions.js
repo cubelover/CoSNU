@@ -20,8 +20,6 @@ export const VERIFY_EMAIL = 'VERIFY_EMAIL'
 export const SET_PASSWORD = 'SET_PASSWORD'
 export const SET_LECTUREINFO = 'SET_LECTUREINFO'
 
-export const SET_ALERT = 'SET_ALERT'
-export const INIT_ALERT = 'INIT_ALERT'
 
 export const user_login = (username, password) => ({type: USER_LOGIN, username, password})
 export const login_success = () => ({type: LOGIN_SUCCESS})
@@ -49,8 +47,13 @@ export const SEARCH_LECTURE = 'SEARCH_LECTURE'
 export const SET_SEARCH_LECTURE = 'SET_SEARCH_LECTURE'
 export const search_lecture = (name, code, page) => ({type: SEARCH_LECTURE, name, code, page})
 export const set_search_lecture = (result) => ({type: SET_SEARCH_LECTURE, result})
-export const set_alert = (message) => ({type:SET_ALERT, message})
-export const init_alert = () => ({type:INIT_ALERT})
+
+export const DEL_ALERT = 'DEL_ALERT'
+export const ADD_ALERT = 'ADD_ALERT'
+export const SEND_ALERT = 'SEND_ALERT'
+export const del_alert = () => ({type:DEL_ALERT})
+export const add_alert = (message) => ({type:ADD_ALERT, message})
+export const send_alert = (message) => ({type:SEND_ALERT, message})
 
 export const REGISTER_LECTURE = 'REGISTER_LECTURE'
 export const register_lecture = (lecture_id, nickname, alias) => ({type: REGISTER_LECTURE, lecture_id, nickname, alias})

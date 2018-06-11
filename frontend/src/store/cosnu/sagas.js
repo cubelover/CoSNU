@@ -252,6 +252,28 @@ export function* watchUSERINFO(action) {
     }}));
 }
 
+export function* watchSignUp(action){
+
+    const response = yield call (fetch, `/api/user/`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            'username': action.username,
+            'password': action.password,
+            'email': action.email,
+            'verify': action.verify_code
+        })
+    });
+    if(response.ok){
+    }
+    else if(response.status == 401){
+    }
+
+}
+
 export function* watchLoginFail() {
     localStorage.setItem("user_info", JSON.stringify({"pk": 0, "username": "", "email": "", "token": "", "lectures": [], current_articles:[],
     current_article:{
@@ -280,6 +302,7 @@ export default function* () {
     yield takeEvery(actions.LOGIN_FAIL, watchLoginFail)
     yield takeEvery(actions.POST_UPVOTE, watchPostUpvote)
     yield takeEvery(actions.POST_DOWNVOTE, watchPostDownvote)
+    yield takeEvery(actions.SIGN_UP, watchSignUp)
     
     yield takeEvery(actions.SEARCH_LECTURE, watchSearchLecture)
     yield takeEvery(actions.VERIFY_EMAIL, watchVerifyEmail)

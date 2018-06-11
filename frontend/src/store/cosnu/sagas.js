@@ -16,6 +16,7 @@ export function* watchValidateToken(action){
     if(response.ok){
         const result = yield call(() => response.json())
         yield put(actions.set_userinfo(result.id, result.username, result.email, token, result.lectures))
+        yield put(actions.send_alert('정상적으로 로그인 되었습니다.'))
     }
     else{
         yield put(actions.login_fail())
@@ -23,6 +24,7 @@ export function* watchValidateToken(action){
 }
 export function* watchLogout(action) {
     yield put(actions.set_userinfo(0, "", "", "", []))
+    yield put(actions.send_alert('정상적으로 로그아웃 되었습니다.'))
 }
 
 export function* watchLogin(action) {
@@ -61,9 +63,9 @@ export function* watchVerifyEmail(action){
 	
     console.log(response)
     if(response.ok){
-        yield put(actions.send_alert('valid email'))
+        yield put(actions.send_alert('메일이 전송되었습니다. 코드를 입력해주세요.'))
     }else if(response.status == 400){
-        yield put(actions.send_alert('invalid email'))
+        yield put(actions.send_alert('올바른 이메일을 입력하십시오. (@snu.ac.kr) '))
     }
 }
 export function* watchSendAlert(action) {
@@ -200,6 +202,7 @@ export function* watchGetArticles(action){
             'Authorization': 'Token ' + token
         },
     })
+    console.log(response.status);
     if(response.ok){
         const result = yield call(() => response.json())
         yield put(actions.set_articles(result))
@@ -283,6 +286,7 @@ export function* watchSignUp(action){
 }
 
 export function* watchLoginFail() {
+    yield put(actions.send_alert('로그인을 먼저 해주십시오.'))
     localStorage.setItem("user_info", JSON.stringify({"pk": 0, "username": "", "email": "", "token": "", "lectures": [], current_articles:[],
     current_article:{
         id: 0,

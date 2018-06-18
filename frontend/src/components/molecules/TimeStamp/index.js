@@ -23,6 +23,14 @@ class TimeStamp extends React.Component {
     var {timestamp, children, ...props} = this.props
     var numberPattern = /\d+/g;
     var list = timestamp.match(numberPattern)
+    if(list == null || list.length < 7) {
+      return (
+        <Wrapper {...props}>
+          <StyledLink title="None">"None"</StyledLink>        
+          {children}
+        </Wrapper>
+      )
+    }
     var articleDate = new Date(list[0], parseInt(list[1])-1, list[2], list[3], list[4], list[5], list[6].substr(0, 3));
     var diffMiliSecond = (new Date()).getTime() - (articleDate.getTime()) - 9 * 3600 * 1000
     console.log(list)

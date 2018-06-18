@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { StyledLink, Table, Tr, Th, Td } from 'components'
+import { TimeStamp } from 'components'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
@@ -28,7 +29,7 @@ const ArticleTable = ({articles, lecture_id, page, children, ...props}) => {
               <Td><StyledLink to={{ pathname: '/lecture/' + lecture_id + '/article/' + article.id, query: { page: page } }}>{article.title}</StyledLink></Td>
               <Td>{article.comments}</Td>
               <Td>{article.author}</Td>
-              <Td>{article.create_time}</Td>
+              <Td><TimeStamp timestamp={article.create_time}/></Td>
               <Td>{article.upvotes}</Td>
               <Td>{article.downvotes}</Td>
             </tr>

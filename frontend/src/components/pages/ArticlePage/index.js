@@ -5,6 +5,7 @@ import { PageTemplate } from 'components'
 import { Button, Input } from 'components'
 import { ArticleList } from 'containers'
 import { CommentTable } from 'components'
+import { TimeStamp } from 'components'
 
 class ArticlePage extends React.Component {
   constructor( props ){
@@ -65,7 +66,7 @@ class ArticlePage extends React.Component {
           <div style={{'background-color': '#eee', 'padding': '4px 8px 4px 16px'}}>
             <div style={{'float': 'right', 'text-align': 'right', 'padding': '2px'}}>
               <div style={{'padding': '2px'}}>{article.author}</div>
-              <div style={{'padding': '2px'}}>{article.create_time}</div>
+              <div style={{'padding': '2px'}}><TimeStamp timestamp={article.create_time}/></div>
               <div style={{'padding': '2px'}}>추천 {article.upvotes} 비추천 {article.downvotes}</div>
             </div> 
             <div><h2>{article.title}</h2></div>

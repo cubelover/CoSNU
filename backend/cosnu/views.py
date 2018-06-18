@@ -60,6 +60,8 @@ class UserView(APIView):
         time = verify.get('time')
         if (datetime.datetime.now() - datetime.datetime.fromtimestamp(time)).total_seconds() > 3600:
             return Response("Verify code Expired", status=status.HTTP_400_BAD_REQUEST)
+        if User.objects.filter(email=data['email']).count() != 0:
+            return Response("Already registered email", status=status.HTTP_400_BAD_REQUEST)
         try:
             User.objects.create_user(data['username'], password=data['password'], email=data['email'])
         except Exception:

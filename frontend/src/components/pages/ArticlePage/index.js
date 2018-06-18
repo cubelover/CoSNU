@@ -75,8 +75,6 @@ class ArticlePage extends React.Component {
         </div>
         <div style={{'width': '960px'}}>
           <div style={{'float': 'left', 'padding': '8px'}}>
-            <Button>수정(todo)</Button>
-            &nbsp;
             <Link to={{ pathname: '/lecture/' + lecture_id + '/list/' }}><Button onClick = {delete_article}>삭제</Button></Link>
           </div>
           <div style={{'float': 'right', 'padding': '8px'}}>

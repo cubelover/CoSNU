@@ -10,15 +10,14 @@ import { Link } from 'react-router'
 class EditProfilePage extends React.Component {
   constructor(props) {
     super(props)
-    this.memo_name = "no name";
-    this.memo_code = "no code";
+    this.memo_search = "no search";
     this.cur_page = 1;
   }
   componentDidMount() {
     var {location} = this.props
     this.cur_page = (location.query.page ? parseInt(location.query.page, 10) : 1)
     if(isNaN(this.cur_page)) this.cur_page = 1
-    this.props.action_search_lecture(this.memo_name, this.memo_code, this.cur_page)
+    this.props.action_search_lecture(this.memo_search, this.cur_page)
   }
   componentWillReceiveProps(nextProps) {
     var {location} = nextProps;
@@ -26,7 +25,7 @@ class EditProfilePage extends React.Component {
     if(isNaN(next_page)) next_page = 1
     if(next_page == this.cur_page) return
     this.cur_page = next_page
-    this.props.action_search_lecture(this.memo_name, this.memo_code, this.cur_page)
+    this.props.action_search_lecture(this.memo_search, this.cur_page)
   }
   render() {
     var {user_state, search_state} = this.props
@@ -45,13 +44,12 @@ class EditProfilePage extends React.Component {
     const send_set_lectureinfo = () => {
       //todo
     }
-    let lecture_name, lecture_code;
+    let lecture_search;
     var lectures_tmp = user_state.lectures;
     var tp = lectures_tmp.find(item => item.lecture.id == 1)
 
     const send_search_lecture = () => {
-      this.memo_name = lecture_name.value
-      this.memo_code = lecture_code.value
+      this.memo_search = lecture_search.value
       this.cur_page = 2;
     }
 
@@ -69,11 +67,10 @@ class EditProfilePage extends React.Component {
         <EditLectureTable lectures={user_state.lectures}/>
 
         <LectureList lectures={user_lectures}/>
-        <Input type="text" placeholder="name" innerRef={(ref) => {lecture_name = ref;}}></Input>
-        <Input type="text" placeholder="code" innerRef={(ref) => {lecture_code = ref;}}></Input>
+        <Input type="text" placeholder="search" innerRef={(ref) => {lecture_search = ref;}}></Input>
 
         <Link to={{pathname : location.pathname, query: {page: 1}}}>
-          <Button onClick={send_search_lecture}>Search Lectures With Name and Code</Button>
+          <Button onClick={send_search_lecture}>Search Lectures</Button>
         </Link>
         <SearchLectureList lectures={search_state} location={location} cur_page={this.cur_page}/>
         {children}

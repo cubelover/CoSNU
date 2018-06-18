@@ -1,4 +1,5 @@
 import { takeEvery, put, call, fork, select, throttle } from 'redux-saga/effects'
+import { push } from 'react-router-redux'
 import {delay} from 'redux-saga';
 import api from 'services/api'
 import * as actions from './actions'
@@ -322,6 +323,7 @@ export function* watchSignUp(action){
     });
     if(response.ok){
         yield put(actions.send_alert('정상적으로 회원가입이 완료되었습니다.'))
+        yield put(push('/'))
     }
     else if(response.status == 400){
         yield put(actions.send_alert('이미 존재하는 아이디거나, 인증코드가 올바르지 않습니다.'))
@@ -393,7 +395,6 @@ export function* watchModifyLecture(action) {
 export function* watchDeleteLecture(action) {
     const token = yield select((state) => state.cosnu.user_state.token)
     const {author_id, lecture_id} = action
-    console.log("saga", author_id)
     const response = yield call (fetch, `/api/author/${author_id}/`, {
         method: "DELETE",
         headers: {
@@ -410,7 +411,25 @@ export function* watchDeleteLecture(action) {
         yield put(actions.login_fail())
     }
 }
-
+export function* watchSetPassword(action) {
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const {password} = action
+    const response = yield call (fetch, `/api/user/set_password/`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        },
+        body: JSON.stringify({password})
+    })
+    if(response.ok) {
+        yield put(actions.send_alert('정상적으로 변경되었습니다.'))
+    }
+    else if(response.status == 401){
+        yield put(actions.login_fail())
+    }
+}
 export default function* () {
     yield takeEvery(actions.USER_LOGIN, watchLogin)
     yield takeEvery(actions.VALIDATE_TOKEN, watchValidateToken)
@@ -436,6 +455,9 @@ export default function* () {
 
     yield takeEvery(actions.MODIFY_LECTURE, watchModifyLecture)
     yield takeEvery(actions.DELETE_LECTURE, watchDeleteLecture)
+    
+    yield takeEvery(actions.SET_PASSWORD, watchSetPassword)
+
 }
 
 export const MODIFY_LECTURE = 'MODIFY_LECTURE'

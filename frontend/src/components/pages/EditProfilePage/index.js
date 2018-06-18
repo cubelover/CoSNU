@@ -57,7 +57,7 @@ class EditProfilePage extends React.Component {
 
     return (
       <PageTemplate {...props}>
-        <h1>EditProfilePage</h1>
+        <h1>설정</h1>
 
         <h2>Change Password</h2>
         <Input type="password" placeholder="password" innerRef={(ref) => {password = ref;}}></Input>

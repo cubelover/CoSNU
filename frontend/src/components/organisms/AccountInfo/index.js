@@ -14,16 +14,24 @@ const Wrapper = styled.div`
 
 const AccountInfo = ( {user_state, action_login, action_logout, children, ...props}) => {
   var username = user_state.username
-  return (
-    <Wrapper {...props}>
-      {
-        username != "" 
-        ? (<SignOut username={username} action_logout={action_logout}/>) 
-        : (<SignIn action_login={action_login}/>) 
-      }
-      {children}
-    </Wrapper>
-  )
+  //console.log(props.params)
+  //const {lecture_id} = props.params
+  //console.log(lecture_id)
+  if(username != "") {
+    return (
+      <Wrapper {...props}>
+        <SignOut username={username} action_logout={action_logout}/>
+        {children}
+      </Wrapper>
+    )
+  }else{
+    return (
+      <Wrapper {...props}>
+        <SignIn action_login={action_login}/>
+        {children}
+      </Wrapper>
+    )
+  }
 }
 
 AccountInfo.propTypes = {

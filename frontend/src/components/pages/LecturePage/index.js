@@ -6,7 +6,6 @@ import { Input, Button, Table, Tr, Th, Td } from 'components'
 import { Link } from 'react-router'
 
 const LecturePage = ({ user_lectures, params, location, children, ...props}) => {
-  console.log(user_lectures)
   let lecture_id = params.lecture_id;
   let cur_page = (location.query.page ? parseInt(location.query.page, 10) : 1);
   if(isNaN(cur_page)) cur_page = 1;

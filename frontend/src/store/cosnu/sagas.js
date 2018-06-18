@@ -1,4 +1,5 @@
 import { takeEvery, put, call, fork, select, throttle } from 'redux-saga/effects'
+import { browserHistory } from 'react-router'
 import {delay} from 'redux-saga';
 import api from 'services/api'
 import * as actions from './actions'
@@ -322,6 +323,7 @@ export function* watchSignUp(action){
     });
     if(response.ok){
         yield put(actions.send_alert('정상적으로 회원가입이 완료되었습니다.'))
+        browserHistory.push('/')
     }
     else if(response.status == 400){
         yield put(actions.send_alert('이미 존재하는 아이디거나, 인증코드가 올바르지 않습니다.'))

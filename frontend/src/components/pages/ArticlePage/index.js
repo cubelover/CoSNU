@@ -26,15 +26,15 @@ class ArticlePage extends React.Component {
     var {location, children, article, ...props} = this.props
     let cur_page = (location.query.page ? parseInt(location.query.page, 10) : 1);
     if(isNaN(cur_page)) cur_page = 1;
-    var lecture_name = "none_lecture_name"
+    var lecture_name = "none_lecture_id", lecture_alias = "none_lecture_id"
     for(var i=0; i<user_lectures.length; i++) {
       if((user_lectures[i].lecture.id).toString() == lecture_id) {
         lecture_name = user_lectures[i].lecture.name
+        lecture_alias = user_lectures[i].alias
         break;
       }
     }
-    if(lecture_name == "none_lecture_name") {
-      //action_send_alert("Invalid Lecture")
+    if(lecture_name == "none_lecture_id") {
       return (
         <PageTemplate>
           <h1>Invalid</h1>
@@ -60,7 +60,7 @@ class ArticlePage extends React.Component {
     }
     return (
       <PageTemplate>
-        <h1>{lecture_name}</h1>
+        <h1>{lecture_alias}({lecture_name})</h1>
         <div style={{'width': '960px', 'border': '1px solid #ccc'}}>
           <div style={{'background-color': '#eee', 'padding': '4px 8px 4px 16px'}}>
             <div style={{'float': 'right', 'text-align': 'right', 'padding': '2px'}}>

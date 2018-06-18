@@ -1,7 +1,8 @@
 import React from 'react'
 
 import { LectureList } from 'components'
-import { SearchLectureList, EditLectureTable } from 'components'
+import { SearchLectureList, } from 'components'
+import { EditLectureTable } from 'containers'
 import { PageTemplate } from 'components'
 import { Input, Button, Table, Tr, Th, Td } from 'components'
 import { Link } from 'react-router'
@@ -66,7 +67,6 @@ class EditProfilePage extends React.Component {
 
         <h2>Change Alias</h2>
         <EditLectureTable lectures={user_state.lectures}/>
-        <Button onClick={send_set_lectureinfo}>Edit Lecture Information (Todo)</Button>
 
         <LectureList lectures={user_lectures}/>
         <Input type="text" placeholder="name" innerRef={(ref) => {lecture_name = ref;}}></Input>

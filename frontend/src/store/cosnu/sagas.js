@@ -357,12 +357,59 @@ export function* watchRegisterLecture(action) {
         const result = yield call(() => response.json())
         console.log(response.status)
         yield put(actions.token_to_user(token))
+        yield put(actions.send_alert('정상적으로 등록 되었습니다.'))
+    }
+    else if(response.status == 401){
+        yield put(actions.login_fail())
+    }
+    else if(response.status == 400){
+        yield put(actions.send_alert('비정상적인 값이거나 이미 등록되어 있는 강의입니다.'))
+    }
+}
+export function* watchModifyLecture(action) {
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const {author_id, lecture_id, nickname, alias} = action
+    console.log("saga", author_id)
+    const response = yield call (fetch, `/api/author/${author_id}/`, {
+        method: "PUT",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        },
+        body: JSON.stringify({nickname, alias})
+    })
+    if(response.ok) {
+        yield put(actions.token_to_user(token))
+        yield put(actions.send_alert('정상적으로 수정 되었습니다.'))
+    }
+    else if(response.status == 401){
+        yield put(actions.login_fail())
+    }
+    else if(response.status == 400){
+        yield put(actions.send_alert('정상적인 값을 입력해주세요.'))
+    }
+}
+export function* watchDeleteLecture(action) {
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const {author_id, lecture_id} = action
+    console.log("saga", author_id)
+    const response = yield call (fetch, `/api/author/${author_id}/`, {
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        },
+    })
+    if(response.ok) {
+        yield put(actions.token_to_user(token))
+        yield put(actions.send_alert('정상적으로 삭제 되었습니다.'))
     }
     else if(response.status == 401){
         yield put(actions.login_fail())
     }
 }
-
 
 export default function* () {
     yield takeEvery(actions.USER_LOGIN, watchLogin)
@@ -386,4 +433,12 @@ export default function* () {
     yield takeEvery(actions.SEND_ALERT, watchSendAlert)
 
     yield takeEvery(actions.TOKEN_TO_USER, watchTokenToUser)
+
+    yield takeEvery(actions.MODIFY_LECTURE, watchModifyLecture)
+    yield takeEvery(actions.DELETE_LECTURE, watchDeleteLecture)
 }
+
+export const MODIFY_LECTURE = 'MODIFY_LECTURE'
+export const DELETE_LECTURE = 'DELETE_LECTURE'
+export const modify_lecture = (author_id, lecture_id, register_nickname, register_alias) => ({type: MODIFY_LECTURE, author_id, lecture_id, register_nickname, register_alias})
+export const delete_lecture = (author_id, lecture_id) => ({type: DELETE_LECTURE, author_id, lecture_id})

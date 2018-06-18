@@ -63,3 +63,8 @@ export const register_lecture = (lecture_id, nickname, alias) => ({type: REGISTE
 
 export const TOKEN_TO_USER = 'TOKEN_TO_USER'
 export const token_to_user = (token) => ({type: TOKEN_TO_USER, token})
+
+export const MODIFY_LECTURE = 'MODIFY_LECTURE'
+export const DELETE_LECTURE = 'DELETE_LECTURE'
+export const modify_lecture = (author_id, lecture_id, nickname, alias) => ({type: MODIFY_LECTURE, author_id, lecture_id, nickname, alias})
+export const delete_lecture = (author_id, lecture_id) => ({type: DELETE_LECTURE, author_id, lecture_id})

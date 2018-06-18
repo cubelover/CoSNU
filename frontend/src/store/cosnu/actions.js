@@ -60,3 +60,6 @@ export const send_alert = (message) => ({type:SEND_ALERT, message})
 
 export const REGISTER_LECTURE = 'REGISTER_LECTURE'
 export const register_lecture = (lecture_id, nickname, alias) => ({type: REGISTER_LECTURE, lecture_id, nickname, alias})
+
+export const TOKEN_TO_USER = 'TOKEN_TO_USER'
+export const token_to_user = (token) => ({type: TOKEN_TO_USER, token})

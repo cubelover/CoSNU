@@ -363,7 +363,7 @@ export function* watchRegisterLecture(action) {
         yield put(actions.login_fail())
     }
     else if(response.status == 400){
-        yield put(actions.send_alert('이미 등록되어 있는 강의입니다.'))
+        yield put(actions.send_alert('비정상적인 값이거나 이미 등록되어 있는 강의입니다.'))
     }
 }
 export function* watchModifyLecture(action) {

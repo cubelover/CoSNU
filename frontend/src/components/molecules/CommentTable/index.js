@@ -14,9 +14,9 @@ const CommentTable = ({ comments, lecture_id, article_id, children, ...props }) 
     <Wrapper {...props}>
       <Table>
         <thead><tr>
-          <Th>author</Th>
-          <Th>contents</Th>
-          <Th>create_time</Th>
+          <Th>작성자</Th>
+          <Th>내용</Th>
+          <Th>작성시간</Th>
         </tr></thead>
         <tbody>
           {(comments).map( (comment) =>

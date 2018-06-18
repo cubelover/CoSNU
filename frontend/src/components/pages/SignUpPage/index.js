@@ -25,7 +25,7 @@ const SignUpPage = ({ action_send_alert, action_verify_email, action_sign_up, ch
   }
   return (
     <PageTemplate {...props}>
-      <h1>SignUpPage</h1>
+      <h1>회원가입</h1>
       <Input type="text" placeholder="username" innerRef={(ref) => {username = ref;}}></Input>
       <Input type="password" placeholder="password" innerRef={(ref) => {password = ref;}}></Input>
       <Input type="password" placeholder="confirm_password" innerRef={(ref) => {confirm_password = ref;}}></Input>

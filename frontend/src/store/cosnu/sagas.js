@@ -61,6 +61,7 @@ export function* watchLogin(action) {
         yield put(actions.validate_token(result.token))
     }
     else{
+//        yield put(actions.send_alert('올바른 아이디 혹은 비밀번호를 입력해주세요.'))
         yield put(actions.login_fail())
     }
 }
@@ -307,7 +308,6 @@ export function* watchUSERINFO(action) {
 }
 
 export function* watchSignUp(action){
-
     const response = yield call (fetch, `/api/user/`, {
         method: "POST",
         headers: {
@@ -322,10 +322,11 @@ export function* watchSignUp(action){
         })
     });
     if(response.ok){
+        yield put(actions.send_alert('정상적으로 회원가입이 완료되었습니다.'))
     }
-    else if(response.status == 401){
+    else if(response.status == 400){
+        yield put(actions.send_alert('이미 존재하는 아이디거나, 인증코드가 올바르지 않습니다.'))
     }
-
 }
 
 export function* watchLoginFail() {

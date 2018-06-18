@@ -14,8 +14,11 @@ const SignUpPage = ({ action_send_alert, action_verify_email, action_sign_up, ch
     }
   }
   const send_sign_up = () => {
-    if(username.value != undefined && password.value != undefined && confirm_password.value != undefined && email.value != undefined && verify_code.value != undefined && password.value == confirm_password.value) {
-      action_sign_up(username.value, password.value, email.value, verify_code.value);
+    if(username.value != undefined && password.value != undefined && confirm_password.value != undefined && email.value != undefined && verify_code.value != undefined) {
+      if(password.value == confirm_password.value)
+        action_sign_up(username.value, password.value, email.value, verify_code.value)
+      else
+        action_send_alert("입력하신 비밀번호가 일치하지 않습니다.")
     }else{
 
     }

@@ -111,7 +111,7 @@ class LectureView(APIView):
 
 
 class LectureListView(generics.ListAPIView):
-    queryset = Lecture.objects.all()
+    queryset = Lecture.objects.all().order_by('code')
     serializer_class = LectureSerializer
     permission_classes = (permissions.IsAuthenticated,)
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)

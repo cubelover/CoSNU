@@ -30,16 +30,17 @@ class EditProfilePage extends React.Component {
   }
   render() {
     var {user_state, search_state} = this.props
-    var {action_set_password, action_set_lectureinfo, action_search_lecture} = this.props
+    var {action_send_alert, action_set_password, action_set_lectureinfo, action_search_lecture} = this.props
     var {location, children, ...props} = this.props
     var user_lectures = {count: user_state.lectures.length, results:[]}
     for(var i=0; i<user_state.lectures.length; i++) user_lectures.results.push(user_state.lectures[i].lecture);
 
-    let password, new_password, confirm_new_password
+    let new_password, confirm_new_password
     const send_set_password = () => {
-      if(password.value != undefined && new_password.value != undefined && confirm_new_password.value != undefined && new_password.value == confirm_new_password.value) {
-        action_set_password(password.value, new_password.value)
+      if(new_password.value != undefined && confirm_new_password.value != undefined && new_password.value == confirm_new_password.value) {
+        action_set_password(new_password.value)
       }else{
+        action_send_alert("입력하신 비밀번호가 일치하지 않습니다.")
       }
     }
     const send_set_lectureinfo = () => {
@@ -60,7 +61,6 @@ class EditProfilePage extends React.Component {
         <h1>설정</h1>
 
         <h2>Change Password</h2>
-        <Input type="password" placeholder="password" innerRef={(ref) => {password = ref;}}></Input>
         <Input type="password" placeholder="new_password" innerRef={(ref) => {new_password = ref;}}></Input>
         <Input type="password" placeholder="confirm_new_password" innerRef={(ref) => {confirm_new_password = ref;}}></Input>
         <Button onClick={send_set_password}>Change Password</Button>

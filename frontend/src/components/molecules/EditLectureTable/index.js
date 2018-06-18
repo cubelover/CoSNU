@@ -20,13 +20,11 @@ class EditLectureTable extends React.Component {
     this.forceUpdate()
   }
   delete(author_id, lecture_id) {
-    console.log(author_id, lecture_id)
     this.props.action_delete_lecture(author_id, lecture_id)
     this.forceUpdate()
   }
   render(){
     var {lectures, children, ...props} = this.props
-    console.log("hihiihihi", lectures);
     return (
       <Wrapper {...props}>
         <Table>

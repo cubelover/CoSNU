@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { EditProfilePage } from 'components'
-import { set_password, set_lectureinfo, search_lecture } from '../store/cosnu/actions'
+import { send_alert, set_password, set_lectureinfo, search_lecture } from '../store/cosnu/actions'
 
 
 const mapStateToProps = (state) => {
@@ -13,8 +13,11 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        action_set_password: (password, new_password) => {
-            dispatch(set_password(password, new_password))
+        action_send_alert: (message) => {
+            dispatch(send_alert(message))
+        },
+        action_set_password: (password) => {
+            dispatch(set_password(password))
         },
         action_set_lectureinfo: () => {
             dispatch(set_lectureinfo()) 

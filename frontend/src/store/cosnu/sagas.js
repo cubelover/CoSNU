@@ -395,7 +395,6 @@ export function* watchModifyLecture(action) {
 export function* watchDeleteLecture(action) {
     const token = yield select((state) => state.cosnu.user_state.token)
     const {author_id, lecture_id} = action
-    console.log("saga", author_id)
     const response = yield call (fetch, `/api/author/${author_id}/`, {
         method: "DELETE",
         headers: {
@@ -412,7 +411,25 @@ export function* watchDeleteLecture(action) {
         yield put(actions.login_fail())
     }
 }
-
+export function* watchSetPassword(action) {
+    const token = yield select((state) => state.cosnu.user_state.token)
+    const {password} = action
+    const response = yield call (fetch, `/api/user/set_password/`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Token ' + token
+        },
+        body: JSON.stringify({password})
+    })
+    if(response.ok) {
+        yield put(actions.send_alert('정상적으로 변경되었습니다.'))
+    }
+    else if(response.status == 401){
+        yield put(actions.login_fail())
+    }
+}
 export default function* () {
     yield takeEvery(actions.USER_LOGIN, watchLogin)
     yield takeEvery(actions.VALIDATE_TOKEN, watchValidateToken)
@@ -438,6 +455,9 @@ export default function* () {
 
     yield takeEvery(actions.MODIFY_LECTURE, watchModifyLecture)
     yield takeEvery(actions.DELETE_LECTURE, watchDeleteLecture)
+    
+    yield takeEvery(actions.SET_PASSWORD, watchSetPassword)
+
 }
 
 export const MODIFY_LECTURE = 'MODIFY_LECTURE'

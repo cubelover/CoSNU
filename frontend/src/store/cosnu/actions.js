@@ -31,7 +31,7 @@ export const set_userinfo = (pk, username, email, token, lectures) => ({type: SE
 export const user_logout = () => ({type: USER_LOGOUT})
 export const sign_up = (username, password, email, verify_code) => ({type: SIGN_UP, username, password, email, verify_code})
 export const verify_email = (email) => ({type: VERIFY_EMAIL, email})
-export const set_password = (password, new_password) => ({type: SET_PASSWORD, password, new_password})
+export const set_password = (password) => ({type: SET_PASSWORD, password})
 export const set_lectureinfo = () => ({type: SET_LECTUREINFO})
 
 export const set_article = (article) => ({type: SET_ARTICLE, article})

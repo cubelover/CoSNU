@@ -32,7 +32,7 @@ const PageTemplate = ( {children, ...props} ) => {
   return (
     <div>
       <Header>
-        <AccountInfo/>
+        <AccountInfo {...props}/>
         <Link to="/" style={{'text-decoration': 'none'}}><Title>CoSNU</Title></Link>
       </Header>
       <Wrapper>

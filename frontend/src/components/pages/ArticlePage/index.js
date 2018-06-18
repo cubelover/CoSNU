@@ -5,6 +5,7 @@ import { PageTemplate } from 'components'
 import { Button, Input } from 'components'
 import { ArticleList } from 'containers'
 import { CommentTable } from 'components'
+import { TimeStamp } from 'components'
 
 class ArticlePage extends React.Component {
   constructor( props ){
@@ -26,17 +27,17 @@ class ArticlePage extends React.Component {
     var {location, children, article, ...props} = this.props
     let cur_page = (location.query.page ? parseInt(location.query.page, 10) : 1);
     if(isNaN(cur_page)) cur_page = 1;
-    var lecture_name = "none_lecture_name"
+    var lecture_name = "none_lecture_id", lecture_alias = "none_lecture_id"
     for(var i=0; i<user_lectures.length; i++) {
       if((user_lectures[i].lecture.id).toString() == lecture_id) {
         lecture_name = user_lectures[i].lecture.name
+        lecture_alias = user_lectures[i].alias
         break;
       }
     }
-    if(lecture_name == "none_lecture_name") {
-      //action_send_alert("Invalid Lecture")
+    if(lecture_name == "none_lecture_id") {
       return (
-        <PageTemplate>
+        <PageTemplate {...props}>
           <h1>Invalid</h1>
           <Link to="/"><Button>Home</Button></Link>
           {children}
@@ -59,13 +60,13 @@ class ArticlePage extends React.Component {
       action_post_downvote(lecture_id, article_id, cur_page)
     }
     return (
-      <PageTemplate>
-        <h1>{lecture_name}</h1>
+      <PageTemplate {...props}>
+        <h1>{lecture_alias}({lecture_name})</h1>
         <div style={{'width': '960px', 'border': '1px solid #ccc'}}>
           <div style={{'background-color': '#eee', 'padding': '4px 8px 4px 16px'}}>
             <div style={{'float': 'right', 'text-align': 'right', 'padding': '2px'}}>
               <div style={{'padding': '2px'}}>{article.author}</div>
-              <div style={{'padding': '2px'}}>{article.create_time}</div>
+              <div style={{'padding': '2px'}}><TimeStamp timestamp={article.create_time}/></div>
               <div style={{'padding': '2px'}}>추천 {article.upvotes} 비추천 {article.downvotes}</div>
             </div> 
             <div><h2>{article.title}</h2></div>
@@ -74,8 +75,6 @@ class ArticlePage extends React.Component {
         </div>
         <div style={{'width': '960px'}}>
           <div style={{'float': 'left', 'padding': '8px'}}>
-            <Button>수정(todo)</Button>
-            &nbsp;
             <Link to={{ pathname: '/lecture/' + lecture_id + '/list/' }}><Button onClick = {delete_article}>삭제</Button></Link>
           </div>
           <div style={{'float': 'right', 'padding': '8px'}}>

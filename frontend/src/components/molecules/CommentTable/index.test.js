@@ -14,7 +14,6 @@ it('renders articles when passed in', () => {
   }
   const wrapper = wrap({comments: [comment]})
   expect(wrapper.contains('COMMENT_CONTENTS')).toBe(true)
-  expect(wrapper.contains('COMMENT_CREATE_TIME')).toBe(true)
 })
 it('renders children when passed in', () => {
   const wrapper = wrap({comments: [], children: 'test' })

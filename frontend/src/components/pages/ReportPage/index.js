@@ -34,7 +34,7 @@ class ReportPage extends React.Component {
     }
     if(lecture_name == "none_lecture_name") {
       return (
-        <PageTemplate>
+        <PageTemplate {...props}>
           <h1>Invalid</h1>
           <Link to="/"><Button>Home</Button></Link>
           {children}
@@ -47,7 +47,7 @@ class ReportPage extends React.Component {
       action_post_report(lecture_id, article_id, input_title.value, input_contents.value, cur_page)
     }
     return (
-      <PageTemplate>
+      <PageTemplate {...props}>
         <h1>{lecture_name}</h1>
         <div style={{'padding': '8px'}}>
           <div>제&nbsp;&nbsp;목: {article.title}</div>

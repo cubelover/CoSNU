@@ -37,7 +37,7 @@ class ArticlePage extends React.Component {
     }
     if(lecture_name == "none_lecture_id") {
       return (
-        <PageTemplate>
+        <PageTemplate {...props}>
           <h1>Invalid</h1>
           <Link to="/"><Button>Home</Button></Link>
           {children}
@@ -60,7 +60,7 @@ class ArticlePage extends React.Component {
       action_post_downvote(lecture_id, article_id, cur_page)
     }
     return (
-      <PageTemplate>
+      <PageTemplate {...props}>
         <h1>{lecture_alias}({lecture_name})</h1>
         <div style={{'width': '960px', 'border': '1px solid #ccc'}}>
           <div style={{'background-color': '#eee', 'padding': '4px 8px 4px 16px'}}>

@@ -56,7 +56,7 @@ class EditProfilePage extends React.Component {
     }
 
     return (
-      <PageTemplate>
+      <PageTemplate {...props}>
         <h1>EditProfilePage</h1>
 
         <h2>Change Password</h2>

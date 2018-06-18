@@ -21,7 +21,7 @@ const LecturePage = ({ user_lectures, params, location, children, ...props}) => 
   }
   if(lecture_name == "none_lecture_id") {
     return (
-      <PageTemplate>
+      <PageTemplate {...props}>
         <h1>Invalid</h1>
         <Link to="/"><Button>Home</Button></Link>
         {children}
@@ -29,7 +29,7 @@ const LecturePage = ({ user_lectures, params, location, children, ...props}) => 
     )
   }else{
     return (
-      <PageTemplate>
+      <PageTemplate {...props}>
         <h1>{lecture_alias}({lecture_name})</h1>
         <ArticleList lecture_id={lecture_id} cur_page={cur_page}/>
         {children}

@@ -20,7 +20,7 @@ const WriteArticlePage = ({user_lectures, params, action_post_article, children,
   }
   if(lecture_name == "none_lecture_name") {
     return (
-      <PageTemplate>
+      <PageTemplate {...props}>
         <h1>Invalid</h1>
         <Link to="/"><Button>Home</Button></Link>
         {children}
@@ -28,7 +28,7 @@ const WriteArticlePage = ({user_lectures, params, action_post_article, children,
     )
   }else{
     return (
-      <PageTemplate>
+      <PageTemplate {...props}>
         <h1>{lecture_name}</h1>
         <div>
           <div style={{'padding': '8px', 'text-align': 'center'}}>

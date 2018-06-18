@@ -15,14 +15,13 @@ class EditLectureTable extends React.Component {
     this.modify = this.modify.bind(this);
     this.delete = this.delete.bind(this);
   }
-  modify(author_id, lecture_id) {
-    console.log(author_id, lecture_id, register_nickname.value, register_alias.value);
-    //action_modify_lecture(author_id, lecture_id, register_nickname.value, register_alias.value)
+  modify(author_id, lecture_id, nickname, alias) {
+    this.props.action_modify_lecture(author_id, lecture_id, nickname, alias)
     this.forceUpdate()
   }
   delete(author_id, lecture_id) {
-    console.log(author_id, lecture_id);
-    //action_delete_lecture(author_id, lecture_id)
+    console.log(author_id, lecture_id)
+    this.props.action_delete_lecture(author_id, lecture_id)
     this.forceUpdate()
   }
   render(){
@@ -44,9 +43,9 @@ class EditLectureTable extends React.Component {
               return (
                 <tr key={lecture.lecture.id}>
                   <Td>{lecture.lecture.name}</Td>
-                  <Td><Input type="text" value={lecture.nickname}></Input></Td>
-                  <Td><Input type="text" value={lecture.alias}></Input></Td>
-                  <Td><Button onClick={()=>this.modify(lecture.id, lecture.lecture.id)}>Modify</Button></Td>
+                  <Td><Input type="text" innerRef={(ref) => {register_nickname = ref;}} defaultValue={lecture.nickname}></Input></Td>
+                  <Td><Input type="text" innerRef={(ref) => {register_alias = ref;}} defaultValue={lecture.alias}></Input></Td>
+                  <Td><Button onClick={()=>this.modify(lecture.id, lecture.lecture.id, register_nickname.value, register_alias.value)}>Modify</Button></Td>
                   <Td><Button onClick={()=>this.delete(lecture.id, lecture.lecture.id)}>Delete</Button></Td>
                 </tr>
               )

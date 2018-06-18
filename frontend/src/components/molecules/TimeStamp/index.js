@@ -13,12 +13,12 @@ class TimeStamp extends React.Component {
     super(props)
     //this.lecture_id = -1;
   }
-  /*
-  modify(author_id, lecture_id, nickname, alias) {
-    this.props.action_modify_lecture(author_id, lecture_id, nickname, alias)
-    this.forceUpdate()
+  componentDidMount() {
+    this.interval = setInterval(() => this.setState({ time: Date.now() }), 1000);
   }
-  */
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
   render(){
     var {timestamp, children, ...props} = this.props
     var numberPattern = /\d+/g;
@@ -33,8 +33,6 @@ class TimeStamp extends React.Component {
     }
     var articleDate = new Date(list[0], parseInt(list[1])-1, list[2], list[3], list[4], list[5], list[6].substr(0, 3));
     var diffMiliSecond = (new Date()).getTime() - (articleDate.getTime()) - 9 * 3600 * 1000
-    console.log(list)
-    console.log(diffMiliSecond)
     var times = ["년", "월", "일", "시", "분", "초"]
     var koreanTimeStr = ""
     for(var i=0; i<6; i++) {
@@ -46,7 +44,7 @@ class TimeStamp extends React.Component {
     var hour = Math.floor(diffMiliSecond / 1000 / 60 / 60)
     var day = Math.floor(diffMiliSecond / 1000 / 60 / 60 / 24)
     var reletive = ""
-    //'방금 전' if d < 60 else '%d분 전' % (d // 60) if d < 3600 else '%d시간 전' % (d // 3600) if d < 259200 else '%d일 전' % (d // 86400)
+
     if(second == 0) reletive = "방금 전"
     else if(second < 60) reletive = second + "초 전"
     else if(minute < 60) reletive = minute + "분 전"

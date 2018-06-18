@@ -58,19 +58,19 @@ class EditProfilePage extends React.Component {
       <PageTemplate {...props}>
         <h1>설정</h1>
 
-        <h2>Change Password</h2>
+        <h2>비밀번호 설정</h2>
         <Input type="password" placeholder="new_password" innerRef={(ref) => {new_password = ref;}}></Input>
         <Input type="password" placeholder="confirm_new_password" innerRef={(ref) => {confirm_new_password = ref;}}></Input>
-        <Button onClick={send_set_password}>Change Password</Button>
+        <Button onClick={send_set_password}>변경하기</Button>
 
-        <h2>Change Alias</h2>
+        <h2>별명 설정</h2>
         <EditLectureTable lectures={user_state.lectures}/>
 
         <LectureList lectures={user_lectures}/>
         <Input type="text" placeholder="search" innerRef={(ref) => {lecture_search = ref;}}></Input>
 
         <Link to={{pathname : location.pathname, query: {page: 1}}}>
-          <Button onClick={send_search_lecture}>Search Lectures</Button>
+          <Button onClick={send_search_lecture}>검색하기</Button>
         </Link>
         <SearchLectureList lectures={search_state} location={location} cur_page={this.cur_page}/>
         {children}

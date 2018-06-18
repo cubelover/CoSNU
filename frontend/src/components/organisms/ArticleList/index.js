@@ -30,9 +30,9 @@ class ArticleList extends React.Component {
     //Sorted by Upvote (Todo)<Input type="radio" name="sortedby" />
     return (
       <Wrapper {...props}>
-        <h3>Article List (Lecture_id = {lecture_id})</h3>
-        <Link to={{pathname : '/lecture/' + lecture_id + '/list/'}}><Button>List</Button></Link>
-        <Link to={{pathname : '/lecture/' + lecture_id + '/write/'}}><Button>Write</Button></Link>
+        <h3>글 목록</h3>
+        <Link to={{pathname : '/lecture/' + lecture_id + '/list/'}}><Button>목록</Button></Link>
+        <Link to={{pathname : '/lecture/' + lecture_id + '/write/'}}><Button>글쓰기</Button></Link>
         <ArticleTable articles={articles.results} lecture_id={lecture_id} page={cur_page}/>
         <div style={{'text-align': 'center'}}>
           <Page to={{pathname : '/lecture/' + lecture_id + '/list/', query: {page: 1}}}>&lt;&lt;</Page>

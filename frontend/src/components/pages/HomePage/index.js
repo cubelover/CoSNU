@@ -11,7 +11,7 @@ return (
       <PageTemplate {...props}>
       {
         user_state.username == "" 
-        ? (<h3>Please Login First</h3>) 
+        ? (<h3>로그인 이후 이용하실 수 있습니다.</h3>) 
         : (<LectureList lectures={user_lectures} />)
       }
       {children}

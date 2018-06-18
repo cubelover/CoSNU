@@ -13,10 +13,10 @@ const LectureTable = ({lectures, children, ...props}) => {
     <Wrapper {...props}>
       <Table>
         <thead><tr>
-          <Th>name</Th>
-          <Th>code</Th>
-          <Th>professor</Th>
-          <Th>semester</Th>
+          <Th>강의명</Th>
+          <Th>강의코드</Th>
+          <Th>교수</Th>
+          <Th>학기</Th>
         </tr></thead>
         <tbody>
           {lectures.map( (lecture) =>

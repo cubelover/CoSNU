@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 const LectureList = ({lectures, children, ...props}) => {
   return (
     <Wrapper {...props}>
-      <h3>Lecture List</h3>
+      <h3>강의목록</h3>
       <LectureTable lectures={lectures.results}></LectureTable>
       {children}
     </Wrapper>

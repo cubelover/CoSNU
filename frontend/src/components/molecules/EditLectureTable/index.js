@@ -29,11 +29,11 @@ class EditLectureTable extends React.Component {
       <Wrapper {...props}>
         <Table>
           <thead><tr>
-            <Th>name</Th>
-            <Th>nickname</Th>
-            <Th>alias</Th>
-            <Th>Modify</Th>
-            <Th>Delete</Th>
+            <Th>강의</Th>
+            <Th>닉네임</Th>
+            <Th>별명</Th>
+            <Th>수정</Th>
+            <Th>삭제</Th>
           </tr></thead>
           <tbody>
             {lectures.map( (lecture) => {

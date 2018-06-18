@@ -15,12 +15,12 @@ const ArticleTable = ({articles, lecture_id, page, children, ...props}) => {
       <Table>
         <thead><tr>
           <Th>id</Th>
-          <Th>title</Th>
-          <Th>comments</Th>
-          <Th>author</Th>
-          <Th>create_time</Th>
-          <Th>upvotes</Th>
-          <Th>downvotes</Th>
+          <Th>제목</Th>
+          <Th>댓글수</Th>
+          <Th>글쓴이</Th>
+          <Th>작성시간</Th>
+          <Th>추천수</Th>
+          <Th>비추천수</Th>
         </tr></thead>
         <tbody>
           {articles.map( (article) =>

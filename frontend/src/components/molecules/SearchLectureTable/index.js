@@ -45,10 +45,10 @@ class SearchLectureTable extends React.Component {
       <Wrapper {...props}>
         <Table>
           <thead><tr>
-            <Th>name</Th>
-            <Th>code</Th>
-            <Th>professor</Th>
-            <Th>semester</Th>
+            <Th>강의명</Th>
+            <Th>강의코드</Th>
+            <Th>교수</Th>
+            <Th>학기</Th>
           </tr></thead>
           <tbody>
             {lectures.map( (lecture) =>
@@ -73,7 +73,7 @@ class SearchLectureTable extends React.Component {
         <div>
           <Input type="text" placeholder="nickname" innerRef={(ref) => {register_nickname = ref;}}></Input>
           <Input type="text" placeholder="alias" innerRef={(ref) => {register_alias = ref;}}></Input>
-          <Button onClick={send_register_lecture}>Register Lecture</Button>
+          <Button onClick={send_register_lecture}>등록하기</Button>
         </div>
         {children}
       </Wrapper>

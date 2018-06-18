@@ -26,11 +26,11 @@ class ArticleList extends React.Component {
     
     var article_per_page = 10, max_page_num = Math.floor((articles.count + article_per_page - 1) / article_per_page)
     var show_page_number = 10, page_base = Math.floor((Math.max(1, cur_page) - 1) / show_page_number) * show_page_number + 1;
+    //Sorted by Time (Todo)<Input type="radio" name="sortedby" />
+    //Sorted by Upvote (Todo)<Input type="radio" name="sortedby" />
     return (
       <Wrapper {...props}>
         <h3>Article List (Lecture_id = {lecture_id})</h3>
-        Sorted by Time (Todo)<Input type="radio" name="sortedby" />
-        Sorted by Upvote (Todo)<Input type="radio" name="sortedby" />
         <Link to={{pathname : '/lecture/' + lecture_id + '/list/'}}><Button>List</Button></Link>
         <Link to={{pathname : '/lecture/' + lecture_id + '/write/'}}><Button>Write</Button></Link>
         <ArticleTable articles={articles.results} lecture_id={lecture_id} page={cur_page}/>

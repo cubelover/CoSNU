@@ -12,6 +12,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 from rest_framework import exceptions
 from django.core import signing
 import datetime
@@ -113,7 +114,8 @@ class LectureListView(generics.ListAPIView):
     queryset = Lecture.objects.all()
     serializer_class = LectureSerializer
     permission_classes = (permissions.IsAuthenticated,)
-    filter_backends = (DjangoFilterBackend,)
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+    search_fields = ('name', 'code', 'professor')
     filter_fields = ('name', 'code')
     pagination_class = SmallNumberPagination
 

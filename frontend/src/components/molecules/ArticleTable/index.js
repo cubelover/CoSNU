@@ -9,7 +9,6 @@ const Wrapper = styled.div`
 `
 
 const ArticleTable = ({articles, lecture_id, page, children, ...props}) => {
-  console.log(articles);
   return (
     <Wrapper {...props}>
       <Table>

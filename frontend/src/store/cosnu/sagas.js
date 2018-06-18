@@ -61,8 +61,7 @@ export function* watchLogin(action) {
         yield put(actions.validate_token(result.token))
     }
     else{
-//        yield put(actions.send_alert('올바른 아이디 혹은 비밀번호를 입력해주세요.'))
-        yield put(actions.login_fail())
+        yield put(actions.send_alert('올바른 아이디 혹은 비밀번호를 입력해주세요.'))
     }
 }
 
